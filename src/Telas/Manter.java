@@ -25,6 +25,8 @@ public class Manter extends javax.swing.JFrame {
      private final static byte EDITAR       = 6;
      private final static byte REMOVER      = 7;
      private static byte opt;
+     
+     private Clientes telaClientes;
     
      /**
      * Creates new form ManterClientes
@@ -54,8 +56,9 @@ public class Manter extends javax.swing.JFrame {
         btnNovo = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
         btnRemover = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnSair = new javax.swing.JButton();
         labelTitulo = new javax.swing.JLabel();
+        btnConsultar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -80,10 +83,10 @@ public class Manter extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setText("Sair");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btnSair.setText("Sair");
+        btnSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btnSairActionPerformed(evt);
             }
         });
 
@@ -92,36 +95,41 @@ public class Manter extends javax.swing.JFrame {
         labelTitulo.setText("Clientes");
         labelTitulo.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
+        btnConsultar.setText("Consultar");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(labelTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)
+                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(47, 47, 47)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnNovo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnRemover, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(52, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(labelTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                    .addComponent(btnSair, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                    .addComponent(btnConsultar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(labelTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(btnNovo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(labelTitulo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnConsultar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnNovo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnRemover, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnEditar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnRemover)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnSair)
                 .addContainerGap())
         );
 
@@ -130,61 +138,65 @@ public class Manter extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
-            switch (opt) {
-                case AEROPORTOS:
-                    break;
-                case AVIOES: 
-                    break;
-                case RESERVAS: 
-                    break;
-                case VOOS: 
-                    break;
-                case CLIENTES: 
-                    break;                 
+        switch (opt) {
+            case AEROPORTOS:
+                break;
+            case AVIOES: 
+                break;
+            case RESERVAS: 
+                break;
+            case VOOS: 
+                break;
+            case CLIENTES:
+                telaClientes = new Clientes(NOVO);
+                telaClientes.setVisible(true);
+                break;                 
         }
+        dispose();
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-                switch (opt) {
-                    case AEROPORTOS: 
-                        break;
-                    case AVIOES: 
-                        break;
-                    case RESERVAS: 
-                        break;
-                    case VOOS: 
-                        break;
-                    case CLIENTES: 
-                        break;                 
+        switch (opt) {
+            case AEROPORTOS: 
+                break;
+            case AVIOES: 
+                break;
+            case RESERVAS: 
+                break;
+            case VOOS: 
+                break;
+            case CLIENTES:
+                telaClientes = new Clientes(EDITAR);
+                telaClientes.setVisible(true);
+                break;                 
         }
+        dispose();
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
-                switch (opt) {
-                    case AEROPORTOS: 
-                        break;
-                    case AVIOES: 
-                        break;
-                    case RESERVAS:
-                        break;
-                    case VOOS: 
-                        break;
-                    case CLIENTES: 
-                        break;                 
+        switch (opt) {
+            case AEROPORTOS: 
+                break;
+            case AVIOES: 
+                break;
+            case RESERVAS:
+                break;
+            case VOOS: 
+                break;
+            case CLIENTES:
+                telaClientes = new Clientes(REMOVER);
+                telaClientes.setVisible(true);
+                break;                 
         }
+        dispose();
     }//GEN-LAST:event_btnRemoverActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
         dispose();
-    }//GEN-LAST:event_jButton4ActionPerformed
+        Menu tela = new Menu();
+        tela.setVisible(true);
+    }//GEN-LAST:event_btnSairActionPerformed
     
-    // Override da função dispose() p/ voltar ao menu principal
-    @Override
-    public void dispose() {
-        super.dispose();
-        Menu menu = new Menu();
-        menu.setVisible(true);
-    }
     
     /**
      * @param args the command line arguments
@@ -223,10 +235,11 @@ public class Manter extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnConsultar;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnNovo;
     private javax.swing.JButton btnRemover;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton btnSair;
     private javax.swing.JLabel labelTitulo;
     // End of variables declaration//GEN-END:variables
 }
