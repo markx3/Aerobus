@@ -13,12 +13,12 @@ para implementar um sistema de reservas de passagens de uma empresa aérea.
 * Descrição do avião  
 * Aeroporto  
 
-###Considere que há dois tipos de clientes: Pessoas fı́sicas e Pessoas jurı́dicas.  
-Pessoas fı́sicas possuem CPF, nome, endereço, sexo(opcional), data de nascimento (opcional) e telefones (opcionais). Pessoas jurı́dicas possuem CNPJ,razão social, endereço e telefones (opcionais).  
-Um vôo possui: data de partida e número de vagas.  
-A descrição de um vôo possui: horário de partida; horário de chegada e número.  
-A descrição de um avião possui: nome do fabricante; número do modelo; número de assentos.  
-Um aeroporto possui: nome; código; nome da cidade em que fica localizado.  
+* Considere que há dois tipos de clientes: Pessoas fı́sicas e Pessoas jurı́dicas.  
+* Pessoas fı́sicas possuem CPF, nome, endereço, sexo(opcional), data de nascimento (opcional) e telefones (opcionais). Pessoas jurı́dicas possuem CNPJ,razão social, endereço e telefones (opcionais).  
+* Um vôo possui: data de partida e número de vagas.  
+* A descrição de um vôo possui: horário de partida; horário de chegada e número.  
+* A descrição de um avião possui: nome do fabricante; número do modelo; número de assentos.  
+* Um aeroporto possui: nome; código; nome da cidade em que fica localizado.  
 
 ###O sistema deve possibilitar:  
 * Incluir, remover e editar clientes  
@@ -37,7 +37,7 @@ Um aeroporto possui: nome; código; nome da cidade em que fica localizado.
 * A partir das cidades de origem e de destino, obter os códigos dos vôos em uma determinada data  
 * A partir do código de um vôo, obter os códigos e os nomes dos aeroportos de origem e de destino.  
 * A partir do código de um aeroporto, obter o seu nome e a sua cidade.  
-O sistema possui as seguintes regras do negócio:  
+###O sistema possui as seguintes regras do negócio:  
 * A um cliente podem estar associadas várias reservas de viagem   
 * A uma reserva de viagem podem estar associados várias reservas de vôos  
 * A uma reserva de vôo está associado um vôo  
