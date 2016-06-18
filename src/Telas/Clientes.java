@@ -27,11 +27,7 @@ public class Clientes extends javax.swing.JFrame {
     public Clientes(byte opt) {
         Clientes.opt = opt;
         initComponents();
-        switch(opt) {
-            case NOVO: labelTitulo.setText("Novo cliente"); break;
-            case EDITAR: labelTitulo.setText("Editar cliente"); break;
-            case REMOVER: caseRemover(); break;
-        }
+        verificaOperacao();
     }
 
     /**
@@ -60,7 +56,7 @@ public class Clientes extends javax.swing.JFrame {
         campoNascimento = new javax.swing.JFormattedTextField();
         btnConfirmar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        campoNome = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -150,7 +146,7 @@ public class Clientes extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(cbSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jTextField1)))
+                            .addComponent(campoNome)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -175,7 +171,7 @@ public class Clientes extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelNome)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(campoNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelEndereco)
@@ -206,10 +202,32 @@ public class Clientes extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    private void verificaOperacao() {
+        switch(opt) {
+            case NOVO: caseNovo(); break;
+            case EDITAR: caseEditar(); break;
+            case REMOVER: caseRemover(); break;
+        }
+    }
+    
+    private void caseNovo() {
+        labelTitulo.setText("Novo cliente");
+    }
+    
+    private void caseEditar() {
+        labelTitulo.setText("Editar cliente");
+        campoNome.setEnabled(false);
+        campoEndereco1.setEnabled(false);
+        campoNascimento.setEnabled(false);
+        campoTel1.setEnabled(false);
+        campoTel2.setEnabled(false);
+        cbSexo.setEnabled(false);
+    }
+    
     private void caseRemover() {
         labelTitulo.setText("Remover cliente");
-        jTextField1.setEnabled(false);
+        campoNome.setEnabled(false);
         campoEndereco1.setEnabled(false);
         campoNascimento.setEnabled(false);
         campoTel1.setEnabled(false);
@@ -218,11 +236,17 @@ public class Clientes extends javax.swing.JFrame {
     }
     
     private void btnConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultaActionPerformed
-        // TODO Regra de negócio: consultar no banco de dados
+        /**
+         * TODO Pesquisar CPF/CNPJ no BD e carregar as informações nos devidos
+         * campos, se o CPF/CNPJ já existir.
+         */
+        
     }//GEN-LAST:event_btnConsultaActionPerformed
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-        // TODO Regra de negócio: verificar entrada de dados e efetuar operação
+        /**
+         * Verificar a validade da operação e adicionar/editar/remover do BD.
+         */
         dispose();
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
@@ -291,11 +315,11 @@ public class Clientes extends javax.swing.JFrame {
     private javax.swing.JTextField campoDocumento;
     private javax.swing.JTextField campoEndereco1;
     private javax.swing.JFormattedTextField campoNascimento;
+    private javax.swing.JTextField campoNome;
     private javax.swing.JTextField campoTel1;
     private javax.swing.JTextField campoTel2;
     private javax.swing.JComboBox<String> cbDocumento;
     private javax.swing.JComboBox<String> cbSexo;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel labelEndereco;
     private javax.swing.JLabel labelNascimento;
     private javax.swing.JLabel labelNome;
