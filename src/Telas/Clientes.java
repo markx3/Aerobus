@@ -12,13 +12,16 @@ package Telas;
  */
 public class Clientes extends javax.swing.JFrame {
     
-    private static byte opt;
     private final static byte CPF          = 0;
     private final static byte CNPJ         = 1;
     private final static byte CLIENTES     = 4;
     private final static byte NOVO         = 5;
     private final static byte EDITAR       = 6;
     private final static byte REMOVER      = 7;
+    
+    private static byte opt;
+
+    
     
     /**
      * Creates new form Clientes
@@ -239,6 +242,8 @@ public class Clientes extends javax.swing.JFrame {
         /**
          * TODO Pesquisar CPF/CNPJ no BD e carregar as informações nos devidos
          * campos, se o CPF/CNPJ já existir.
+         * 
+         * 
          */
         
     }//GEN-LAST:event_btnConsultaActionPerformed
@@ -256,14 +261,16 @@ public class Clientes extends javax.swing.JFrame {
 
     private void cbDocumentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDocumentoActionPerformed
         if (cbDocumento.getSelectedIndex() == CNPJ) {
+            labelNome.setText("Razão Social:");
             cbSexo.setEnabled(false);
             campoNascimento.setEnabled(false);
-            labelNome.setText("Razão Social:");
         }
         if (cbDocumento.getSelectedIndex() == CPF) {
-            cbSexo.setEnabled(true);
-            campoNascimento.setEnabled(true);
             labelNome.setText("Nome:");
+            if (opt == NOVO) {
+                cbSexo.setEnabled(true);
+                campoNascimento.setEnabled(true);
+            }
         }
     }//GEN-LAST:event_cbDocumentoActionPerformed
     

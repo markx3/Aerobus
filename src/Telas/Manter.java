@@ -27,6 +27,7 @@ public class Manter extends javax.swing.JFrame {
      private static byte opt;
      
      private Clientes telaClientes;
+     private Voos telaVoos;
     
      /**
      * Creates new form ManterClientes
@@ -137,58 +138,37 @@ public class Manter extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
-        switch (opt) {
-            case AEROPORTOS:
-                break;
-            case AVIOES: 
-                break;
-            case RESERVAS: 
-                break;
-            case VOOS: 
-                break;
-            case CLIENTES:
-                telaClientes = new Clientes(NOVO);
-                telaClientes.setVisible(true);
-                break;                 
+    private void selecionaAcao(byte entidade, byte opcao) {
+        if (entidade == AEROPORTOS) {
+            
+        }
+        if (entidade == AVIOES) {
+            
+        }
+        if (entidade == RESERVAS) {
+            
+        }
+        if (entidade == VOOS) {
+            Voos tela = new Voos(opcao);
+            tela.setVisible(true);
+        }
+        if (entidade == CLIENTES) {
+            Clientes tela = new Clientes(opcao);
+            tela.setVisible(true);
         }
         dispose();
+    }
+    
+    private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
+        selecionaAcao(opt, NOVO);
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        switch (opt) {
-            case AEROPORTOS: 
-                break;
-            case AVIOES: 
-                break;
-            case RESERVAS: 
-                break;
-            case VOOS: 
-                break;
-            case CLIENTES:
-                telaClientes = new Clientes(EDITAR);
-                telaClientes.setVisible(true);
-                break;                 
-        }
-        dispose();
+        selecionaAcao(opt, EDITAR);
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
-        switch (opt) {
-            case AEROPORTOS: 
-                break;
-            case AVIOES: 
-                break;
-            case RESERVAS:
-                break;
-            case VOOS: 
-                break;
-            case CLIENTES:
-                telaClientes = new Clientes(REMOVER);
-                telaClientes.setVisible(true);
-                break;                 
-        }
-        dispose();
+        selecionaAcao(opt, REMOVER);
     }//GEN-LAST:event_btnRemoverActionPerformed
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
