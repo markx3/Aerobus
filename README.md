@@ -13,7 +13,7 @@ para implementar um sistema de reservas de passagens de uma empresa aérea.
 * Descrição do avião  
 * Aeroporto  
 
-Considere que há dois tipos de clientes: Pessoas fı́sicas e Pessoas jurı́dicas.  
+* Considere que há dois tipos de clientes: Pessoas fı́sicas e Pessoas jurı́dicas.  
 * Pessoas fı́sicas possuem CPF, nome, endereço, sexo(opcional), data de nascimento (opcional) e telefones (opcionais). Pessoas jurı́dicas possuem CNPJ,razão social, endereço e telefones (opcionais).  
 * Um vôo possui: data de partida e número de vagas.  
 * A descrição de um vôo possui: horário de partida; horário de chegada e número.  
