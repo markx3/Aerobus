@@ -11,6 +11,7 @@ package Telas;
  */
 public class Voos extends javax.swing.JFrame {
 
+    private final static byte VOOS         = 3;
     private final static byte NOVO         = 5;
     private final static byte EDITAR       = 6;
     private final static byte REMOVER      = 7;
@@ -37,14 +38,41 @@ public class Voos extends javax.swing.JFrame {
     
     private void caseNovo() {
         labelTitulo.setText("Novo vôo");
+        cbVoo.setEnabled(false);
     }
     
     private void caseEditar() {
         labelTitulo.setText("Editar vôo");
+        desabilitaItems();
     }
     
     private void caseRemover() {
         labelTitulo.setText("Remover vôo");
+        desabilitaItems();
+    }
+    
+    private void habilitaItems() {
+        campoDataChegada.setEnabled(true);
+        campoDataPartida.setEnabled(true);
+        campoVagas.setEnabled(true);
+        cbAeroportoDestino.setEnabled(true);
+        cbAeroportoOrigem.setEnabled(true);
+        cbCidadeDestino.setEnabled(true);
+        cbCidadeOrigem.setEnabled(true);
+        cbAviao.setEnabled(true);
+
+                
+    }
+    
+    private void desabilitaItems() {
+        campoDataChegada.setEnabled(false);
+        campoDataPartida.setEnabled(false);
+        campoVagas.setEnabled(false);
+        cbAeroportoDestino.setEnabled(false);
+        cbAeroportoOrigem.setEnabled(false);
+        cbCidadeDestino.setEnabled(false);
+        cbCidadeOrigem.setEnabled(false);
+        cbAviao.setEnabled(false);
     }
     
     /**
@@ -57,30 +85,208 @@ public class Voos extends javax.swing.JFrame {
     private void initComponents() {
 
         labelTitulo = new javax.swing.JLabel();
+        cbVoo = new javax.swing.JComboBox<>();
+        labelCidadeOrigem = new javax.swing.JLabel();
+        cbCidadeOrigem = new javax.swing.JComboBox<>();
+        labelCidadeDestino = new javax.swing.JLabel();
+        cbCidadeDestino = new javax.swing.JComboBox<>();
+        labelAeroportoOrigem = new javax.swing.JLabel();
+        cbAeroportoOrigem = new javax.swing.JComboBox<>();
+        labelAeroportoDestino = new javax.swing.JLabel();
+        cbAeroportoDestino = new javax.swing.JComboBox<>();
+        labelDataPartida = new javax.swing.JLabel();
+        campoDataPartida = new javax.swing.JFormattedTextField();
+        labelDataChegada = new javax.swing.JLabel();
+        campoDataChegada = new javax.swing.JFormattedTextField();
+        labelAviao = new javax.swing.JLabel();
+        cbAviao = new javax.swing.JComboBox<>();
+        labelVagas = new javax.swing.JLabel();
+        btnConfirmar = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
+        campoVagas = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         labelTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelTitulo.setText("jLabel1");
 
+        cbVoo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbVoo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbVooActionPerformed(evt);
+            }
+        });
+
+        labelCidadeOrigem.setText("Cidade de Origem:");
+
+        cbCidadeOrigem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        labelCidadeDestino.setText("Cidade de Destino:");
+
+        cbCidadeDestino.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        labelAeroportoOrigem.setText("Aeroporto de Origem:");
+
+        cbAeroportoOrigem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        labelAeroportoDestino.setText("Aeroporto de Destino:");
+
+        cbAeroportoDestino.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        labelDataPartida.setText("Data de Partida:");
+
+        try {
+            campoDataPartida.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        labelDataChegada.setText("Data de Chegada:");
+
+        try {
+            campoDataChegada.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        labelAviao.setText("Avião:");
+
+        cbAviao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        labelVagas.setText("Vagas disponíveis:");
+
+        btnConfirmar.setText("Confirmar");
+        btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmarActionPerformed(evt);
+            }
+        });
+
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
+
+        try {
+            campoVagas.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(labelTitulo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 409, Short.MAX_VALUE)
+            .addComponent(labelTitulo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cbVoo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(labelAeroportoOrigem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(labelDataPartida)
+                                .addComponent(labelCidadeOrigem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(labelAviao))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cbCidadeOrigem, 0, 150, Short.MAX_VALUE)
+                            .addComponent(cbAeroportoOrigem, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(campoDataPartida)
+                            .addComponent(cbAviao, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labelCidadeDestino)
+                            .addComponent(labelAeroportoDestino)
+                            .addComponent(labelDataChegada)
+                            .addComponent(labelVagas))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(cbCidadeDestino, 0, 150, Short.MAX_VALUE)
+                                .addComponent(cbAeroportoDestino, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(campoDataChegada))
+                            .addComponent(campoVagas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(labelTitulo)
-                .addContainerGap(330, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(cbVoo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelCidadeOrigem)
+                    .addComponent(cbCidadeOrigem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelCidadeDestino)
+                    .addComponent(cbCidadeDestino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelAeroportoOrigem)
+                    .addComponent(cbAeroportoOrigem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelAeroportoDestino)
+                    .addComponent(cbAeroportoDestino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelDataPartida)
+                    .addComponent(campoDataPartida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelDataChegada)
+                    .addComponent(campoDataChegada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(labelAviao)
+                            .addComponent(cbAviao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labelVagas))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(campoVagas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnConfirmar)
+                    .addComponent(btnCancelar))
+                .addContainerGap())
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
+        dispose();
+    }//GEN-LAST:event_btnConfirmarActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        dispose();
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void cbVooActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbVooActionPerformed
+        if ((!(cbVoo.getSelectedIndex() == 0)) && opt != REMOVER) {
+            /**
+             * Carregar informações referentes ao vôo aqui.
+             */
+            habilitaItems();
+        }
+    }//GEN-LAST:event_cbVooActionPerformed
+
+    @Override
+    public void dispose() {
+        super.dispose();
+        Manter tela = new Manter(VOOS);
+        tela.setVisible(true);
+    }
     
     /**
      * @param args the command line arguments
@@ -119,6 +325,25 @@ public class Voos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnConfirmar;
+    private javax.swing.JFormattedTextField campoDataChegada;
+    private javax.swing.JFormattedTextField campoDataPartida;
+    private javax.swing.JFormattedTextField campoVagas;
+    private javax.swing.JComboBox<String> cbAeroportoDestino;
+    private javax.swing.JComboBox<String> cbAeroportoOrigem;
+    private javax.swing.JComboBox<String> cbAviao;
+    private javax.swing.JComboBox<String> cbCidadeDestino;
+    private javax.swing.JComboBox<String> cbCidadeOrigem;
+    private javax.swing.JComboBox<String> cbVoo;
+    private javax.swing.JLabel labelAeroportoDestino;
+    private javax.swing.JLabel labelAeroportoOrigem;
+    private javax.swing.JLabel labelAviao;
+    private javax.swing.JLabel labelCidadeDestino;
+    private javax.swing.JLabel labelCidadeOrigem;
+    private javax.swing.JLabel labelDataChegada;
+    private javax.swing.JLabel labelDataPartida;
     private javax.swing.JLabel labelTitulo;
+    private javax.swing.JLabel labelVagas;
     // End of variables declaration//GEN-END:variables
 }
