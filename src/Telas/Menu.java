@@ -11,6 +11,15 @@ package Telas;
  */
 public class Menu extends javax.swing.JFrame {
 
+     private final static byte AEROPORTOS   = 0;
+     private final static byte AVIOES       = 1;
+     private final static byte RESERVAS     = 2;
+     private final static byte VOOS         = 3;
+     private final static byte CLIENTES     = 4;
+     
+     private Manter tela;
+     
+    
     /**
      * Creates new form ManterReservas
      */
@@ -27,72 +36,138 @@ public class Menu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        btnClientes = new javax.swing.JButton();
+        btnReservas = new javax.swing.JButton();
+        btnVoos = new javax.swing.JButton();
+        btnAeroportos = new javax.swing.JButton();
+        btnAvioes = new javax.swing.JButton();
+        btnSair = new javax.swing.JButton();
+        labelTitulo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("Clientes");
-
-        jButton2.setText("Reservas");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnClientes.setText("Clientes");
+        btnClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnClientesActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Vôos");
+        btnReservas.setText("Reservas");
+        btnReservas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReservasActionPerformed(evt);
+            }
+        });
 
-        jButton4.setText("Aeroportos");
+        btnVoos.setText("Vôos");
+        btnVoos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoosActionPerformed(evt);
+            }
+        });
 
-        jButton5.setText("Aviões");
+        btnAeroportos.setText("Aeroportos");
+        btnAeroportos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAeroportosActionPerformed(evt);
+            }
+        });
 
-        jButton6.setText("Sair");
+        btnAvioes.setText("Aviões");
+        btnAvioes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAvioesActionPerformed(evt);
+            }
+        });
+
+        btnSair.setText("Sair");
+        btnSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSairActionPerformed(evt);
+            }
+        });
+
+        labelTitulo.setFont(new java.awt.Font("Ubuntu", 0, 36)); // NOI18N
+        labelTitulo.setText("Aerobus");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(141, 141, 141)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton6)
-                    .addComponent(jButton5)
-                    .addComponent(jButton4)
-                    .addComponent(jButton3)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1))
-                .addContainerGap(145, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(43, 43, 43)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnClientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnReservas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnVoos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnAeroportos, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                            .addComponent(btnAvioes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnSair, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(120, 120, 120)
+                        .addComponent(labelTitulo)))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(jButton1)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(18, Short.MAX_VALUE)
+                .addComponent(labelTitulo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnClientes)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
+                .addComponent(btnReservas)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3)
+                .addComponent(btnVoos)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton4)
+                .addComponent(btnAeroportos)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton5)
+                .addComponent(btnAvioes)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton6)
-                .addContainerGap(66, Short.MAX_VALUE))
+                .addComponent(btnSair)
+                .addContainerGap())
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void btnReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReservasActionPerformed
+        tela = new Manter(RESERVAS);
+        tela.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnReservasActionPerformed
+
+    private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActionPerformed
+        tela = new Manter(CLIENTES);
+        tela.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnClientesActionPerformed
+
+    private void btnVoosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoosActionPerformed
+        tela = new Manter(VOOS);
+        tela.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnVoosActionPerformed
+
+    private void btnAeroportosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAeroportosActionPerformed
+        tela = new Manter(AEROPORTOS);
+        tela.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnAeroportosActionPerformed
+
+    private void btnAvioesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvioesActionPerformed
+        tela = new Manter(AVIOES);
+        tela.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnAvioesActionPerformed
+
+    private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
+        dispose();
+    }//GEN-LAST:event_btnSairActionPerformed
 
     /**
      * @param args the command line arguments
@@ -131,11 +206,12 @@ public class Menu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
+    private javax.swing.JButton btnAeroportos;
+    private javax.swing.JButton btnAvioes;
+    private javax.swing.JButton btnClientes;
+    private javax.swing.JButton btnReservas;
+    private javax.swing.JButton btnSair;
+    private javax.swing.JButton btnVoos;
+    private javax.swing.JLabel labelTitulo;
     // End of variables declaration//GEN-END:variables
 }
