@@ -13,15 +13,20 @@ import javax.swing.SwingConstants;
  * @author marcos
  */
 public class Manter extends javax.swing.JFrame {
-    
+    /**
+     * Variáveis estáticas
+     */
      private final static byte AEROPORTOS   = 0;
      private final static byte AVIOES       = 1;
      private final static byte RESERVAS     = 2;
      private final static byte VOOS         = 3;
      private final static byte CLIENTES     = 4;
+     private final static byte NOVO         = 5;
+     private final static byte EDITAR       = 6;
+     private final static byte REMOVER      = 7;
+     private static byte opt;
     
-    private static byte opt;
-    /**
+     /**
      * Creates new form ManterClientes
      * @param opt
      */
@@ -35,8 +40,6 @@ public class Manter extends javax.swing.JFrame {
             case VOOS: labelTitulo.setText("Vôos"); break;
             case CLIENTES: labelTitulo.setText("Clientes"); break;                 
         }
-        labelTitulo.setHorizontalAlignment(SwingConstants.CENTER);
-        labelTitulo.setVerticalAlignment(SwingConstants.TOP);
     }
 
     /**
