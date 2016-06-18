@@ -37,6 +37,7 @@ para implementar um sistema de reservas de passagens de uma empresa aérea.
 * A partir das cidades de origem e de destino, obter os códigos dos vôos em uma determinada data  
 * A partir do código de um vôo, obter os códigos e os nomes dos aeroportos de origem e de destino.  
 * A partir do código de um aeroporto, obter o seu nome e a sua cidade.  
+
 ###O sistema possui as seguintes regras do negócio:  
 * A um cliente podem estar associadas várias reservas de viagem   
 * A uma reserva de viagem podem estar associados várias reservas de vôos  
