@@ -5,6 +5,7 @@
  */
 package Telas;
 
+
 /**
  *
  * @author mrk
@@ -12,6 +13,8 @@ package Telas;
 public class Clientes extends javax.swing.JFrame {
     
     private static byte opt;
+    private final static byte CPF          = 0;
+    private final static byte CNPJ         = 1;
     private final static byte CLIENTES     = 4;
     private final static byte NOVO         = 5;
     private final static byte EDITAR       = 6;
@@ -45,7 +48,6 @@ public class Clientes extends javax.swing.JFrame {
         btnConsulta = new javax.swing.JButton();
         cbDocumento = new javax.swing.JComboBox<>();
         labelNome = new javax.swing.JLabel();
-        campoNome = new javax.swing.JTextField();
         labelEndereco = new javax.swing.JLabel();
         campoEndereco1 = new javax.swing.JTextField();
         labelTel1 = new javax.swing.JLabel();
@@ -58,6 +60,7 @@ public class Clientes extends javax.swing.JFrame {
         campoNascimento = new javax.swing.JFormattedTextField();
         btnConfirmar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -73,19 +76,30 @@ public class Clientes extends javax.swing.JFrame {
         });
 
         cbDocumento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CPF", "CNPJ" }));
+        cbDocumento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbDocumentoActionPerformed(evt);
+            }
+        });
 
+        labelNome.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         labelNome.setText("Nome:");
 
+        labelEndereco.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         labelEndereco.setText("Endereço:");
 
+        labelTel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         labelTel1.setText("Telefone 1:");
 
+        labelTel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         labelTel2.setText("Telefone 2:");
 
+        labelSexo.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         labelSexo.setText("Sexo:");
 
         cbSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Feminino" }));
 
+        labelNascimento.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         labelNascimento.setText(" Nascimento:");
 
         try {
@@ -118,18 +132,14 @@ public class Clientes extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(labelNascimento)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(cbDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(labelTel1)
-                                .addComponent(labelTel2)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(labelNome)
-                                    .addComponent(labelEndereco))
-                                .addComponent(labelSexo, javax.swing.GroupLayout.Alignment.TRAILING)))
+                            .addComponent(cbDocumento, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(labelNome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(labelEndereco, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(labelTel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(labelTel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(labelSexo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(campoNome)
                             .addComponent(campoEndereco1)
                             .addComponent(campoTel1)
                             .addComponent(campoTel2, javax.swing.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE)
@@ -138,14 +148,18 @@ public class Clientes extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnConsulta))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(cbSexo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(campoNascimento))
-                                .addGap(0, 0, Short.MAX_VALUE))))
+                                .addComponent(cbSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jTextField1)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(labelNascimento)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(campoNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -161,7 +175,7 @@ public class Clientes extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelNome)
-                    .addComponent(campoNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelEndereco)
@@ -178,11 +192,11 @@ public class Clientes extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelSexo)
                     .addComponent(cbSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelNascimento)
                     .addComponent(campoNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnConfirmar)
                     .addComponent(btnCancelar))
@@ -195,7 +209,7 @@ public class Clientes extends javax.swing.JFrame {
 
     private void caseRemover() {
         labelTitulo.setText("Remover cliente");
-        campoNome.setEnabled(false);
+        jTextField1.setEnabled(false);
         campoEndereco1.setEnabled(false);
         campoNascimento.setEnabled(false);
         campoTel1.setEnabled(false);
@@ -215,6 +229,19 @@ public class Clientes extends javax.swing.JFrame {
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void cbDocumentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDocumentoActionPerformed
+        if (cbDocumento.getSelectedIndex() == CNPJ) {
+            cbSexo.setEnabled(false);
+            campoNascimento.setEnabled(false);
+            labelNome.setText("Razão Social:");
+        }
+        if (cbDocumento.getSelectedIndex() == CPF) {
+            cbSexo.setEnabled(true);
+            campoNascimento.setEnabled(true);
+            labelNome.setText("Nome:");
+        }
+    }//GEN-LAST:event_cbDocumentoActionPerformed
     
     @Override
     public void dispose() {
@@ -264,11 +291,11 @@ public class Clientes extends javax.swing.JFrame {
     private javax.swing.JTextField campoDocumento;
     private javax.swing.JTextField campoEndereco1;
     private javax.swing.JFormattedTextField campoNascimento;
-    private javax.swing.JTextField campoNome;
     private javax.swing.JTextField campoTel1;
     private javax.swing.JTextField campoTel2;
     private javax.swing.JComboBox<String> cbDocumento;
     private javax.swing.JComboBox<String> cbSexo;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel labelEndereco;
     private javax.swing.JLabel labelNascimento;
     private javax.swing.JLabel labelNome;

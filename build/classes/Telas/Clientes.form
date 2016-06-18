@@ -30,21 +30,15 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="labelNascimento" min="-2" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="cbDocumento" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="labelTel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="labelTel2" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                  <Component id="labelNome" min="-2" max="-2" attributes="0"/>
-                                  <Component id="labelEndereco" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="labelSexo" alignment="1" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="cbDocumento" alignment="1" max="32767" attributes="0"/>
+                          <Component id="labelNome" max="32767" attributes="0"/>
+                          <Component id="labelEndereco" alignment="0" max="32767" attributes="0"/>
+                          <Component id="labelTel1" alignment="0" max="32767" attributes="0"/>
+                          <Component id="labelTel2" alignment="0" max="32767" attributes="0"/>
+                          <Component id="labelSexo" alignment="1" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="campoNome" max="32767" attributes="0"/>
                           <Component id="campoEndereco1" alignment="0" max="32767" attributes="0"/>
                           <Component id="campoTel1" alignment="0" max="32767" attributes="0"/>
                           <Component id="campoTel2" alignment="0" pref="294" max="32767" attributes="0"/>
@@ -54,18 +48,22 @@
                               <Component id="btnConsulta" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="cbSexo" max="32767" attributes="0"/>
-                                  <Component id="campoNascimento" max="32767" attributes="0"/>
-                              </Group>
+                              <Component id="cbSexo" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
+                          <Component id="jTextField1" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" attributes="0">
                       <Component id="btnConfirmar" min="-2" pref="150" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="btnCancelar" min="-2" pref="150" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="labelNascimento" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="campoNascimento" min="-2" pref="90" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -86,7 +84,7 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="labelNome" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="campoNome" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -108,12 +106,12 @@
                   <Component id="labelSexo" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="cbSexo" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="labelNascimento" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="campoNascimento" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnConfirmar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -149,19 +147,22 @@
           </StringArray>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbDocumentoActionPerformed"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JLabel" name="labelNome">
       <Properties>
+        <Property name="horizontalAlignment" type="int" value="4"/>
         <Property name="text" type="java.lang.String" value="Nome:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="campoNome">
-    </Component>
     <Component class="javax.swing.JLabel" name="labelEndereco">
       <Properties>
+        <Property name="horizontalAlignment" type="int" value="4"/>
         <Property name="text" type="java.lang.String" value="Endere&#xe7;o:"/>
       </Properties>
     </Component>
@@ -169,11 +170,13 @@
     </Component>
     <Component class="javax.swing.JLabel" name="labelTel1">
       <Properties>
+        <Property name="horizontalAlignment" type="int" value="4"/>
         <Property name="text" type="java.lang.String" value="Telefone 1:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="labelTel2">
       <Properties>
+        <Property name="horizontalAlignment" type="int" value="4"/>
         <Property name="text" type="java.lang.String" value="Telefone 2:"/>
       </Properties>
     </Component>
@@ -183,6 +186,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="labelSexo">
       <Properties>
+        <Property name="horizontalAlignment" type="int" value="4"/>
         <Property name="text" type="java.lang.String" value="Sexo:"/>
       </Properties>
     </Component>
@@ -201,6 +205,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="labelNascimento">
       <Properties>
+        <Property name="horizontalAlignment" type="int" value="4"/>
         <Property name="text" type="java.lang.String" value=" Nascimento:"/>
       </Properties>
     </Component>
@@ -226,6 +231,8 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCancelarActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jTextField1">
     </Component>
   </SubComponents>
 </Form>
