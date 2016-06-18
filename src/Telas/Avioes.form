@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
   </Properties>
@@ -23,11 +23,11 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="labelTitulo" max="32767" attributes="0"/>
+          <Component id="labelTitulo" alignment="1" max="32767" attributes="0"/>
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="cbCodigoVoo" alignment="0" max="32767" attributes="0"/>
+                  <Component id="cbAvioes" alignment="0" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="btnConfirmar" min="-2" pref="150" max="-2" attributes="0"/>
                       <EmptySpace pref="76" max="32767" attributes="0"/>
@@ -35,17 +35,15 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="labelCodigo" pref="55" max="32767" attributes="0"/>
-                              <Component id="labelCidade" max="32767" attributes="0"/>
-                          </Group>
-                          <Component id="labelNome" alignment="0" min="-2" pref="55" max="-2" attributes="0"/>
+                          <Component id="labelFabricante" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="labelModelo" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="labelNumAssentos" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="campoNome" max="32767" attributes="0"/>
-                          <Component id="campoCidade" max="32767" attributes="0"/>
-                          <Component id="campoCodigo" alignment="1" max="32767" attributes="0"/>
+                          <Component id="campoModelo" max="32767" attributes="0"/>
+                          <Component id="campoFabricante" max="32767" attributes="0"/>
+                          <Component id="campoNumAssentos" alignment="1" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -58,22 +56,22 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="labelTitulo" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-              <Component id="cbCodigoVoo" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="cbAvioes" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="labelNome" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="campoNome" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="labelFabricante" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="campoFabricante" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="labelCodigo" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="campoCodigo" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="labelModelo" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="campoModelo" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="labelCidade" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="campoCidade" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="labelNumAssentos" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="campoNumAssentos" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -92,33 +90,7 @@
         <Property name="text" type="java.lang.String" value="jLabel1"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="labelNome">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Nome:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="campoNome">
-    </Component>
-    <Component class="javax.swing.JLabel" name="labelCodigo">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="C&#xf3;digo:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JFormattedTextField" name="campoCodigo">
-      <Properties>
-        <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
-          <Format format="###" subtype="-1" type="5"/>
-        </Property>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="labelCidade">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Cidade:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="campoCidade">
-    </Component>
-    <Component class="javax.swing.JComboBox" name="cbCodigoVoo">
+    <Component class="javax.swing.JComboBox" name="cbAvioes">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="5">
@@ -131,11 +103,32 @@
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbCodigoVooActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbAvioesActionPerformed"/>
       </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
+    </Component>
+    <Component class="javax.swing.JLabel" name="labelFabricante">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Fabricante:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="labelModelo">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Modelo:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="labelNumAssentos">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Num. Assentos:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="campoFabricante">
+    </Component>
+    <Component class="javax.swing.JTextField" name="campoModelo">
+    </Component>
+    <Component class="javax.swing.JFormattedTextField" name="campoNumAssentos">
     </Component>
     <Component class="javax.swing.JButton" name="btnConfirmar">
       <Properties>

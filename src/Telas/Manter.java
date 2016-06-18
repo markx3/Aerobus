@@ -5,6 +5,7 @@
  */
 package Telas;
 
+import Telas.Reservas.Reservas;
 import java.awt.Component;
 import javax.swing.SwingConstants;
 
@@ -57,7 +58,7 @@ public class Manter extends javax.swing.JFrame {
         btnNovo = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
         btnRemover = new javax.swing.JButton();
-        btnSair = new javax.swing.JButton();
+        btnVoltar = new javax.swing.JButton();
         labelTitulo = new javax.swing.JLabel();
         btnConsultar = new javax.swing.JButton();
 
@@ -84,10 +85,10 @@ public class Manter extends javax.swing.JFrame {
             }
         });
 
-        btnSair.setText("Sair");
-        btnSair.addActionListener(new java.awt.event.ActionListener() {
+        btnVoltar.setText("Voltar");
+        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSairActionPerformed(evt);
+                btnVoltarActionPerformed(evt);
             }
         });
 
@@ -112,7 +113,7 @@ public class Manter extends javax.swing.JFrame {
                     .addComponent(btnNovo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnRemover, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnSair, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                    .addComponent(btnVoltar, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
                     .addComponent(btnConsultar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -130,7 +131,7 @@ public class Manter extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnRemover)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnSair)
+                .addComponent(btnVoltar)
                 .addContainerGap())
         );
 
@@ -140,13 +141,16 @@ public class Manter extends javax.swing.JFrame {
 
     private void selecionaAcao(byte entidade, byte opcao) {
         if (entidade == AEROPORTOS) {
-            
+            Aeroportos tela = new Aeroportos(opcao);
+            tela.setVisible(true);
         }
         if (entidade == AVIOES) {
-            
+            Avioes tela = new Avioes(opcao);
+            tela.setVisible(true);
         }
         if (entidade == RESERVAS) {
-            
+            Reservas tela = new Reservas();
+            tela.setVisible(true);
         }
         if (entidade == VOOS) {
             Voos tela = new Voos(opcao);
@@ -171,11 +175,11 @@ public class Manter extends javax.swing.JFrame {
         selecionaAcao(opt, REMOVER);
     }//GEN-LAST:event_btnRemoverActionPerformed
 
-    private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         dispose();
         Menu tela = new Menu();
         tela.setVisible(true);
-    }//GEN-LAST:event_btnSairActionPerformed
+    }//GEN-LAST:event_btnVoltarActionPerformed
     
     
     /**
@@ -219,7 +223,7 @@ public class Manter extends javax.swing.JFrame {
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnNovo;
     private javax.swing.JButton btnRemover;
-    private javax.swing.JButton btnSair;
+    private javax.swing.JButton btnVoltar;
     private javax.swing.JLabel labelTitulo;
     // End of variables declaration//GEN-END:variables
 }

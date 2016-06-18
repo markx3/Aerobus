@@ -279,6 +279,7 @@ public class Voos extends javax.swing.JFrame {
              */
             habilitaItems();
         }
+        if (cbVoo.getSelectedIndex() == 0) desabilitaItems();
     }//GEN-LAST:event_cbVooActionPerformed
 
     @Override

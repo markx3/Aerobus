@@ -9,24 +9,24 @@ package Telas;
  *
  * @author mrk
  */
-public class Aeroportos extends javax.swing.JFrame {
-
-    private final static byte AEROPORTOS   = 0;
+public class Avioes extends javax.swing.JFrame {
+         
+    private final static byte AVIOES       = 1;
     private final static byte NOVO         = 5;
     private final static byte EDITAR       = 6;
     private final static byte REMOVER      = 7;
     
     private static byte opt;
-    
     /**
-     * Creates new form Aeroportos
+     * Creates new form Avioes
+     * @param opt
      */
-    public Aeroportos(byte opt) {
-        Aeroportos.opt = opt;
+    public Avioes(byte opt) {
+        Avioes.opt = opt;
         initComponents();
         verificaOperacao();
     }
-
+       
     private void verificaOperacao() {
          switch(opt) {
             case NOVO: caseNovo(); break;
@@ -36,31 +36,32 @@ public class Aeroportos extends javax.swing.JFrame {
     }
     
     private void caseNovo() {
-        labelTitulo.setText("Novo aeroporto");
-        cbCodigoVoo.setEnabled(false);
+        labelTitulo.setText("Novo avião");
+        cbAvioes.setEnabled(false);
     }
     
     private void caseEditar() {
-        labelTitulo.setText("Editar aeroporto");
+        labelTitulo.setText("Editar avião");
         desabilitaItems();
     }
     
     private void caseRemover() {
-        labelTitulo.setText("Remover aeroporto");
+        labelTitulo.setText("Remover avião");
         desabilitaItems();
     }
      
     private void habilitaItems() {
-        campoCidade.setEnabled(true);
-        campoCodigo.setEnabled(true);
-        campoNome.setEnabled(true);
+        campoFabricante.setEnabled(true);
+        campoModelo.setEnabled(true);
+        campoNumAssentos.setEnabled(true);
            
     }
     
     private void desabilitaItems() {
-        campoCidade.setEnabled(false);
-        campoCodigo.setEnabled(false);
-        campoNome.setEnabled(false);
+        campoFabricante.setEnabled(false);
+        campoModelo.setEnabled(false);
+        campoNumAssentos.setEnabled(false);
+
     }
     
     /**
@@ -73,13 +74,13 @@ public class Aeroportos extends javax.swing.JFrame {
     private void initComponents() {
 
         labelTitulo = new javax.swing.JLabel();
-        labelNome = new javax.swing.JLabel();
-        campoNome = new javax.swing.JTextField();
-        labelCodigo = new javax.swing.JLabel();
-        campoCodigo = new javax.swing.JFormattedTextField();
-        labelCidade = new javax.swing.JLabel();
-        campoCidade = new javax.swing.JTextField();
-        cbCodigoVoo = new javax.swing.JComboBox<>();
+        cbAvioes = new javax.swing.JComboBox<>();
+        labelFabricante = new javax.swing.JLabel();
+        labelModelo = new javax.swing.JLabel();
+        labelNumAssentos = new javax.swing.JLabel();
+        campoFabricante = new javax.swing.JTextField();
+        campoModelo = new javax.swing.JTextField();
+        campoNumAssentos = new javax.swing.JFormattedTextField();
         btnConfirmar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
 
@@ -88,24 +89,18 @@ public class Aeroportos extends javax.swing.JFrame {
         labelTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelTitulo.setText("jLabel1");
 
-        labelNome.setText("Nome:");
-
-        labelCodigo.setText("Código:");
-
-        try {
-            campoCodigo.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-
-        labelCidade.setText("Cidade:");
-
-        cbCodigoVoo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cbCodigoVoo.addActionListener(new java.awt.event.ActionListener() {
+        cbAvioes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbAvioes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbCodigoVooActionPerformed(evt);
+                cbAvioesActionPerformed(evt);
             }
         });
+
+        labelFabricante.setText("Fabricante:");
+
+        labelModelo.setText("Modelo:");
+
+        labelNumAssentos.setText("Num. Assentos:");
 
         btnConfirmar.setText("Confirmar");
         btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
@@ -125,26 +120,25 @@ public class Aeroportos extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(labelTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(labelTitulo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cbCodigoVoo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cbAvioes, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
                         .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(labelCodigo, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
-                                .addComponent(labelCidade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(labelNome, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(labelFabricante)
+                            .addComponent(labelModelo)
+                            .addComponent(labelNumAssentos))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(campoNome)
-                            .addComponent(campoCidade)
-                            .addComponent(campoCodigo, javax.swing.GroupLayout.Alignment.TRAILING))))
+                            .addComponent(campoModelo)
+                            .addComponent(campoFabricante)
+                            .addComponent(campoNumAssentos, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -153,19 +147,19 @@ public class Aeroportos extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(labelTitulo)
                 .addGap(18, 18, 18)
-                .addComponent(cbCodigoVoo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelNome)
-                    .addComponent(campoNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(cbAvioes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelCodigo)
-                    .addComponent(campoCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(labelFabricante)
+                    .addComponent(campoFabricante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelCidade)
-                    .addComponent(campoCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(labelModelo)
+                    .addComponent(campoModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelNumAssentos)
+                    .addComponent(campoNumAssentos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnConfirmar)
@@ -177,16 +171,6 @@ public class Aeroportos extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cbCodigoVooActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCodigoVooActionPerformed
-        if ((!(cbCodigoVoo.getSelectedIndex() == 0)) && opt != REMOVER) {
-            /**
-             * Carregar informações referentes ao vôo aqui.
-             */
-            habilitaItems();
-        }
-        if (cbCodigoVoo.getSelectedIndex() == 0) desabilitaItems();
-    }//GEN-LAST:event_cbCodigoVooActionPerformed
-
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         dispose();
     }//GEN-LAST:event_btnConfirmarActionPerformed
@@ -195,16 +179,27 @@ public class Aeroportos extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    private void cbAvioesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAvioesActionPerformed
+        if ((!(cbAvioes.getSelectedIndex() == 0)) && opt != REMOVER) {
+            /**
+             * Carregar informações referentes ao vôo aqui.
+             */
+            habilitaItems();
+        }
+        if (cbAvioes.getSelectedIndex() == 0) desabilitaItems();
+    }//GEN-LAST:event_cbAvioesActionPerformed
+
     @Override
     public void dispose() {
         super.dispose();
-        Manter tela = new Manter(AEROPORTOS);
+        Manter tela = new Manter(AVIOES);
         tela.setVisible(true);
     }
     
     /**
      * @param args the command line arguments
      */
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -219,20 +214,20 @@ public class Aeroportos extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Aeroportos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Avioes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Aeroportos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Avioes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Aeroportos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Avioes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Aeroportos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Avioes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Aeroportos(opt).setVisible(true);
+                new Avioes(opt).setVisible(true);
             }
         });
     }
@@ -240,13 +235,13 @@ public class Aeroportos extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnConfirmar;
-    private javax.swing.JTextField campoCidade;
-    private javax.swing.JFormattedTextField campoCodigo;
-    private javax.swing.JTextField campoNome;
-    private javax.swing.JComboBox<String> cbCodigoVoo;
-    private javax.swing.JLabel labelCidade;
-    private javax.swing.JLabel labelCodigo;
-    private javax.swing.JLabel labelNome;
+    private javax.swing.JTextField campoFabricante;
+    private javax.swing.JTextField campoModelo;
+    private javax.swing.JFormattedTextField campoNumAssentos;
+    private javax.swing.JComboBox<String> cbAvioes;
+    private javax.swing.JLabel labelFabricante;
+    private javax.swing.JLabel labelModelo;
+    private javax.swing.JLabel labelNumAssentos;
     private javax.swing.JLabel labelTitulo;
     // End of variables declaration//GEN-END:variables
 }

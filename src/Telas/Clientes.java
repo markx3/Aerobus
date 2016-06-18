@@ -216,26 +216,55 @@ public class Clientes extends javax.swing.JFrame {
     
     private void caseNovo() {
         labelTitulo.setText("Novo cliente");
+        btnConsulta.setEnabled(false);
+        habilitaItems();
     }
     
     private void caseEditar() {
         labelTitulo.setText("Editar cliente");
-        campoNome.setEnabled(false);
-        campoEndereco1.setEnabled(false);
-        campoNascimento.setEnabled(false);
-        campoTel1.setEnabled(false);
-        campoTel2.setEnabled(false);
-        cbSexo.setEnabled(false);
+        desabilitaItems();
+
     }
     
     private void caseRemover() {
         labelTitulo.setText("Remover cliente");
+        desabilitaItems();
+    }
+    
+    private void habilitaItems() {
+        campoNome.setEnabled(true);
+        campoEndereco1.setEnabled(true);
+        campoTel1.setEnabled(true);
+        campoTel2.setEnabled(true);
+        if (cbDocumento.getSelectedIndex() == CNPJ) {
+            cbSexo.setEnabled(false);
+            campoNascimento.setEnabled(false);
+            labelNome.setText("Razão social:");
+        }
+        else {
+            cbSexo.setEnabled(true);
+            campoNascimento.setEnabled(true);
+            labelNome.setText("Nome:");
+
+        }
+    }
+    
+    private void desabilitaItems() {
         campoNome.setEnabled(false);
         campoEndereco1.setEnabled(false);
-        campoNascimento.setEnabled(false);
         campoTel1.setEnabled(false);
         campoTel2.setEnabled(false);
-        cbSexo.setEnabled(false);
+        if (cbDocumento.getSelectedIndex() == CNPJ) {
+            cbSexo.setEnabled(false);
+            campoNascimento.setEnabled(false);
+            labelNome.setText("Razão social:");
+        }
+        else {
+            cbSexo.setEnabled(false);
+            campoNascimento.setEnabled(false);
+            labelNome.setText("Nome:");
+
+        }
     }
     
     private void btnConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultaActionPerformed
@@ -245,6 +274,13 @@ public class Clientes extends javax.swing.JFrame {
          * 
          * 
          */
+        if (opt != REMOVER) {
+            habilitaItems();
+        }
+        cbDocumento.setEnabled(false);
+        campoDocumento.setEnabled(false);
+        btnConsulta.setEnabled(false);
+
         
     }//GEN-LAST:event_btnConsultaActionPerformed
 
@@ -260,18 +296,11 @@ public class Clientes extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void cbDocumentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDocumentoActionPerformed
-        if (cbDocumento.getSelectedIndex() == CNPJ) {
-            labelNome.setText("Razão Social:");
-            cbSexo.setEnabled(false);
-            campoNascimento.setEnabled(false);
-        }
-        if (cbDocumento.getSelectedIndex() == CPF) {
-            labelNome.setText("Nome:");
-            if (opt == NOVO) {
-                cbSexo.setEnabled(true);
-                campoNascimento.setEnabled(true);
-            }
-        }
+       if (cbDocumento.getSelectedIndex() == CPF) labelNome.setText("Nome:");
+       else labelNome.setText("Razão social:");
+       if (opt == NOVO) {
+           habilitaItems();
+       }
     }//GEN-LAST:event_cbDocumentoActionPerformed
     
     @Override
