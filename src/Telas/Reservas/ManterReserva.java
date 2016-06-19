@@ -5,22 +5,33 @@
  */
 package Telas.Reservas;
 
-import Telas.Menu;
-
 /**
  *
  * @author mrk
  */
-public class Reservas extends javax.swing.JFrame {
-    
+public class ManterReserva extends javax.swing.JFrame {
+
     private static final byte VOO = 0;
     private static final byte VIAGEM = 1;
-        
+    private static final byte NOVO = 2;
+    private static final byte CANCELAR = 3;
+    
+    private static byte opt;
+
     /**
-     * Creates new form Reservas
+     * Creates new form ManterReservaVoo
      */
-    public Reservas() {
+    public ManterReserva(byte opt) {
+        ManterReserva.opt = opt;
         initComponents();
+        setaLabels();
+    }
+    
+    private void setaLabels() {
+        switch (opt) {
+            case VOO: labelTitulo.setText("Reserva de vôos"); break;
+            case VIAGEM: labelTitulo.setText("Reserva de viagens"); break;
+        }
     }
 
     /**
@@ -33,27 +44,28 @@ public class Reservas extends javax.swing.JFrame {
     private void initComponents() {
 
         labelTitulo = new javax.swing.JLabel();
-        btnViagem = new javax.swing.JButton();
-        btnVoo = new javax.swing.JButton();
+        btnNovaReserva = new javax.swing.JButton();
+        btnCancelarReserva = new javax.swing.JButton();
         btnVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         labelTitulo.setFont(new java.awt.Font("Ubuntu", 0, 36)); // NOI18N
         labelTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelTitulo.setText("Reservas");
+        labelTitulo.setText("jLabel1");
+        labelTitulo.setToolTipText("");
 
-        btnViagem.setText("Viagem");
-        btnViagem.addActionListener(new java.awt.event.ActionListener() {
+        btnNovaReserva.setText("Nova reserva");
+        btnNovaReserva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnViagemActionPerformed(evt);
+                btnNovaReservaActionPerformed(evt);
             }
         });
 
-        btnVoo.setText("Vôo");
-        btnVoo.addActionListener(new java.awt.event.ActionListener() {
+        btnCancelarReserva.setText("Cancelar reserva");
+        btnCancelarReserva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVooActionPerformed(evt);
+                btnCancelarReservaActionPerformed(evt);
             }
         });
 
@@ -72,13 +84,13 @@ public class Reservas extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(labelTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(51, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnVoo, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnViagem, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(49, 49, 49))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnNovaReserva, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnCancelarReserva, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                    .addComponent(btnVoltar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -86,9 +98,9 @@ public class Reservas extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(labelTitulo)
                 .addGap(18, 18, 18)
-                .addComponent(btnViagem)
+                .addComponent(btnNovaReserva)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnVoo)
+                .addComponent(btnCancelarReserva)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnVoltar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -98,24 +110,27 @@ public class Reservas extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnNovaReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovaReservaActionPerformed
+        ReservaVoo tela = new ReservaVoo(NOVO);
+        tela.setVisible(true);
+    }//GEN-LAST:event_btnNovaReservaActionPerformed
+
+    private void btnCancelarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarReservaActionPerformed
+        ReservaVoo tela = new ReservaVoo(CANCELAR);
+        tela.setVisible(true);
+    }//GEN-LAST:event_btnCancelarReservaActionPerformed
+
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         dispose();
-        Menu tela = new Menu();
-        tela.setVisible(true);
     }//GEN-LAST:event_btnVoltarActionPerformed
 
-    private void btnVooActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVooActionPerformed
-        ManterReserva tela = new ManterReserva(VOO);
+    @Override
+    public void dispose() {
+        super.dispose();
+        Reservas tela = new Reservas();
         tela.setVisible(true);
-        dispose();
-    }//GEN-LAST:event_btnVooActionPerformed
-
-    private void btnViagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViagemActionPerformed
-        ManterReserva tela = new ManterReserva(VIAGEM);
-        tela.setVisible(true);
-        dispose();
-    }//GEN-LAST:event_btnViagemActionPerformed
-
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -133,28 +148,31 @@ public class Reservas extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Reservas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ManterReserva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Reservas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ManterReserva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Reservas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ManterReserva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Reservas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ManterReserva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Reservas().setVisible(true);
+                new ManterReserva(opt).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnViagem;
+    private javax.swing.JButton btnCancelarReserva;
+    private javax.swing.JButton btnNovaReserva;
     private javax.swing.JButton btnVoltar;
-    private javax.swing.JButton btnVoo;
     private javax.swing.JLabel labelTitulo;
     // End of variables declaration//GEN-END:variables
 }

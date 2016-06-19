@@ -10,14 +10,23 @@ package Telas.Reservas;
  * @author mrk
  */
 public class ReservaVoo extends javax.swing.JFrame {
-    
+    // TODO Debugar quando for cancelar cliente
     private static final byte CPF = 0;
     private static final byte CNPJ = 1;
+    private static final byte NOVO = 2;
+    private static final byte CANCELAR = 3;
+    
+    private static byte opt;
+    
+    private boolean selecionouCliente;
+    private boolean selecionouVoo;
     
     /**
      * Creates new form Voo
+     * @param opt
      */
-    public ReservaVoo() {
+    public ReservaVoo(byte opt) {
+        ReservaVoo.opt = opt;
         initComponents();
         campoAviao.setEnabled(false);
         campoHorarioChegada.setEnabled(false);
@@ -25,23 +34,53 @@ public class ReservaVoo extends javax.swing.JFrame {
         campoHorarioPartida.setEnabled(false);
         campoAeroportoDestino.setEnabled(false);
         campoAeroportoOrigem.setEnabled(false);
+        campoNomeCliente.setEditable(false);
+        btnConfirmaFinal.setEnabled(false);
+        btnCancelaFinal.setEnabled(true);
+        btnSelecionarCliente.setEnabled(false);
+        btnSelecionarVoo.setEnabled(false);
+
+        if (opt != CANCELAR) cbReservasVoos.setEnabled(false);
+        if (opt == CANCELAR) {
+            btnConfirmaFinal.setText("Confirmar cancelamento");
+            btnCancelaFinal.setText("Voltar");
+            cbCidadeDeOrigem.setEnabled(false);
+            cbCidadeDeDestino.setEnabled(false);
+            campoDataPartida.setEnabled(false);
+            btnConsultaCodVoo.setEnabled(false);
+            btnCancelarVoo.setEnabled(false);
+            btnSelecionarVoo.setEnabled(false);
+        }
     }
 
-    private void setaItems(boolean opcao) {
-
-        cbCidadeDeOrigem.setEnabled(opcao);
-        cbCidadeDeDestino.setEnabled(opcao);
-        campoDataPartida.setEnabled(opcao);
+    private void setaItemsVoos(boolean opcao) {
+        if (opt != CANCELAR) {
+            cbCidadeDeOrigem.setEnabled(opcao);
+            cbCidadeDeDestino.setEnabled(opcao);
+            campoDataPartida.setEnabled(opcao);
+        }
+        if (opt == CANCELAR) {
+            cbCidadeDeOrigem.setEnabled(opcao);
+            cbCidadeDeDestino.setEnabled(opcao);
+            campoDataPartida.setEnabled(opcao);
+            cbCidadeDeOrigem.setEnabled(false);
+            cbCidadeDeDestino.setEnabled(false);
+            campoDataPartida.setEnabled(false);
+            btnConsultaCodVoo.setEnabled(false);
+            btnCancelarVoo.setEnabled(false);
+            btnSelecionarVoo.setEnabled(false);
+        }
+        
     }
     
-    private void habilitaItems() {
-
-        setaItems(true);
+    private void habilitaItemsVoos() {
+        setaItemsVoos(true);
     }
     
-    private void desabilitaItems() {
-        setaItems(false);
+    private void desabilitaItemsVoos() {
+        setaItemsVoos(false);
     }
+    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -62,10 +101,10 @@ public class ReservaVoo extends javax.swing.JFrame {
         campoNomeCliente = new javax.swing.JTextField();
         btnSelecionarCliente = new javax.swing.JButton();
         btnCancelarCliente = new javax.swing.JButton();
-        labelVooSelecionado = new javax.swing.JLabel();
-        labelVooSelecionado2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnConfirmaFinal = new javax.swing.JButton();
+        btnCancelaFinal = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        cbReservasVoos = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         labelConsultaVoo = new javax.swing.JLabel();
         labelCidadeDeOrigem = new javax.swing.JLabel();
@@ -109,20 +148,45 @@ public class ReservaVoo extends javax.swing.JFrame {
         });
 
         btnConsultaCliente.setText("OK");
+        btnConsultaCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultaClienteActionPerformed(evt);
+            }
+        });
 
         labelNomeCliente.setText("Nome:");
 
         btnSelecionarCliente.setText("Selecionar cliente");
+        btnSelecionarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSelecionarClienteActionPerformed(evt);
+            }
+        });
 
         btnCancelarCliente.setText("Cancelar");
+        btnCancelarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarClienteActionPerformed(evt);
+            }
+        });
 
-        labelVooSelecionado.setText("Vôo selecionado:");
+        btnConfirmaFinal.setText("Confirmar reserva");
+        btnConfirmaFinal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmaFinalActionPerformed(evt);
+            }
+        });
 
-        labelVooSelecionado2.setText("jLabel3");
+        btnCancelaFinal.setText("Cancelar reserva");
+        btnCancelaFinal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelaFinalActionPerformed(evt);
+            }
+        });
 
-        jButton1.setText("Confirmar reserva");
+        jLabel2.setText("Reservas de vôos:");
 
-        jButton2.setText("Cancelar reserva");
+        cbReservasVoos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -133,6 +197,10 @@ public class ReservaVoo extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbReservasVoos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(cbDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -143,29 +211,22 @@ public class ReservaVoo extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(btnSelecionarCliente)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
                                 .addComponent(btnCancelarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(campoNomeCliente)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(67, 67, 67)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnConfirmaFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnCancelaFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnConsultaCliente))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(119, 119, 119)
-                .addComponent(labelVooSelecionado)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(labelVooSelecionado2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addComponent(labelConsultaCliente)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(campoDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -178,15 +239,15 @@ public class ReservaVoo extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSelecionarCliente)
                     .addComponent(btnCancelarCliente))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                .addGap(8, 8, 8)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelVooSelecionado)
-                    .addComponent(labelVooSelecionado2))
-                .addGap(49, 49, 49)
+                    .addComponent(jLabel2)
+                    .addComponent(cbReservasVoos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                    .addComponent(btnCancelaFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnConfirmaFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32))
         );
 
         labelConsultaVoo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -210,6 +271,11 @@ public class ReservaVoo extends javax.swing.JFrame {
         labelVoo.setText("Vôo:");
 
         cbVoo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbVoo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbVooActionPerformed(evt);
+            }
+        });
 
         labelDataPartida.setText("Data de Partida:");
 
@@ -220,6 +286,11 @@ public class ReservaVoo extends javax.swing.JFrame {
         }
 
         btnSelecionarVoo.setText("Selecionar vôo");
+        btnSelecionarVoo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSelecionarVooActionPerformed(evt);
+            }
+        });
 
         btnCancelarVoo.setText("Cancelar");
         btnCancelarVoo.addActionListener(new java.awt.event.ActionListener() {
@@ -410,17 +481,71 @@ public class ReservaVoo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnConsultaCodVooActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultaCodVooActionPerformed
-        desabilitaItems();
+        desabilitaItemsVoos();
+        btnSelecionarVoo.setEnabled(true);
     }//GEN-LAST:event_btnConsultaCodVooActionPerformed
 
     private void btnCancelarVooActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarVooActionPerformed
-        habilitaItems();
+        habilitaItemsVoos();
+        btnConsultaCodVoo.setEnabled(true);
+        selecionouVoo = false;
+        if (selecionouCliente && selecionouVoo) btnConfirmaFinal.setEnabled(true);
+        else btnConfirmaFinal.setEnabled(false);
     }//GEN-LAST:event_btnCancelarVooActionPerformed
 
     private void cbDocumentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDocumentoActionPerformed
         if (cbDocumento.getSelectedIndex() == 0)labelNomeCliente.setText("Nome:");
         else labelNomeCliente.setText("Razão social:");
     }//GEN-LAST:event_cbDocumentoActionPerformed
+
+    private void btnConsultaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultaClienteActionPerformed
+        campoNomeCliente.setText("Nome do cliente"); // editar
+        campoDocumento.setEnabled(false);
+        btnSelecionarCliente.setEnabled(true);
+
+    }//GEN-LAST:event_btnConsultaClienteActionPerformed
+
+    private void btnSelecionarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelecionarClienteActionPerformed
+        campoNomeCliente.setEnabled(false);
+        campoDocumento.setEnabled(false);
+        btnConsultaCliente.setEnabled(false);
+        selecionouCliente = true;
+        if (selecionouCliente && selecionouVoo) btnConfirmaFinal.setEnabled(true);
+        else btnConfirmaFinal.setEnabled(false);
+        
+    }//GEN-LAST:event_btnSelecionarClienteActionPerformed
+
+    private void btnCancelarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarClienteActionPerformed
+        campoNomeCliente.setText("");
+        campoNomeCliente.setEnabled(true);
+        campoDocumento.setEnabled(true);
+        btnConsultaCliente.setEnabled(true);
+        btnSelecionarCliente.setEnabled(false);
+        campoDocumento.setEnabled(true);
+        selecionouCliente = false;
+        if (selecionouCliente && selecionouVoo) btnConfirmaFinal.setEnabled(true);
+        else btnConfirmaFinal.setEnabled(false);
+    }//GEN-LAST:event_btnCancelarClienteActionPerformed
+
+    private void btnConfirmaFinalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmaFinalActionPerformed
+        dispose();
+    }//GEN-LAST:event_btnConfirmaFinalActionPerformed
+
+    private void btnCancelaFinalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelaFinalActionPerformed
+        dispose();
+    }//GEN-LAST:event_btnCancelaFinalActionPerformed
+
+    private void btnSelecionarVooActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelecionarVooActionPerformed
+        cbVoo.setEnabled(false);
+        btnConsultaCodVoo.setEnabled(false);
+        selecionouVoo = true;
+        if (selecionouCliente && selecionouVoo) btnConfirmaFinal.setEnabled(true);
+        else btnConfirmaFinal.setEnabled(false);
+    }//GEN-LAST:event_btnSelecionarVooActionPerformed
+
+    private void cbVooActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbVooActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbVooActionPerformed
 
     /**
      * @param args the command line arguments
@@ -453,14 +578,16 @@ public class ReservaVoo extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ReservaVoo().setVisible(true);
+                new ReservaVoo(opt).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCancelaFinal;
     private javax.swing.JButton btnCancelarCliente;
     private javax.swing.JButton btnCancelarVoo;
+    private javax.swing.JButton btnConfirmaFinal;
     private javax.swing.JButton btnConsultaCliente;
     private javax.swing.JButton btnConsultaCodVoo;
     private javax.swing.JButton btnSelecionarCliente;
@@ -477,10 +604,10 @@ public class ReservaVoo extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbCidadeDeDestino;
     private javax.swing.JComboBox<String> cbCidadeDeOrigem;
     private javax.swing.JComboBox<String> cbDocumento;
+    private javax.swing.JComboBox<String> cbReservasVoos;
     private javax.swing.JComboBox<String> cbVoo;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -497,7 +624,5 @@ public class ReservaVoo extends javax.swing.JFrame {
     private javax.swing.JLabel labelNomeCliente;
     private javax.swing.JLabel labelVagas;
     private javax.swing.JLabel labelVoo;
-    private javax.swing.JLabel labelVooSelecionado;
-    private javax.swing.JLabel labelVooSelecionado2;
     // End of variables declaration//GEN-END:variables
 }
