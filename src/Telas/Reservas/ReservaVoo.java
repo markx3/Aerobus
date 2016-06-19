@@ -50,6 +50,7 @@ public class ReservaVoo extends javax.swing.JFrame {
             btnConsultaCodVoo.setEnabled(false);
             btnCancelarVoo.setEnabled(false);
             btnSelecionarVoo.setEnabled(false);
+            cbVoo.setEnabled(false);
         }
     }
 
@@ -101,8 +102,6 @@ public class ReservaVoo extends javax.swing.JFrame {
         campoNomeCliente = new javax.swing.JTextField();
         btnSelecionarCliente = new javax.swing.JButton();
         btnCancelarCliente = new javax.swing.JButton();
-        btnConfirmaFinal = new javax.swing.JButton();
-        btnCancelaFinal = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         cbReservasVoos = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
@@ -131,11 +130,13 @@ public class ReservaVoo extends javax.swing.JFrame {
         campoVagas = new javax.swing.JFormattedTextField();
         labelAviao = new javax.swing.JLabel();
         campoAviao = new javax.swing.JTextField();
+        btnCancelaFinal = new javax.swing.JButton();
+        btnConfirmaFinal = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Reseva de vôo");
+        jLabel1.setText("Reserva de vôo");
 
         labelConsultaCliente.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelConsultaCliente.setText("Consulta cliente");
@@ -170,20 +171,6 @@ public class ReservaVoo extends javax.swing.JFrame {
             }
         });
 
-        btnConfirmaFinal.setText("Confirmar reserva");
-        btnConfirmaFinal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnConfirmaFinalActionPerformed(evt);
-            }
-        });
-
-        btnCancelaFinal.setText("Cancelar reserva");
-        btnCancelaFinal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelaFinalActionPerformed(evt);
-            }
-        });
-
         jLabel2.setText("Reservas de vôos:");
 
         cbReservasVoos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -213,11 +200,7 @@ public class ReservaVoo extends javax.swing.JFrame {
                                 .addComponent(btnSelecionarCliente)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
                                 .addComponent(btnCancelarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(campoNomeCliente)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnConfirmaFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnCancelaFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(campoNomeCliente))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnConsultaCliente))
         );
@@ -226,7 +209,7 @@ public class ReservaVoo extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addComponent(labelConsultaCliente)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(campoDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -243,11 +226,7 @@ public class ReservaVoo extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(cbReservasVoos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCancelaFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnConfirmaFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32))
+                .addContainerGap(175, Short.MAX_VALUE))
         );
 
         labelConsultaVoo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -450,6 +429,20 @@ public class ReservaVoo extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        btnCancelaFinal.setText("Cancelar reserva");
+        btnCancelaFinal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelaFinalActionPerformed(evt);
+            }
+        });
+
+        btnConfirmaFinal.setText("Confirmar reserva");
+        btnConfirmaFinal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmaFinalActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -459,21 +452,30 @@ public class ReservaVoo extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnConfirmaFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnCancelaFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
                 .addGap(18, 18, 18)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnCancelaFinal)
+                            .addComponent(btnConfirmaFinal))
+                        .addContainerGap())))
         );
 
         pack();
@@ -501,6 +503,7 @@ public class ReservaVoo extends javax.swing.JFrame {
     private void btnConsultaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultaClienteActionPerformed
         campoNomeCliente.setText("Nome do cliente"); // editar
         campoDocumento.setEnabled(false);
+        cbDocumento.setEnabled(false);
         btnSelecionarCliente.setEnabled(true);
 
     }//GEN-LAST:event_btnConsultaClienteActionPerformed
@@ -522,6 +525,7 @@ public class ReservaVoo extends javax.swing.JFrame {
         btnConsultaCliente.setEnabled(true);
         btnSelecionarCliente.setEnabled(false);
         campoDocumento.setEnabled(true);
+        cbDocumento.setEnabled(true);
         selecionouCliente = false;
         if (selecionouCliente && selecionouVoo) btnConfirmaFinal.setEnabled(true);
         else btnConfirmaFinal.setEnabled(false);

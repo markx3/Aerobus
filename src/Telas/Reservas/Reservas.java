@@ -111,7 +111,7 @@ public class Reservas extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVooActionPerformed
 
     private void btnViagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViagemActionPerformed
-        ManterReserva tela = new ManterReserva(VIAGEM);
+        ReservaViagem tela = new ReservaViagem();
         tela.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnViagemActionPerformed
