@@ -5,13 +5,15 @@
  */
 package Entidades;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author marcos
  */
 public class PessoaJuridica extends Pessoa {
     private String CNPJ;
-    private String razaoSocial;
+    private String razaoSocial;    
     
     public PessoaJuridica(String razaoSocial, String CNPJ, String endereco, String tel1, String tel2){
         this.razaoSocial = razaoSocial;

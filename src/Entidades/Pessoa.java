@@ -5,6 +5,8 @@
  */
 package Entidades;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author marcos
@@ -13,6 +15,8 @@ public class Pessoa {
     protected String endereco;
     protected String tel1;
     protected String tel2;
+    protected ArrayList<ReservaViagem> reservas = new ArrayList<>();
+
 
     public String getEndereco() {
         return endereco;
@@ -36,6 +40,10 @@ public class Pessoa {
 
     public void setTel2(String tel2) {
         this.tel2 = tel2;
+    }
+
+    public ArrayList<ReservaViagem> getReservas() {
+        return reservas;
     }
     
 }
