@@ -3,14 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/marcos/NetBeansProjects/Aerobus/src/Entidades/Voo.java</file>
-            <file>file:/Users/marcos/NetBeansProjects/Aerobus/src/Negocio/NegocioCliente.java</file>
-            <file>file:/Users/marcos/NetBeansProjects/Aerobus/src/Entidades/DescricaoVoo.java</file>
-            <file>file:/Users/marcos/NetBeansProjects/Aerobus/src/Telas/TelaVoos.java</file>
-            <file>file:/Users/marcos/NetBeansProjects/Aerobus/src/Entidades/Aerobus.java</file>
-            <file>file:/Users/marcos/NetBeansProjects/Aerobus/src/Telas/TelaAvioes.java</file>
-            <file>file:/Users/marcos/NetBeansProjects/Aerobus/src/Entidades/DescricaoAviao.java</file>
-            <file>file:/Users/marcos/NetBeansProjects/Aerobus/src/Negocio/NegocioVoo.java</file>
+            <file>file:/home/mrk/NetBeansProjects/Aerobus/Aerobus/src/Telas/TelaAeroportos.java</file>
+            <file>file:/home/mrk/NetBeansProjects/Aerobus/Aerobus/src/Telas/Manter.java</file>
+            <file>file:/home/mrk/NetBeansProjects/Aerobus/Aerobus/src/Telas/Menu.java</file>
+            <file>file:/home/mrk/NetBeansProjects/Aerobus/Aerobus/src/Telas/TelaVoos.java</file>
         </group>
     </open-files>
 </project-private>

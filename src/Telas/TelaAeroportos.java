@@ -5,6 +5,10 @@
  */
 package Telas;
 
+import Entidades.Aerobus;
+import Entidades.Aeroporto;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author mrk
@@ -17,6 +21,7 @@ public class TelaAeroportos extends javax.swing.JFrame {
     private final static byte REMOVER      = 7;
     
     private static byte opt;
+    private Aeroporto aeroporto;
     
     /**
      * Creates new form Aeroportos
@@ -25,6 +30,11 @@ public class TelaAeroportos extends javax.swing.JFrame {
         TelaAeroportos.opt = opt;
         initComponents();
         verificaOperacao();
+        for(int i = 0; i < Aerobus.arrayAeroporto.size(); i++) {
+            Aeroporto tmp = Aerobus.arrayAeroporto.get(i);
+            cbAeroporto.addItem(tmp.toString());
+            
+        }
     }
 
     private void verificaOperacao() {
@@ -37,7 +47,7 @@ public class TelaAeroportos extends javax.swing.JFrame {
     
     private void caseNovo() {
         labelTitulo.setText("Novo aeroporto");
-        cbCodigoVoo.setEnabled(false);
+        cbAeroporto.setEnabled(false);
     }
     
     private void caseEditar() {
@@ -76,12 +86,12 @@ public class TelaAeroportos extends javax.swing.JFrame {
         labelNome = new javax.swing.JLabel();
         campoNome = new javax.swing.JTextField();
         labelCodigo = new javax.swing.JLabel();
-        campoCodigo = new javax.swing.JFormattedTextField();
         labelCidade = new javax.swing.JLabel();
         campoCidade = new javax.swing.JTextField();
-        cbCodigoVoo = new javax.swing.JComboBox<>();
+        cbAeroporto = new javax.swing.JComboBox<>();
         btnConfirmar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
+        campoCodigo = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -92,18 +102,12 @@ public class TelaAeroportos extends javax.swing.JFrame {
 
         labelCodigo.setText("Código:");
 
-        try {
-            campoCodigo.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-
         labelCidade.setText("Cidade:");
 
-        cbCodigoVoo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cbCodigoVoo.addActionListener(new java.awt.event.ActionListener() {
+        cbAeroporto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+        cbAeroporto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbCodigoVooActionPerformed(evt);
+                cbAeroportoActionPerformed(evt);
             }
         });
 
@@ -129,7 +133,7 @@ public class TelaAeroportos extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cbCodigoVoo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cbAeroporto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
@@ -144,7 +148,7 @@ public class TelaAeroportos extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(campoNome)
                             .addComponent(campoCidade)
-                            .addComponent(campoCodigo, javax.swing.GroupLayout.Alignment.TRAILING))))
+                            .addComponent(campoCodigo))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -153,7 +157,7 @@ public class TelaAeroportos extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(labelTitulo)
                 .addGap(18, 18, 18)
-                .addComponent(cbCodigoVoo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cbAeroporto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelNome)
@@ -177,17 +181,47 @@ public class TelaAeroportos extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cbCodigoVooActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCodigoVooActionPerformed
-        if ((!(cbCodigoVoo.getSelectedIndex() == 0)) && opt != REMOVER) {
-            /**
-             * Carregar informações referentes ao vôo aqui.
-             */
-            habilitaItems();
+    private void cbAeroportoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAeroportoActionPerformed
+        int option = cbAeroporto.getSelectedIndex();
+        if (option != -1) {
+           aeroporto = Aerobus.arrayAeroporto.get(option-1);
+           campoCidade.setText(aeroporto.getCidade());
+           campoCodigo.setText(aeroporto.getCodigo());
+           campoNome.setText(aeroporto.getNome());
+           habilitaItems();
         }
-        if (cbCodigoVoo.getSelectedIndex() == 0) desabilitaItems();
-    }//GEN-LAST:event_cbCodigoVooActionPerformed
+        if (option == -1 || opt == REMOVER) desabilitaItems();
+    }//GEN-LAST:event_cbAeroportoActionPerformed
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
+        String nome = campoNome.getText();
+        String cidade = campoCidade.getText();
+        String codigo = campoCodigo.getText();
+        
+        if ((opt == NOVO || opt == EDITAR) && 
+           (nome.equals("") || cidade.equals("") || codigo.equals(""))) {
+            JOptionPane.showMessageDialog(null, "Todos os campos são obrigatórios.\n");
+            dispose();
+        }
+        
+        switch(opt) {
+            case NOVO:
+                aeroporto = new Aeroporto(codigo, nome, cidade);
+                Aerobus.arrayAeroporto.add(aeroporto);
+                break;
+            case EDITAR:
+                aeroporto = Aerobus.arrayAeroporto.get(cbAeroporto.getSelectedIndex()-1);
+                aeroporto.setCidade(cidade);
+                aeroporto.setNome(nome);
+                aeroporto.setCodigo(codigo);
+                break;
+            case REMOVER:
+                Aerobus.arrayAeroporto.remove(cbAeroporto.getSelectedIndex()-1);
+        }
+        
+        
+        
+        
         dispose();
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
@@ -242,9 +276,9 @@ public class TelaAeroportos extends javax.swing.JFrame {
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnConfirmar;
     private javax.swing.JTextField campoCidade;
-    private javax.swing.JFormattedTextField campoCodigo;
+    private javax.swing.JTextField campoCodigo;
     private javax.swing.JTextField campoNome;
-    private javax.swing.JComboBox<String> cbCodigoVoo;
+    private javax.swing.JComboBox<String> cbAeroporto;
     private javax.swing.JLabel labelCidade;
     private javax.swing.JLabel labelCodigo;
     private javax.swing.JLabel labelNome;

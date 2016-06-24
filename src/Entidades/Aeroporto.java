@@ -43,6 +43,11 @@ public class Aeroporto {
     public void setCidade(String cidade) {
         this.cidade = cidade;
     }
+
+    @Override
+    public String toString() {
+        return codigo + " / " + nome + " / " + cidade;
+    }
    
     
 }

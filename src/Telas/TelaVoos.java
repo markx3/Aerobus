@@ -6,8 +6,12 @@
 package Telas;
 
 import Entidades.Aerobus;
+import Entidades.Aeroporto;
 import Entidades.DescricaoAviao;
 import Negocio.NegocioVoo;
+import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.Set;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 
@@ -25,6 +29,7 @@ public class TelaVoos extends javax.swing.JFrame {
     private static byte opt;
     
     private final NegocioVoo negocio = new NegocioVoo(this);
+    private static final Hashtable<String,String> hashAeroporto = new Hashtable<>();
     
     /**
      * Creates new form Voo
@@ -34,11 +39,34 @@ public class TelaVoos extends javax.swing.JFrame {
         TelaVoos.opt = opt;
         initComponents();
         verificaOperacao();
-        
-        for(int i = 0; i < Aerobus.arrayDescricaoAviao.size(); i++) {
+        int i = 0;
+        for(i = 0; i < Aerobus.arrayDescricaoAviao.size(); i++) {
             DescricaoAviao tmp = Aerobus.arrayDescricaoAviao.get(i);
             cbAviao.addItem(tmp.toString());
+            campoVagas.setText(Integer.toString(tmp.getNumAssentos()));
         }
+        
+        for (i = 0; i < Aerobus.arrayAeroporto.size(); i++) {
+            boolean isInIndexDestino = false;
+            boolean isInIndexOrigem = false;
+            
+            Aeroporto tmp = Aerobus.arrayAeroporto.get(i);
+            String cidade = tmp.getCidade();
+            String codigo = tmp.getCodigo();
+            hashAeroporto.put(cidade, tmp.getCodigo());
+            
+            for (int j = 0; j < cbCidadeDestino.getItemCount(); j++) { 
+                if (cbCidadeDestino.getItemAt(j).equals(cidade)) isInIndexDestino = true;
+            }
+            for (int j = 0; j < cbCidadeOrigem.getItemCount(); j++) {
+                if (cbCidadeOrigem.getItemAt(j).equals(cidade)) isInIndexOrigem = true;
+            }
+            if (!isInIndexDestino) cbCidadeDestino.addItem(cidade);
+            if (!isInIndexOrigem) cbCidadeOrigem.addItem(cidade);
+            
+            
+        }
+        System.out.println(hashAeroporto.get("ny"));
     }
 
     private void verificaOperacao() {
@@ -65,7 +93,6 @@ public class TelaVoos extends javax.swing.JFrame {
     }
     
     private void habilitaItems() {
-        campoDataChegada.setEnabled(true);
         campoDataPartida.setEnabled(true);
         campoVagas.setEnabled(true);
         cbAeroportoDestino.setEnabled(true);
@@ -78,7 +105,6 @@ public class TelaVoos extends javax.swing.JFrame {
     }
     
     private void desabilitaItems() {
-        campoDataChegada.setEnabled(false);
         campoDataPartida.setEnabled(false);
         campoVagas.setEnabled(false);
         cbAeroportoDestino.setEnabled(false);
@@ -130,7 +156,7 @@ public class TelaVoos extends javax.swing.JFrame {
 
         labelCidadeOrigem.setText("Cidade de Origem:");
 
-        cbCidadeOrigem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbCidadeOrigem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
         cbCidadeOrigem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbCidadeOrigemActionPerformed(evt);
@@ -139,15 +165,20 @@ public class TelaVoos extends javax.swing.JFrame {
 
         labelCidadeDestino.setText("Cidade de Destino:");
 
-        cbCidadeDestino.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbCidadeDestino.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+        cbCidadeDestino.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbCidadeDestinoActionPerformed(evt);
+            }
+        });
 
         labelAeroportoOrigem.setText("Aeroporto de Origem:");
 
-        cbAeroportoOrigem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbAeroportoOrigem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
 
         labelAeroportoDestino.setText("Aeroporto de Destino:");
 
-        cbAeroportoDestino.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbAeroportoDestino.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
 
         labelDataPartida.setText("Data de Partida:");
 
@@ -159,7 +190,7 @@ public class TelaVoos extends javax.swing.JFrame {
 
         labelAviao.setText("Avião:");
 
-        cbAviao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbAviao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
 
         labelVagas.setText("Vagas disponíveis:");
 
@@ -282,8 +313,30 @@ public class TelaVoos extends javax.swing.JFrame {
     }//GEN-LAST:event_cbVooActionPerformed
 
     private void cbCidadeOrigemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCidadeOrigemActionPerformed
-        // TODO add your handling code here:
+        int option = cbCidadeOrigem.getSelectedIndex();
+        if (option != -1) {
+            String cidade = cbCidadeOrigem.getItemAt(option);
+            String tmp = hashAeroporto.get(cidade);
+            String[] split = tmp.split("\n");
+            cbAeroportoOrigem.removeAllItems();
+            for(int i = 0; i < split.length; i++) {
+                cbAeroportoOrigem.addItem(split[i]);
+            }
+        }
     }//GEN-LAST:event_cbCidadeOrigemActionPerformed
+
+    private void cbCidadeDestinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCidadeDestinoActionPerformed
+        int option = cbCidadeDestino.getSelectedIndex();
+        if (option != -1) {
+            String cidade = cbCidadeDestino.getItemAt(option);
+            String tmp = hashAeroporto.get(cidade);
+            String[] split = tmp.split("\n");
+            cbAeroportoDestino.removeAllItems();
+            for(int i = 0; i < split.length; i++) {
+                cbAeroportoDestino.addItem(split[i]);
+            }
+        }
+    }//GEN-LAST:event_cbCidadeDestinoActionPerformed
 
     @Override
     public void dispose() {
@@ -294,10 +347,6 @@ public class TelaVoos extends javax.swing.JFrame {
 
     public static byte getOpt() {
         return opt;
-    }
-
-    public JFormattedTextField getCampoDataChegada() {
-        return campoDataChegada;
     }
 
     public JFormattedTextField getCampoDataPartida() {

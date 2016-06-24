@@ -31,6 +31,7 @@ public class Aerobus {
     public static ArrayList<DescricaoVoo> arrayDescricaoVoos = new ArrayList<>();
     public static ArrayList<Voo> arrayVoos = new ArrayList<>();
     public static ArrayList<DescricaoAviao> arrayDescricaoAviao = new ArrayList<>();
+    public static ArrayList<Aeroporto> arrayAeroporto = new ArrayList<>();
     
     public static void main(String args[]) {
         Menu menu = new Menu();

@@ -102,6 +102,7 @@ public class TelaAvioes extends javax.swing.JFrame {
         labelTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelTitulo.setText("jLabel1");
 
+        cbAvioes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
         cbAvioes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbAvioesActionPerformed(evt);
@@ -199,13 +200,13 @@ public class TelaAvioes extends javax.swing.JFrame {
                 Aerobus.arrayDescricaoAviao.add(descricaoAviao);
                 break;
             case EDITAR:
-                descricaoAviao = Aerobus.arrayDescricaoAviao.get(cbAvioes.getSelectedIndex());
+                descricaoAviao = Aerobus.arrayDescricaoAviao.get(cbAvioes.getSelectedIndex()-1);
                 descricaoAviao.setNomeFabricante(fabricante);
                 descricaoAviao.setNumAssentos(Integer.parseInt(numAssentos));
                 descricaoAviao.setIdModelo(Long.parseLong(modelo));
                 break;
             case REMOVER: caseRemover();
-                Aerobus.arrayDescricaoAviao.remove(cbAvioes.getSelectedIndex());
+                Aerobus.arrayDescricaoAviao.remove(cbAvioes.getSelectedIndex()-1);
                 break;
         }
         
@@ -218,13 +219,15 @@ public class TelaAvioes extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void cbAvioesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAvioesActionPerformed
-        if ((!(cbAvioes.getSelectedIndex() == 0)) && opt != REMOVER) {
-            /**
-             * Carregar informações referentes ao vôo aqui.
-             */
+        int option = cbAvioes.getSelectedIndex();
+        if (option != -1) {
+            descricaoAviao = Aerobus.arrayDescricaoAviao.get(option-1);
+            campoFabricante.setText(descricaoAviao.getNomeFabricante());
+            campoModelo.setText(Long.toString(descricaoAviao.getIdModelo()));
+            campoNumAssentos.setText(Long.toString(descricaoAviao.getNumAssentos()));
             habilitaItems();
         }
-        if (cbAvioes.getSelectedIndex() == 0) desabilitaItems();
+        if (option == -1 || opt == REMOVER) desabilitaItems();
     }//GEN-LAST:event_cbAvioesActionPerformed
 
     @Override
