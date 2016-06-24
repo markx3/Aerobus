@@ -9,7 +9,7 @@ package Telas;
  *
  * @author mrk
  */
-public class Aeroportos extends javax.swing.JFrame {
+public class TelaAeroportos extends javax.swing.JFrame {
 
     private final static byte AEROPORTOS   = 0;
     private final static byte NOVO         = 5;
@@ -21,8 +21,8 @@ public class Aeroportos extends javax.swing.JFrame {
     /**
      * Creates new form Aeroportos
      */
-    public Aeroportos(byte opt) {
-        Aeroportos.opt = opt;
+    public TelaAeroportos(byte opt) {
+        TelaAeroportos.opt = opt;
         initComponents();
         verificaOperacao();
     }
@@ -219,20 +219,21 @@ public class Aeroportos extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Aeroportos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaAeroportos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Aeroportos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaAeroportos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Aeroportos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaAeroportos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Aeroportos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaAeroportos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Aeroportos(opt).setVisible(true);
+                new TelaAeroportos(opt).setVisible(true);
             }
         });
     }

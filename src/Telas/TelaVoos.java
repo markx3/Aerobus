@@ -9,7 +9,7 @@ package Telas;
  *
  * @author mrk
  */
-public class Voos extends javax.swing.JFrame {
+public class TelaVoos extends javax.swing.JFrame {
 
     private final static byte VOOS         = 3;
     private final static byte NOVO         = 5;
@@ -22,8 +22,8 @@ public class Voos extends javax.swing.JFrame {
      * Creates new form Voo
      * @param opt
      */
-    public Voos(byte opt) {
-        Voos.opt = opt;
+    public TelaVoos(byte opt) {
+        TelaVoos.opt = opt;
         initComponents();
         verificaOperacao();
     }
@@ -306,21 +306,23 @@ public class Voos extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Voos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaVoos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Voos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaVoos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Voos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaVoos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Voos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaVoos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Voos(opt).setVisible(true);
+                new TelaVoos(opt).setVisible(true);
             }
         });
     }

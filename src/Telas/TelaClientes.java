@@ -5,13 +5,21 @@
  */
 package Telas;
 
+import Negocio.NegocioCliente;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+
 
 
 /**
  *
  * @author mrk
  */
-public class Clientes extends javax.swing.JFrame {
+public class TelaClientes extends javax.swing.JFrame {
     
     private final static byte CPF          = 0;
     private final static byte CNPJ         = 1;
@@ -21,15 +29,17 @@ public class Clientes extends javax.swing.JFrame {
     private final static byte REMOVER      = 7;
     
     private static byte opt;
-
+    private byte docOpt;
+    private final NegocioCliente negocio;
     
     
     /**
      * Creates new form Clientes
      * @param opt
      */
-    public Clientes(byte opt) {
-        Clientes.opt = opt;
+    public TelaClientes(byte opt) {
+        TelaClientes.opt = opt;
+        negocio = new NegocioCliente(this, opt);
         initComponents();
         verificaOperacao();
     }
@@ -241,11 +251,13 @@ public class Clientes extends javax.swing.JFrame {
             cbSexo.setEnabled(false);
             campoNascimento.setEnabled(false);
             labelNome.setText("Razão social:");
+            docOpt = CNPJ;
         }
         else {
             cbSexo.setEnabled(true);
             campoNascimento.setEnabled(true);
             labelNome.setText("Nome:");
+            docOpt = CPF;
 
         }
     }
@@ -269,26 +281,24 @@ public class Clientes extends javax.swing.JFrame {
     }
     
     private void btnConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultaActionPerformed
-        /**
-         * TODO Pesquisar CPF/CNPJ no BD e carregar as informações nos devidos
-         * campos, se o CPF/CNPJ já existir.
-         * 
-         * 
-         */
+        if (docOpt == CPF) negocio.consultaPessoaFisica();
+        if (docOpt == CNPJ) negocio.consultaPessoaJuridica();
         if (opt != REMOVER) {
             habilitaItems();
         }
         cbDocumento.setEnabled(false);
         campoDocumento.setEnabled(false);
         btnConsulta.setEnabled(false);
-
+        
         
     }//GEN-LAST:event_btnConsultaActionPerformed
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-        /**
-         * Verificar a validade da operação e adicionar/editar/remover do BD.
-         */
+        if ("".equals(campoDocumento.getText()) || "".equals(campoNome.getText()) || "".equals(campoEndereco1.getText())) {
+            JOptionPane.showMessageDialog(null, "Campos obrigatórios: documento, nome/razão social e endereço.\n");
+            dispose();
+        }
+        negocio.verificaAoConfirmar(docOpt, opt);
         dispose();
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
@@ -297,12 +307,100 @@ public class Clientes extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void cbDocumentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDocumentoActionPerformed
-       if (cbDocumento.getSelectedIndex() == CPF) labelNome.setText("Nome:");
-       else labelNome.setText("Razão social:");
+       if (cbDocumento.getSelectedIndex() == CPF) {
+           labelNome.setText("Nome:");
+           docOpt = CPF;
+       }
+       else {
+           labelNome.setText("Razão social:");
+           docOpt = CNPJ;
+       }
        if (opt == NOVO) {
            habilitaItems();
        }
     }//GEN-LAST:event_cbDocumentoActionPerformed
+
+    public static byte getOpt() {
+        return opt;
+    }
+
+    public byte getDocOpt() {
+        return docOpt;
+    }
+
+
+    public JButton getBtnCancelar() {
+        return btnCancelar;
+    }
+
+    public JButton getBtnConfirmar() {
+        return btnConfirmar;
+    }
+
+    public JButton getBtnConsulta() {
+        return btnConsulta;
+    }
+
+    public JTextField getCampoDocumento() {
+        return campoDocumento;
+    }
+
+
+    public JTextField getCampoEndereco1() {
+        return campoEndereco1;
+    }
+
+    public JFormattedTextField getCampoNascimento() {
+        return campoNascimento;
+    }
+
+    public JTextField getCampoNome() {
+        return campoNome;
+    }
+
+    public JTextField getCampoTel1() {
+        return campoTel1;
+    }
+
+    public JTextField getCampoTel2() {
+        return campoTel2;
+    }
+
+    public JComboBox<String> getCbDocumento() {
+        return cbDocumento;
+    }
+
+    public JComboBox<String> getCbSexo() {
+        return cbSexo;
+    }
+
+    public JLabel getLabelEndereco() {
+        return labelEndereco;
+    }
+
+    public JLabel getLabelNascimento() {
+        return labelNascimento;
+    }
+
+    public JLabel getLabelNome() {
+        return labelNome;
+    }
+
+    public JLabel getLabelSexo() {
+        return labelSexo;
+    }
+
+    public JLabel getLabelTel1() {
+        return labelTel1;
+    }
+
+    public JLabel getLabelTel2() {
+        return labelTel2;
+    }
+
+    public JLabel getLabelTitulo() {
+        return labelTitulo;
+    }
     
     @Override
     public void dispose() {
@@ -327,20 +425,21 @@ public class Clientes extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Clientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Clientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Clientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Clientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Clientes(opt).setVisible(true);
+                new TelaClientes(opt).setVisible(true);
             }
         });
     }

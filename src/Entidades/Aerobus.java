@@ -1,5 +1,7 @@
+package Entidades;
 
-import Telas.Aeroportos;
+
+import Telas.TelaAeroportos;
 import Telas.Menu;
 import java.util.Hashtable;
 
@@ -14,12 +16,23 @@ import java.util.Hashtable;
  * @author marcos
  */
 public class Aerobus {
+
+    /**
+     *
+     */
+    public static Hashtable<String,PessoaFisica> pessoaFisicaHTable = new Hashtable<>();
+
+    /**
+     *
+     */
+    public static Hashtable<String,PessoaJuridica> pessoaJuridicaHTable = new Hashtable<>();
+    
     public static void main(String args[]) {
-       
-        
         Menu menu = new Menu();
         menu.setVisible(true);
         
+
+     
         
     }
     

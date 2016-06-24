@@ -10,9 +10,9 @@ package Entidades;
  * @author Henrique Parucker
  */
 public class Aeroporto {
-    private int idAeroporto;
-    private String nomeAeroporto;
-    private String cidadeAeroporto;
+    private String codigo;
+    private String nome;
+    private String cidade;
    
     
 }

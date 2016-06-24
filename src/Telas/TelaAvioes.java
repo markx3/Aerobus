@@ -9,7 +9,7 @@ package Telas;
  *
  * @author mrk
  */
-public class Avioes extends javax.swing.JFrame {
+public class TelaAvioes extends javax.swing.JFrame {
          
     private final static byte AVIOES       = 1;
     private final static byte NOVO         = 5;
@@ -21,8 +21,8 @@ public class Avioes extends javax.swing.JFrame {
      * Creates new form Avioes
      * @param opt
      */
-    public Avioes(byte opt) {
-        Avioes.opt = opt;
+    public TelaAvioes(byte opt) {
+        TelaAvioes.opt = opt;
         initComponents();
         verificaOperacao();
     }
@@ -214,20 +214,21 @@ public class Avioes extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Avioes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaAvioes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Avioes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaAvioes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Avioes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaAvioes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Avioes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaAvioes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Avioes(opt).setVisible(true);
+                new TelaAvioes(opt).setVisible(true);
             }
         });
     }

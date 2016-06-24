@@ -26,8 +26,8 @@ public class Manter extends javax.swing.JFrame {
      private final static byte REMOVER      = 7;
      private static byte opt;
      
-     private Clientes telaClientes;
-     private Voos telaVoos;
+     private TelaClientes telaClientes;
+     private TelaVoos telaVoos;
     
      /**
      * Creates new form ManterClientes
@@ -140,23 +140,23 @@ public class Manter extends javax.swing.JFrame {
 
     private void selecionaAcao(byte entidade, byte opcao) {
         if (entidade == AEROPORTOS) {
-            Aeroportos tela = new Aeroportos(opcao);
+            TelaAeroportos tela = new TelaAeroportos(opcao);
             tela.setVisible(true);
         }
         if (entidade == AVIOES) {
-            Avioes tela = new Avioes(opcao);
+            TelaAvioes tela = new TelaAvioes(opcao);
             tela.setVisible(true);
         }
         if (entidade == RESERVAS) {
-            Reservas tela = new Reservas();
+            TelaReservas tela = new TelaReservas(opcao);
             tela.setVisible(true);
         }
         if (entidade == VOOS) {
-            Voos tela = new Voos(opcao);
+            TelaVoos tela = new TelaVoos(opcao);
             tela.setVisible(true);
         }
         if (entidade == CLIENTES) {
-            Clientes tela = new Clientes(opcao);
+            TelaClientes tela = new TelaClientes(opcao);
             tela.setVisible(true);
         }
         dispose();
