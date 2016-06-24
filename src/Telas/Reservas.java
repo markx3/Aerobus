@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Telas.Reservas;
+package Telas;
 
 /**
  *
  * @author mrk
  */
-public class ReservaViagem extends javax.swing.JFrame {
+public class Reservas extends javax.swing.JFrame {
 
     private static final byte CPF = 0;
     private static final byte CNPJ = 1;
@@ -19,7 +19,7 @@ public class ReservaViagem extends javax.swing.JFrame {
     /**
      * Creates new form Viagem
      */
-    public ReservaViagem() {
+    public Reservas() {
         initComponents();
     }
 
@@ -42,8 +42,6 @@ public class ReservaViagem extends javax.swing.JFrame {
         campoNomeCliente = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaCodVoo = new javax.swing.JTable();
-        btnReservaVoo = new javax.swing.JButton();
-        btnCancelaVoo = new javax.swing.JButton();
         btnAdicionarReserva = new javax.swing.JButton();
         btnRemoverReserva = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -96,26 +94,19 @@ public class ReservaViagem extends javax.swing.JFrame {
             Class[] types = new Class [] {
                 java.lang.Long.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
         });
         jScrollPane1.setViewportView(tabelaCodVoo);
-
-        btnReservaVoo.setText("Reservar Vôo");
-        btnReservaVoo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnReservaVooActionPerformed(evt);
-            }
-        });
-
-        btnCancelaVoo.setText("Cancelar Vôo");
-        btnCancelaVoo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelaVooActionPerformed(evt);
-            }
-        });
 
         btnAdicionarReserva.setText("Adicionar");
         btnAdicionarReserva.addActionListener(new java.awt.event.ActionListener() {
@@ -136,15 +127,22 @@ public class ReservaViagem extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Código de Reserva"
+                "Código Vôo", "Origem", "Destino", "Data", "Partida", "Chegada"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Long.class
+                java.lang.Long.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         jScrollPane3.setViewportView(tabelaCodReserva);
@@ -177,10 +175,6 @@ public class ReservaViagem extends javax.swing.JFrame {
                             .addComponent(cbDocumento, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnReservaVoo, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnCancelaVoo, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(campoDocumento)
                             .addComponent(campoNomeCliente))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -190,14 +184,13 @@ public class ReservaViagem extends javax.swing.JFrame {
                         .addComponent(btnAdicionarReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnRemoverReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 608, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, Short.MAX_VALUE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(btnConfirmarReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 608, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnConfirmarReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -214,10 +207,6 @@ public class ReservaViagem extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelDocumento)
                     .addComponent(campoNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnReservaVoo)
-                    .addComponent(btnCancelaVoo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -230,7 +219,7 @@ public class ReservaViagem extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnConfirmarReserva)
                     .addComponent(btnCancelar))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -253,22 +242,6 @@ public class ReservaViagem extends javax.swing.JFrame {
          */
         campoNomeCliente.setText("Nome do cliente");
     }//GEN-LAST:event_btnConsultaClienteActionPerformed
-
-    private void btnReservaVooActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReservaVooActionPerformed
-        ReservaVoo tela = new ReservaVoo(NOVO);
-        tela.setVisible(true);
-        /**
-         * Carregar as informações do cliente novamente na tela se reservou
-         */
-    }//GEN-LAST:event_btnReservaVooActionPerformed
-
-    private void btnCancelaVooActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelaVooActionPerformed
-        ReservaVoo tela = new ReservaVoo(CANCELAR);
-        tela.setVisible(true);
-        /**
-         * Carregar as informações do cliente novamente na tela se cancelou
-         */
-    }//GEN-LAST:event_btnCancelaVooActionPerformed
 
     private void btnAdicionarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarReservaActionPerformed
         /**
@@ -324,33 +297,33 @@ public class ReservaViagem extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ReservaViagem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Reservas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ReservaViagem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Reservas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ReservaViagem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Reservas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ReservaViagem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Reservas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ReservaViagem().setVisible(true);
+                new Reservas().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionarReserva;
-    private javax.swing.JButton btnCancelaVoo;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnConfirmarReserva;
     private javax.swing.JButton btnConsultaCliente;
     private javax.swing.JButton btnRemoverReserva;
-    private javax.swing.JButton btnReservaVoo;
     private javax.swing.JTextField campoDocumento;
     private javax.swing.JTextField campoNomeCliente;
     private javax.swing.JComboBox<String> cbDocumento;

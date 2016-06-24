@@ -5,8 +5,6 @@
  */
 package Telas;
 
-import Telas.Reservas.Reservas;
-
 /**
  *
  * @author marcos
@@ -138,8 +136,8 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReservasActionPerformed
-        Reservas telaReservas = new Reservas();
-        telaReservas.setVisible(true);
+        tela = new Manter(RESERVAS);
+        tela.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnReservasActionPerformed
 
