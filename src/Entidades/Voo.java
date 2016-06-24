@@ -15,8 +15,10 @@ public class Voo {
     private String data;
     private int numPoltronas;
     private DescricaoVoo descricaoVoo;
+    private static long id;
 
     public Voo(String data, int numPoltronas, DescricaoVoo descricaoVoo) {
+        Voo.id++;
         this.data = data;
         this.numPoltronas = numPoltronas;
         this.descricaoVoo = descricaoVoo;
@@ -45,4 +47,9 @@ public class Voo {
     public void setDescricaoVoo(DescricaoVoo descricaoVoo) {
         this.descricaoVoo = descricaoVoo;
     }
+
+    public static long getId() {
+        return id;
+    }
+    
 }

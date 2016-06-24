@@ -3,6 +3,7 @@ package Entidades;
 
 import Telas.TelaAeroportos;
 import Telas.Menu;
+import java.util.ArrayList;
 import java.util.Hashtable;
 
 /*
@@ -27,9 +28,16 @@ public class Aerobus {
      */
     public static Hashtable<String,PessoaJuridica> pessoaJuridicaHTable = new Hashtable<>();
     
+    public static ArrayList<DescricaoVoo> arrayDescricaoVoos = new ArrayList<>();
+    public static ArrayList<Voo> arrayVoos = new ArrayList<>();
+    public static ArrayList<DescricaoAviao> arrayDescricaoAviao = new ArrayList<>();
+    
     public static void main(String args[]) {
         Menu menu = new Menu();
         menu.setVisible(true);
+        
+
+        
         
 
      

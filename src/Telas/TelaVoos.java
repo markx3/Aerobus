@@ -5,6 +5,10 @@
  */
 package Telas;
 
+import Negocio.NegocioVoo;
+import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
+
 /**
  *
  * @author mrk
@@ -17,6 +21,8 @@ public class TelaVoos extends javax.swing.JFrame {
     private final static byte REMOVER      = 7;
     
     private static byte opt;
+    
+    private final NegocioVoo negocio = new NegocioVoo(this);
     
     /**
      * Creates new form Voo
@@ -120,6 +126,11 @@ public class TelaVoos extends javax.swing.JFrame {
         labelCidadeOrigem.setText("Cidade de Origem:");
 
         cbCidadeOrigem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbCidadeOrigem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbCidadeOrigemActionPerformed(evt);
+            }
+        });
 
         labelCidadeDestino.setText("Cidade de Destino:");
 
@@ -282,12 +293,58 @@ public class TelaVoos extends javax.swing.JFrame {
         if (cbVoo.getSelectedIndex() == 0) desabilitaItems();
     }//GEN-LAST:event_cbVooActionPerformed
 
+    private void cbCidadeOrigemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCidadeOrigemActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbCidadeOrigemActionPerformed
+
     @Override
     public void dispose() {
         super.dispose();
         Manter tela = new Manter(VOOS);
         tela.setVisible(true);
     }
+
+    public static byte getOpt() {
+        return opt;
+    }
+
+    public JFormattedTextField getCampoDataChegada() {
+        return campoDataChegada;
+    }
+
+    public JFormattedTextField getCampoDataPartida() {
+        return campoDataPartida;
+    }
+
+    public JFormattedTextField getCampoVagas() {
+        return campoVagas;
+    }
+
+    public JComboBox<String> getCbAeroportoDestino() {
+        return cbAeroportoDestino;
+    }
+
+    public JComboBox<String> getCbAeroportoOrigem() {
+        return cbAeroportoOrigem;
+    }
+
+    public JComboBox<String> getCbAviao() {
+        return cbAviao;
+    }
+
+    public JComboBox<String> getCbCidadeDestino() {
+        return cbCidadeDestino;
+    }
+
+    public JComboBox<String> getCbCidadeOrigem() {
+        return cbCidadeOrigem;
+    }
+
+    public JComboBox<String> getCbVoo() {
+        return cbVoo;
+    }
+    
+    
     
     /**
      * @param args the command line arguments

@@ -43,6 +43,12 @@ public class DescricaoAviao {
     public void setNumAssentos(int numAssentos) {
         this.numAssentos = numAssentos;
     }
+
+    @Override
+    public String toString() {
+        return nomeFabricante + " / " + idModelo;
+    }
+    
     
     
 }

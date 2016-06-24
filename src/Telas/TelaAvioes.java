@@ -5,6 +5,11 @@
  */
 package Telas;
 
+import Entidades.Aerobus;
+import Entidades.DescricaoAviao;
+import java.util.Set;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author mrk
@@ -17,14 +22,22 @@ public class TelaAvioes extends javax.swing.JFrame {
     private final static byte REMOVER      = 7;
     
     private static byte opt;
+    
+    DescricaoAviao descricaoAviao;
     /**
      * Creates new form Avioes
      * @param opt
      */
     public TelaAvioes(byte opt) {
+        int i = 0;
         TelaAvioes.opt = opt;
         initComponents();
         verificaOperacao();
+        for (i = 0; i < Aerobus.arrayDescricaoAviao.size(); i++) {
+            DescricaoAviao tmp = Aerobus.arrayDescricaoAviao.get(i);
+            cbAvioes.addItem(tmp.toString());
+        }
+        
     }
        
     private void verificaOperacao() {
@@ -89,7 +102,6 @@ public class TelaAvioes extends javax.swing.JFrame {
         labelTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelTitulo.setText("jLabel1");
 
-        cbAvioes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "Item 1", "Item 2", "Item 3", "Item 4" }));
         cbAvioes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbAvioesActionPerformed(evt);
@@ -172,6 +184,32 @@ public class TelaAvioes extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
+        String fabricante = campoFabricante.getText();
+        String modelo = campoModelo.getText();
+        String numAssentos = campoNumAssentos.getText();
+        
+        if ((opt == NOVO || opt == EDITAR) && (fabricante.equals("") || modelo.equals("") || numAssentos.equals(""))) {
+            JOptionPane.showMessageDialog(null, "Todos os campos são obrigatórios.\n");
+            dispose();
+        }
+        
+        switch(opt) {
+            case NOVO: 
+                descricaoAviao = new DescricaoAviao(fabricante, Long.parseLong(modelo), Integer.parseInt(numAssentos));
+                Aerobus.arrayDescricaoAviao.add(descricaoAviao);
+                break;
+            case EDITAR:
+                descricaoAviao = Aerobus.arrayDescricaoAviao.get(cbAvioes.getSelectedIndex());
+                descricaoAviao.setNomeFabricante(fabricante);
+                descricaoAviao.setNumAssentos(Integer.parseInt(numAssentos));
+                descricaoAviao.setIdModelo(Long.parseLong(modelo));
+                break;
+            case REMOVER: caseRemover();
+                Aerobus.arrayDescricaoAviao.remove(cbAvioes.getSelectedIndex());
+                break;
+        }
+        
+        
         dispose();
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
