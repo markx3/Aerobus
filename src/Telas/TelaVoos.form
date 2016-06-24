@@ -48,7 +48,6 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="labelCidadeDestino" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="labelAeroportoDestino" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="labelDataChegada" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="labelVagas" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -56,7 +55,6 @@
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="cbCidadeDestino" pref="150" max="32767" attributes="0"/>
                               <Component id="cbAeroportoDestino" max="32767" attributes="0"/>
-                              <Component id="campoDataChegada" max="32767" attributes="0"/>
                           </Group>
                           <Component id="campoVagas" alignment="1" min="-2" pref="150" max="-2" attributes="0"/>
                       </Group>
@@ -97,25 +95,15 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="labelDataPartida" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="campoDataPartida" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="labelDataChegada" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="campoDataChegada" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="labelAviao" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="cbAviao" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="labelVagas" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="campoVagas" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="labelAviao" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cbAviao" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="labelVagas" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="campoVagas" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
+              <EmptySpace pref="51" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnConfirmar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -240,18 +228,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="campoDataPartida">
-      <Properties>
-        <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
-          <Format format="##/##/####" subtype="-1" type="5"/>
-        </Property>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="labelDataChegada">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Data de Chegada:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JFormattedTextField" name="campoDataChegada">
       <Properties>
         <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
           <Format format="##/##/####" subtype="-1" type="5"/>

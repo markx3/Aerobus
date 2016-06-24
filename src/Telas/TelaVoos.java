@@ -5,6 +5,8 @@
  */
 package Telas;
 
+import Entidades.Aerobus;
+import Entidades.DescricaoAviao;
 import Negocio.NegocioVoo;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
@@ -32,6 +34,11 @@ public class TelaVoos extends javax.swing.JFrame {
         TelaVoos.opt = opt;
         initComponents();
         verificaOperacao();
+        
+        for(int i = 0; i < Aerobus.arrayDescricaoAviao.size(); i++) {
+            DescricaoAviao tmp = Aerobus.arrayDescricaoAviao.get(i);
+            cbAviao.addItem(tmp.toString());
+        }
     }
 
     private void verificaOperacao() {
@@ -102,8 +109,6 @@ public class TelaVoos extends javax.swing.JFrame {
         cbAeroportoDestino = new javax.swing.JComboBox<>();
         labelDataPartida = new javax.swing.JLabel();
         campoDataPartida = new javax.swing.JFormattedTextField();
-        labelDataChegada = new javax.swing.JLabel();
-        campoDataChegada = new javax.swing.JFormattedTextField();
         labelAviao = new javax.swing.JLabel();
         cbAviao = new javax.swing.JComboBox<>();
         labelVagas = new javax.swing.JLabel();
@@ -148,14 +153,6 @@ public class TelaVoos extends javax.swing.JFrame {
 
         try {
             campoDataPartida.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-
-        labelDataChegada.setText("Data de Chegada:");
-
-        try {
-            campoDataChegada.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -212,14 +209,12 @@ public class TelaVoos extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(labelCidadeDestino)
                             .addComponent(labelAeroportoDestino)
-                            .addComponent(labelDataChegada)
                             .addComponent(labelVagas))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(cbCidadeDestino, 0, 150, Short.MAX_VALUE)
-                                .addComponent(cbAeroportoDestino, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(campoDataChegada))
+                                .addComponent(cbAeroportoDestino, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addComponent(campoVagas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
@@ -250,21 +245,14 @@ public class TelaVoos extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelDataPartida)
-                    .addComponent(campoDataPartida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelDataChegada)
-                    .addComponent(campoDataChegada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(labelAviao)
-                            .addComponent(cbAviao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labelVagas))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(campoVagas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                    .addComponent(campoDataPartida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelAviao)
+                    .addComponent(cbAviao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelVagas)
+                    .addComponent(campoVagas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnConfirmar)
                     .addComponent(btnCancelar))
@@ -387,7 +375,6 @@ public class TelaVoos extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnConfirmar;
-    private javax.swing.JFormattedTextField campoDataChegada;
     private javax.swing.JFormattedTextField campoDataPartida;
     private javax.swing.JFormattedTextField campoVagas;
     private javax.swing.JComboBox<String> cbAeroportoDestino;
@@ -401,7 +388,6 @@ public class TelaVoos extends javax.swing.JFrame {
     private javax.swing.JLabel labelAviao;
     private javax.swing.JLabel labelCidadeDestino;
     private javax.swing.JLabel labelCidadeOrigem;
-    private javax.swing.JLabel labelDataChegada;
     private javax.swing.JLabel labelDataPartida;
     private javax.swing.JLabel labelTitulo;
     private javax.swing.JLabel labelVagas;
