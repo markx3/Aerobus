@@ -380,8 +380,8 @@ public class TelaReservas extends javax.swing.JFrame {
          * Confirma a reserva de viagem
          */
         
-        if (campoNomeCliente.equals("") ||
-            tabelaCodReserva.getRowCount() == 0)  {
+        if ((campoNomeCliente.equals("") ||
+            tabelaCodReserva.getRowCount() == 0) && opt == NOVO)  {
             JOptionPane.showMessageDialog(null, "É necessário selecionar o cliente e no mínimo um vôo!\n");
             dispose();
         }
@@ -395,25 +395,26 @@ public class TelaReservas extends javax.swing.JFrame {
             ReservaVoo tmp = new ReservaVoo(Aerobus.arrayVoos.get(aux-1));
             tmpArrayVoos.add(tmp);
         }
+        tmpReservaViagem.setReservasVoos(tmpArrayVoos);
         switch(opt) {
             case NOVO:
                 switch (docOpt) {
                     case CPF:
-                        pessoaFisica.getReservas().add(reservaViagem);
+                        pessoaFisica.getReservas().add(tmpReservaViagem);
                         break;
                     case CNPJ:
-                        pessoaJuridica.getReservas().add(reservaViagem);
+                        pessoaJuridica.getReservas().add(tmpReservaViagem);
                         break;
                 }
                 break;
             case EDITAR:
                 if (docOpt == CPF) {
                     pessoaFisica.getReservas().remove(cbReservas.getSelectedIndex()-1);
-                    pessoaFisica.getReservas().add(cbReservas.getSelectedIndex(), tmpReservaViagem);
+                    pessoaFisica.getReservas().add(cbReservas.getSelectedIndex()-1, tmpReservaViagem);
                 }
                 if (docOpt == CNPJ) {
                     pessoaJuridica.getReservas().remove(cbReservas.getSelectedIndex()-1);
-                    pessoaJuridica.getReservas().add(cbReservas.getSelectedIndex(), tmpReservaViagem);
+                    pessoaJuridica.getReservas().add(cbReservas.getSelectedIndex()-1, tmpReservaViagem);
                 }
                 break;
             case REMOVER:
@@ -425,8 +426,7 @@ public class TelaReservas extends javax.swing.JFrame {
                 }
                 break;
         }
-           
-
+        
         
         dispose();
     }//GEN-LAST:event_btnConfirmarReservaActionPerformed
@@ -441,19 +441,11 @@ public class TelaReservas extends javax.swing.JFrame {
     private void cbReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbReservasActionPerformed
         int option = cbReservas.getSelectedIndex();
         if (option != -1) {
-            ReservaViagem tmpReservaViagem = null;
-            if (docOpt == CPF) {
-                tmpReservaViagem = pessoaFisica.getReservas().get(option-1);
-            }
-            if (docOpt == CNPJ) {
-                tmpReservaViagem = pessoaJuridica.getReservas().get(option-1);
-            }
-            ArrayList<ReservaVoo> tmpArrayVoo = null;
-            try {
-                tmpArrayVoo = tmpReservaViagem.getReservasVoos();
-            } catch (NullPointerException e) {
-                printStackTrace(e);
-            }
+            
+            ArrayList<ReservaVoo> tmpArrayVoo =
+            arrayReservas.get(option-1).getReservasVoos();
+            
+            
             DefaultTableModel dtm = (DefaultTableModel) tabelaCodReserva.getModel();
             for (int i = 0; i < tmpArrayVoo.size(); i++) {
                 ReservaVoo tmp = tmpArrayVoo.get(i);
