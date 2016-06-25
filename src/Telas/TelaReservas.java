@@ -169,6 +169,7 @@ public class TelaReservas extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tabelaCodVoo);
 
         btnAdicionarReserva.setText("Adicionar");
+        btnAdicionarReserva.setEnabled(false);
         btnAdicionarReserva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAdicionarReservaActionPerformed(evt);
@@ -176,6 +177,7 @@ public class TelaReservas extends javax.swing.JFrame {
         });
 
         btnRemoverReserva.setText("Remover");
+        btnRemoverReserva.setEnabled(false);
         btnRemoverReserva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRemoverReservaActionPerformed(evt);
@@ -207,7 +209,7 @@ public class TelaReservas extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(tabelaCodReserva);
 
-        btnConfirmarReserva.setText("Confirmar reserva");
+        btnConfirmarReserva.setText("Confirmar");
         btnConfirmarReserva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnConfirmarReservaActionPerformed(evt);
@@ -328,8 +330,22 @@ public class TelaReservas extends javax.swing.JFrame {
         /**
          * Escreve o nome do cliente no devido campo.
          */
+        if ("".equals(campoDocumento.getText())) return;
+        if (campoDocumento.getText().length() != 11 && docOpt == CPF) {
+            JOptionPane.showMessageDialog(null, "Favor inserir CPF válido.");
+            return;
+        }
+        if ("".equals(campoDocumento.getText())) return;
+        if (campoDocumento.getText().length() != 14 && docOpt == CNPJ) {
+            JOptionPane.showMessageDialog(null, "Favor inserir CNPJ válido.");
+        }
+  
         if (opt == EDITAR || opt == REMOVER) {
             cbReservas.setEnabled(true);
+        }
+        
+        if ((opt == EDITAR || opt == NOVO) && !Aerobus.arrayVoos.isEmpty()) {
+            btnAdicionarReserva.setEnabled(true);
         }
         
         String documento = campoDocumento.getText();
@@ -361,6 +377,15 @@ public class TelaReservas extends javax.swing.JFrame {
         dtmVoos.removeRow(tabelaCodVoo.getSelectedRow());
         dtmReservas.addRow(data);
         
+        if (tabelaCodReserva.getRowCount() != 0) {
+            btnRemoverReserva.setEnabled(true);
+        }
+        
+        if (tabelaCodVoo.getRowCount() == 0) {
+            btnAdicionarReserva.setEnabled(false);
+        }
+            
+        
     }//GEN-LAST:event_btnAdicionarReservaActionPerformed
 
     private void btnRemoverReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverReservaActionPerformed
@@ -373,6 +398,14 @@ public class TelaReservas extends javax.swing.JFrame {
         Vector<Object> data = (Vector<Object>) dtmReservas.getDataVector().elementAt(tabelaCodReserva.getSelectedRow());
         dtmReservas.removeRow(tabelaCodReserva.getSelectedRow());
         dtmVoos.addRow(data);
+        
+        if (tabelaCodVoo.getRowCount() != 0) {
+            btnAdicionarReserva.setEnabled(true);
+        }
+        
+        if (tabelaCodReserva.getRowCount() == 0) {
+            btnRemoverReserva.setEnabled(false);
+        }
     }//GEN-LAST:event_btnRemoverReservaActionPerformed
 
     private void btnConfirmarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarReservaActionPerformed
@@ -451,8 +484,8 @@ public class TelaReservas extends javax.swing.JFrame {
                 ReservaVoo tmp = tmpArrayVoo.get(i);
                 Object [] data = {
                     String.valueOf(tmp.getVoo().getId()), 
-                    tmp.getVoo().getDescricaoVoo().getAeroportoOrigem().toString(),
-                    tmp.getVoo().getDescricaoVoo().getAeroportoChegada().toString(),
+                    tmp.getVoo().getDescricaoVoo().getAeroportoOrigem().getCodigo(),
+                    tmp.getVoo().getDescricaoVoo().getAeroportoChegada().getCodigo(),
                     tmp.getVoo().getData(),
                     tmp.getVoo().getDescricaoVoo().getHorarioPartida(),
                     tmp.getVoo().getDescricaoVoo().getHorarioChegada()

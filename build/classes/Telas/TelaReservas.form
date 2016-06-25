@@ -230,6 +230,7 @@
     <Component class="javax.swing.JButton" name="btnAdicionarReserva">
       <Properties>
         <Property name="text" type="java.lang.String" value="Adicionar"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAdicionarReservaActionPerformed"/>
@@ -238,6 +239,7 @@
     <Component class="javax.swing.JButton" name="btnRemoverReserva">
       <Properties>
         <Property name="text" type="java.lang.String" value="Remover"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRemoverReservaActionPerformed"/>
@@ -305,7 +307,7 @@
     </Container>
     <Component class="javax.swing.JButton" name="btnConfirmarReserva">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Confirmar reserva"/>
+        <Property name="text" type="java.lang.String" value="Confirmar"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnConfirmarReservaActionPerformed"/>

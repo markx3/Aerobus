@@ -281,8 +281,20 @@ public class TelaClientes extends javax.swing.JFrame {
     }
     
     private void btnConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultaActionPerformed
+        if ("".equals(campoDocumento.getText())) return;
+        if (campoDocumento.getText().length() != 11 && docOpt == CPF) {
+            JOptionPane.showMessageDialog(null, "Favor inserir CPF válido.");
+            return;
+        }
+        if ("".equals(campoDocumento.getText())) return;
+        if (campoDocumento.getText().length() != 14 && docOpt == CNPJ) {
+            JOptionPane.showMessageDialog(null, "Favor inserir CNPJ válido.");
+        }
+  
+        
         if (docOpt == CPF) negocio.consultaPessoaFisica();
         if (docOpt == CNPJ) negocio.consultaPessoaJuridica();
+        
         if (opt != REMOVER) {
             habilitaItems();
         }
@@ -298,6 +310,18 @@ public class TelaClientes extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Campos obrigatórios: documento, nome/razão social e endereço.\n");
             dispose();
         }
+        
+        if (campoDocumento.getText().length() != 11 && docOpt == CPF) {
+            JOptionPane.showMessageDialog(null, "Favor inserir CPF válido.");
+            return;
+        }
+
+        if (campoDocumento.getText().length() != 14 && docOpt == CNPJ) {
+            JOptionPane.showMessageDialog(null, "Favor inserir CNPJ válido.");
+        }
+  
+        
+        
         negocio.verificaAoConfirmar(docOpt, opt);
         dispose();
     }//GEN-LAST:event_btnConfirmarActionPerformed
