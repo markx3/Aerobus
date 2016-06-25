@@ -15,10 +15,10 @@ public class Voo {
     private String data;
     private int numPoltronas;
     private DescricaoVoo descricaoVoo;
-    private static long id;
+    private long id;
 
     public Voo(String data, int numPoltronas, DescricaoVoo descricaoVoo) {
-        Voo.id++;
+        id++;
         this.data = data;
         this.numPoltronas = numPoltronas;
         this.descricaoVoo = descricaoVoo;
@@ -48,8 +48,16 @@ public class Voo {
         this.descricaoVoo = descricaoVoo;
     }
 
-    public static long getId() {
+    public long getId() {
         return id;
+    }
+
+    @Override
+    public String toString() {
+        String retorno = descricaoVoo.getAeroportoOrigem().getCodigo() +
+                " -> " + descricaoVoo.getAeroportoChegada().getCodigo() +
+                "(" + data + ")";
+        return retorno;
     }
     
 }

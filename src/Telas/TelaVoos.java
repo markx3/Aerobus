@@ -8,12 +8,15 @@ package Telas;
 import Entidades.Aerobus;
 import Entidades.Aeroporto;
 import Entidades.DescricaoAviao;
+import Entidades.DescricaoVoo;
+import Entidades.Voo;
 import Negocio.NegocioVoo;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Set;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -29,8 +32,11 @@ public class TelaVoos extends javax.swing.JFrame {
     private static byte opt;
     
     private final NegocioVoo negocio = new NegocioVoo(this);
-    private static final Hashtable hashAeroporto = new Hashtable();
-    private static Multimap<String,Aeroporto> multiMapAeroporto = HashMultimap.create();
+    private final Hashtable<String, DescricaoAviao> hashDescricaoAviao = new Hashtable<>();
+    private final Hashtable<String, Aeroporto> hashAeroporto = new Hashtable<>();
+    private Voo voo;
+    private DescricaoVoo descricaoVoo;
+    private Aeroporto aeroporto;
     
     /**
      * Creates new form Voo
@@ -43,8 +49,8 @@ public class TelaVoos extends javax.swing.JFrame {
         int i = 0;
         for(i = 0; i < Aerobus.arrayDescricaoAviao.size(); i++) {
             DescricaoAviao tmp = Aerobus.arrayDescricaoAviao.get(i);
+            hashDescricaoAviao.put(tmp.toString(), tmp);
             cbAviao.addItem(tmp.toString());
-            campoVagas.setText(Integer.toString(tmp.getNumAssentos()));
         }
         
         for (i = 0; i < Aerobus.arrayAeroporto.size(); i++) {
@@ -54,7 +60,7 @@ public class TelaVoos extends javax.swing.JFrame {
             Aeroporto tmp = Aerobus.arrayAeroporto.get(i);
             String cidade = tmp.getCidade();
             String codigo = tmp.getCodigo();
-            hashAeroporto.put(cidade, tmp);
+            hashAeroporto.put(tmp.getCodigo(), tmp);
             
             for (int j = 0; j < cbCidadeDestino.getItemCount(); j++) { 
                 if (cbCidadeDestino.getItemAt(j).equals(cidade)) isInIndexDestino = true;
@@ -64,9 +70,15 @@ public class TelaVoos extends javax.swing.JFrame {
             }
             if (!isInIndexDestino) cbCidadeDestino.addItem(cidade);
             if (!isInIndexOrigem) cbCidadeOrigem.addItem(cidade);
-            
+           
         }
-        System.out.println(hashAeroporto.get("ny"));
+        if (opt == EDITAR || opt == REMOVER) {
+            for (i = 0; i < Aerobus.arrayVoos.size(); i++) {
+                Voo tmp = Aerobus.arrayVoos.get(i);
+                cbVoo.addItem(tmp.toString());
+            }
+        } 
+        
     }
 
     private void verificaOperacao() {
@@ -140,14 +152,18 @@ public class TelaVoos extends javax.swing.JFrame {
         labelVagas = new javax.swing.JLabel();
         btnConfirmar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
-        campoVagas = new javax.swing.JFormattedTextField();
+        labelHorarioPartida = new javax.swing.JLabel();
+        campoHorarioPartida = new javax.swing.JFormattedTextField();
+        labelHorarioChegada = new javax.swing.JLabel();
+        campoHorarioChegada = new javax.swing.JFormattedTextField();
+        campoVagas = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         labelTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelTitulo.setText("jLabel1");
 
-        cbVoo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbVoo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
         cbVoo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbVooActionPerformed(evt);
@@ -191,6 +207,11 @@ public class TelaVoos extends javax.swing.JFrame {
         labelAviao.setText("Avião:");
 
         cbAviao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+        cbAviao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbAviaoActionPerformed(evt);
+            }
+        });
 
         labelVagas.setText("Vagas disponíveis:");
 
@@ -208,8 +229,18 @@ public class TelaVoos extends javax.swing.JFrame {
             }
         });
 
+        labelHorarioPartida.setText("Horário Partida:");
+
         try {
-            campoVagas.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###")));
+            campoHorarioPartida.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        labelHorarioChegada.setText("Horário Chegada:");
+
+        try {
+            campoHorarioChegada.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -224,34 +255,37 @@ public class TelaVoos extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cbVoo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 148, Short.MAX_VALUE)
+                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(labelAeroportoOrigem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(labelDataPartida)
                                 .addComponent(labelCidadeOrigem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(labelAviao))
+                            .addComponent(labelAviao)
+                            .addComponent(labelHorarioPartida))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(cbCidadeOrigem, 0, 150, Short.MAX_VALUE)
                             .addComponent(cbAeroportoOrigem, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(campoDataPartida)
-                            .addComponent(cbAviao, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(cbAviao, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(campoHorarioPartida))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(labelCidadeDestino)
                             .addComponent(labelAeroportoDestino)
-                            .addComponent(labelVagas))
+                            .addComponent(labelVagas)
+                            .addComponent(labelHorarioChegada))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(cbCidadeDestino, 0, 150, Short.MAX_VALUE)
-                                .addComponent(cbAeroportoDestino, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(campoVagas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(campoHorarioChegada)
+                            .addComponent(cbCidadeDestino, 0, 150, Short.MAX_VALUE)
+                            .addComponent(cbAeroportoDestino, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(campoVagas))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -283,7 +317,13 @@ public class TelaVoos extends javax.swing.JFrame {
                     .addComponent(cbAviao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelVagas)
                     .addComponent(campoVagas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelHorarioPartida)
+                    .addComponent(campoHorarioPartida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelHorarioChegada)
+                    .addComponent(campoHorarioChegada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnConfirmar)
                     .addComponent(btnCancelar))
@@ -295,7 +335,45 @@ public class TelaVoos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-        dispose();
+       String data = campoDataPartida.getText();
+       int numPoltronas = Integer.parseInt(campoVagas.getText());
+       String horarioPartida = campoHorarioPartida.getText();
+       String horarioChegada = campoHorarioChegada.getText();
+       DescricaoAviao descricaoAviao = hashDescricaoAviao.get(cbAviao.getItemAt(cbAviao.getSelectedIndex()));
+       Aeroporto aeroportoOrigem = hashAeroporto.get(cbAeroportoOrigem.getItemAt(cbAeroportoOrigem.getSelectedIndex()));
+       Aeroporto aeroportoDestino = hashAeroporto.get(cbAeroportoDestino.getItemAt(cbAeroportoDestino.getSelectedIndex()));
+       
+       if ((opt == NOVO || opt == EDITAR) && (data.equals("") || numPoltronas == 0 || horarioPartida.equals("")
+                                              || horarioChegada.equals("") || descricaoAviao == null 
+                                              || aeroportoOrigem == null || aeroportoDestino == null )) {
+           JOptionPane.showMessageDialog(null, "Erro! Todos os campos são obrigatórios.\n");
+           dispose();
+       }
+       
+       switch(opt) {
+           case NOVO:
+               descricaoVoo = new DescricaoVoo(horarioPartida, horarioChegada, aeroportoOrigem, aeroportoDestino, descricaoAviao);
+               voo = new Voo(data, numPoltronas, descricaoVoo);
+               Aerobus.arrayVoos.add(voo);
+               break;
+           case EDITAR:
+               voo = Aerobus.arrayVoos.get(cbVoo.getSelectedIndex()-1);
+               descricaoVoo = voo.getDescricaoVoo();
+               descricaoVoo.setAeroportoChegada(aeroportoDestino);
+               descricaoVoo.setAeroportoOrigem(aeroportoOrigem);
+               descricaoVoo.setDescricaoAviao(descricaoAviao);
+               descricaoVoo.setHorarioChegada(horarioChegada);
+               descricaoVoo.setHorarioPartida(horarioPartida);
+               voo.setData(data);
+               voo.setDescricaoVoo(descricaoVoo);
+               voo.setNumPoltronas(numPoltronas);
+               break;
+           case REMOVER:
+               voo = Aerobus.arrayVoos.remove(cbVoo.getSelectedIndex()-1);
+               break;
+       }
+       
+       dispose();
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -303,24 +381,37 @@ public class TelaVoos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void cbVooActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbVooActionPerformed
-        if ((!(cbVoo.getSelectedIndex() == 0)) && opt != REMOVER) {
-            /**
-             * Carregar informações referentes ao vôo aqui.
-             */
+        int option = cbVoo.getSelectedIndex();
+        if (option != -1) {
+            voo = Aerobus.arrayVoos.get(option-1);
+            descricaoVoo = voo.getDescricaoVoo();
+            Aeroporto aeroportoOrigem = descricaoVoo.getAeroportoOrigem();
+            Aeroporto aeroportoDestino = descricaoVoo.getAeroportoChegada();
+            cbCidadeDestino.setSelectedItem(aeroportoDestino.getCidade());
+            cbCidadeOrigem.setSelectedItem(aeroportoOrigem.getCidade());
+            cbAeroportoOrigem.setSelectedItem(aeroportoOrigem.getCodigo());
+            cbAeroportoDestino.setSelectedItem(aeroportoDestino.getCodigo());
+            campoDataPartida.setText(voo.getData());
+            cbAviao.setSelectedItem(descricaoVoo.getDescricaoAviao().toString());
+            campoVagas.setText(String.valueOf(voo.getNumPoltronas()));
+            campoHorarioChegada.setText(descricaoVoo.getHorarioChegada());
+            campoHorarioPartida.setText(descricaoVoo.getHorarioPartida());
             habilitaItems();
         }
-        if (cbVoo.getSelectedIndex() == 0) desabilitaItems();
+        if (option == -1 || opt == REMOVER) desabilitaItems();
     }//GEN-LAST:event_cbVooActionPerformed
 
     private void cbCidadeOrigemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCidadeOrigemActionPerformed
+
         int option = cbCidadeOrigem.getSelectedIndex();
         if (option != -1) {
             String cidade = cbCidadeOrigem.getItemAt(option);
-            Aeroporto tmp = (Aeroporto) hashAeroporto.get(cidade);
-            tmp.
             cbAeroportoOrigem.removeAllItems();
-            for(int i = 0; i < split.length; i++) {
-                cbAeroportoOrigem.addItem(split[i]);
+            for (int i = 0; i < Aerobus.arrayAeroporto.size(); i++) {
+                Aeroporto tmp = Aerobus.arrayAeroporto.get(i);
+                if (cidade.equals(tmp.getCidade())) {
+                    cbAeroportoOrigem.addItem(tmp.getCodigo());
+                }
             }
         }
     }//GEN-LAST:event_cbCidadeOrigemActionPerformed
@@ -329,14 +420,23 @@ public class TelaVoos extends javax.swing.JFrame {
         int option = cbCidadeDestino.getSelectedIndex();
         if (option != -1) {
             String cidade = cbCidadeDestino.getItemAt(option);
-            Aeroporto tmp = (Aeroporto) hashAeroporto.get(cidade);
-            String[] split = tmp.split("\n");
             cbAeroportoDestino.removeAllItems();
-            for(int i = 0; i < split.length; i++) {
-                cbAeroportoDestino.addItem(split[i]);
+            for (int i = 0; i < Aerobus.arrayAeroporto.size(); i++) {
+                Aeroporto tmp = Aerobus.arrayAeroporto.get(i);
+                if(cidade.equals(tmp.getCidade())) {
+                    cbAeroportoDestino.addItem(tmp.getCodigo());
+                }
             }
         }
     }//GEN-LAST:event_cbCidadeDestinoActionPerformed
+
+    private void cbAviaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAviaoActionPerformed
+        int option = cbAviao.getSelectedIndex();
+        if (option != -1) {
+            DescricaoAviao tmp = Aerobus.arrayDescricaoAviao.get(option-1);
+            campoVagas.setText(String.valueOf(tmp.getNumAssentos()));
+        }
+    }//GEN-LAST:event_cbAviaoActionPerformed
 
     @Override
     public void dispose() {
@@ -354,7 +454,7 @@ public class TelaVoos extends javax.swing.JFrame {
     }
 
     public JFormattedTextField getCampoVagas() {
-        return campoVagas;
+        return (JFormattedTextField) campoVagas;
     }
 
     public JComboBox<String> getCbAeroportoDestino() {
@@ -425,7 +525,9 @@ public class TelaVoos extends javax.swing.JFrame {
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnConfirmar;
     private javax.swing.JFormattedTextField campoDataPartida;
-    private javax.swing.JFormattedTextField campoVagas;
+    private javax.swing.JFormattedTextField campoHorarioChegada;
+    private javax.swing.JFormattedTextField campoHorarioPartida;
+    private javax.swing.JTextField campoVagas;
     private javax.swing.JComboBox<String> cbAeroportoDestino;
     private javax.swing.JComboBox<String> cbAeroportoOrigem;
     private javax.swing.JComboBox<String> cbAviao;
@@ -438,6 +540,8 @@ public class TelaVoos extends javax.swing.JFrame {
     private javax.swing.JLabel labelCidadeDestino;
     private javax.swing.JLabel labelCidadeOrigem;
     private javax.swing.JLabel labelDataPartida;
+    private javax.swing.JLabel labelHorarioChegada;
+    private javax.swing.JLabel labelHorarioPartida;
     private javax.swing.JLabel labelTitulo;
     private javax.swing.JLabel labelVagas;
     // End of variables declaration//GEN-END:variables

@@ -28,6 +28,11 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="cbVoo" alignment="0" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="btnConfirmar" min="-2" pref="250" max="-2" attributes="0"/>
+                      <EmptySpace pref="148" max="32767" attributes="0"/>
+                      <Component id="btnCancelar" min="-2" pref="250" max="-2" attributes="0"/>
+                  </Group>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
@@ -36,6 +41,7 @@
                               <Component id="labelCidadeOrigem" alignment="0" max="32767" attributes="0"/>
                           </Group>
                           <Component id="labelAviao" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="labelHorarioPartida" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -43,27 +49,23 @@
                           <Component id="cbAeroportoOrigem" max="32767" attributes="0"/>
                           <Component id="campoDataPartida" max="32767" attributes="0"/>
                           <Component id="cbAviao" max="32767" attributes="0"/>
+                          <Component id="campoHorarioPartida" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="labelCidadeDestino" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="labelAeroportoDestino" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="labelVagas" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="labelHorarioChegada" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="cbCidadeDestino" pref="150" max="32767" attributes="0"/>
-                              <Component id="cbAeroportoDestino" max="32767" attributes="0"/>
-                          </Group>
-                          <Component id="campoVagas" alignment="1" min="-2" pref="150" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="campoHorarioChegada" max="32767" attributes="0"/>
+                          <Component id="cbCidadeDestino" pref="150" max="32767" attributes="0"/>
+                          <Component id="cbAeroportoDestino" max="32767" attributes="0"/>
+                          <Component id="campoVagas" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="btnConfirmar" min="-2" pref="250" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="btnCancelar" min="-2" pref="250" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -103,7 +105,14 @@
                   <Component id="labelVagas" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="campoVagas" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="51" max="32767" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="labelHorarioPartida" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="campoHorarioPartida" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="labelHorarioChegada" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="campoHorarioChegada" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnConfirmar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -123,12 +132,8 @@
     <Component class="javax.swing.JComboBox" name="cbVoo">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="5">
+          <StringArray count="1">
             <StringItem index="0" value=" "/>
-            <StringItem index="1" value="Item 1"/>
-            <StringItem index="2" value="Item 2"/>
-            <StringItem index="3" value="Item 3"/>
-            <StringItem index="4" value="Item 4"/>
           </StringArray>
         </Property>
       </Properties>
@@ -238,6 +243,9 @@
           </StringArray>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbAviaoActionPerformed"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
@@ -263,12 +271,31 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCancelarActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JFormattedTextField" name="campoVagas">
+    <Component class="javax.swing.JLabel" name="labelHorarioPartida">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Hor&#xe1;rio Partida:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JFormattedTextField" name="campoHorarioPartida">
       <Properties>
         <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
-          <Format format="###" subtype="-1" type="5"/>
+          <Format format="##:##" subtype="-1" type="5"/>
         </Property>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="labelHorarioChegada">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Hor&#xe1;rio Chegada:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JFormattedTextField" name="campoHorarioChegada">
+      <Properties>
+        <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
+          <Format format="##:##" subtype="-1" type="5"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="campoVagas">
     </Component>
   </SubComponents>
 </Form>
