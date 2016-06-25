@@ -29,7 +29,8 @@ public class TelaVoos extends javax.swing.JFrame {
     private static byte opt;
     
     private final NegocioVoo negocio = new NegocioVoo(this);
-    private static final Hashtable<String,String> hashAeroporto = new Hashtable<>();
+    private static final Hashtable hashAeroporto = new Hashtable();
+    private static Multimap<String,Aeroporto> multiMapAeroporto = HashMultimap.create();
     
     /**
      * Creates new form Voo
@@ -53,7 +54,7 @@ public class TelaVoos extends javax.swing.JFrame {
             Aeroporto tmp = Aerobus.arrayAeroporto.get(i);
             String cidade = tmp.getCidade();
             String codigo = tmp.getCodigo();
-            hashAeroporto.put(cidade, tmp.getCodigo());
+            hashAeroporto.put(cidade, tmp);
             
             for (int j = 0; j < cbCidadeDestino.getItemCount(); j++) { 
                 if (cbCidadeDestino.getItemAt(j).equals(cidade)) isInIndexDestino = true;
@@ -63,7 +64,6 @@ public class TelaVoos extends javax.swing.JFrame {
             }
             if (!isInIndexDestino) cbCidadeDestino.addItem(cidade);
             if (!isInIndexOrigem) cbCidadeOrigem.addItem(cidade);
-            
             
         }
         System.out.println(hashAeroporto.get("ny"));
@@ -316,8 +316,8 @@ public class TelaVoos extends javax.swing.JFrame {
         int option = cbCidadeOrigem.getSelectedIndex();
         if (option != -1) {
             String cidade = cbCidadeOrigem.getItemAt(option);
-            String tmp = hashAeroporto.get(cidade);
-            String[] split = tmp.split("\n");
+            Aeroporto tmp = (Aeroporto) hashAeroporto.get(cidade);
+            tmp.
             cbAeroportoOrigem.removeAllItems();
             for(int i = 0; i < split.length; i++) {
                 cbAeroportoOrigem.addItem(split[i]);
@@ -329,7 +329,7 @@ public class TelaVoos extends javax.swing.JFrame {
         int option = cbCidadeDestino.getSelectedIndex();
         if (option != -1) {
             String cidade = cbCidadeDestino.getItemAt(option);
-            String tmp = hashAeroporto.get(cidade);
+            Aeroporto tmp = (Aeroporto) hashAeroporto.get(cidade);
             String[] split = tmp.split("\n");
             cbAeroportoDestino.removeAllItems();
             for(int i = 0; i < split.length; i++) {
