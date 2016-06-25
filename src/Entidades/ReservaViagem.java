@@ -12,10 +12,13 @@ import java.util.ArrayList;
  * @author marcos
  */
 public class ReservaViagem {
+    private long id;
     protected ArrayList<ReservaVoo> reservasVoos = new ArrayList<>();
 
     public ReservaViagem() {
+        id++;
     }
+
 
     public ArrayList<ReservaVoo> getReservasVoos() {
         return reservasVoos;
@@ -23,6 +26,10 @@ public class ReservaViagem {
 
     public void setReservasVoos(ArrayList<ReservaVoo> reservasVoos) {
         this.reservasVoos = reservasVoos;
+    }
+
+    public long getId() {
+        return id;
     }
     
 }

@@ -6,6 +6,7 @@
 package Entidades;
 
 import java.util.Date;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  *
@@ -15,10 +16,11 @@ public class Voo {
     private String data;
     private int numPoltronas;
     private DescricaoVoo descricaoVoo;
-    private long id;
+    private static final AtomicInteger count = new AtomicInteger(0);
+    private final int id;
 
     public Voo(String data, int numPoltronas, DescricaoVoo descricaoVoo) {
-        id++;
+        id = count.incrementAndGet();
         this.data = data;
         this.numPoltronas = numPoltronas;
         this.descricaoVoo = descricaoVoo;
@@ -48,10 +50,10 @@ public class Voo {
         this.descricaoVoo = descricaoVoo;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
-
+    
     @Override
     public String toString() {
         String retorno = descricaoVoo.getAeroportoOrigem().getCodigo() +
@@ -59,5 +61,5 @@ public class Voo {
                 "(" + data + ")";
         return retorno;
     }
-    
+
 }

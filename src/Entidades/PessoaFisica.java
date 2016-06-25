@@ -5,7 +5,7 @@
  */
 package Entidades;
 
-import java.util.Date;
+import java.util.ArrayList;
 
 /**
  *
@@ -59,7 +59,8 @@ public class PessoaFisica extends Pessoa {
         this.endereco = endereco;
     }
     
-    public PessoaFisica() {}
+    public PessoaFisica() {
+}
 
     public String getNome() {
         return nome;
@@ -91,7 +92,6 @@ public class PessoaFisica extends Pessoa {
 
     public void setNascimento(String nascimento) {
         this.nascimento = nascimento;
-    }
-    
+    }  
     
 }
