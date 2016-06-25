@@ -52,7 +52,7 @@ public class TelaReservas extends javax.swing.JFrame {
         initComponents();
         verificaOperacao();
         campoNomeCliente.setEditable(false);
-        if (opt == NOVO) carregaVoosDisponiveis();
+        if (opt == NOVO || opt == EDITAR) carregaVoosDisponiveis();
     }
 
     private void verificaOperacao() {
