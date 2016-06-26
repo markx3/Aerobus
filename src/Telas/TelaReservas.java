@@ -492,7 +492,10 @@ public class TelaReservas extends javax.swing.JFrame {
                 };
                 dtm.addRow(data);
             }
+            btnAdicionarReserva.setEnabled(true);
+            btnRemoverReserva.setEnabled(true);
         }
+        
     }//GEN-LAST:event_cbReservasActionPerformed
 
     private void carregaVoosDisponiveis() {
