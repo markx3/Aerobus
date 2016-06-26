@@ -5,73 +5,42 @@
  */
 package Telas;
 
-import Entidades.Aerobus;
+
 import Entidades.Aeroporto;
-import javax.swing.JOptionPane;
+import Negocio.NegocioAeroportos;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 /**
  *
  * @author mrk
  */
-public class TelaAeroportos extends javax.swing.JFrame {
+public abstract class TelaAeroportos extends javax.swing.JFrame {
 
-    private final static byte AEROPORTOS   = 0;
-    private final static byte NOVO         = 5;
-    private final static byte EDITAR       = 6;
-    private final static byte REMOVER      = 7;
+    protected final static byte AEROPORTOS   = 0;
+    protected final static byte NOVO         = 5;
+    protected final static byte EDITAR       = 6;
+    protected final static byte REMOVER      = 7;
     
-    private static byte opt;
-    private Aeroporto aeroporto;
+    protected static byte opt;
+    protected Aeroporto aeroporto;
     
     /**
      * Creates new form Aeroportos
+     * @param opt
      */
     public TelaAeroportos(byte opt) {
         TelaAeroportos.opt = opt;
         initComponents();
-        verificaOperacao();
-        for(int i = 0; i < Aerobus.arrayAeroporto.size(); i++) {
-            Aeroporto tmp = Aerobus.arrayAeroporto.get(i);
-            cbAeroporto.addItem(tmp.toString());
-            
-        }
-    }
 
-    private void verificaOperacao() {
-         switch(opt) {
-            case NOVO: caseNovo(); break;
-            case EDITAR: caseEditar(); break;
-            case REMOVER: caseRemover(); break;
-        }
     }
     
-    private void caseNovo() {
-        labelTitulo.setText("Novo aeroporto");
-        cbAeroporto.setEnabled(false);
-    }
+    public abstract void cbAeroportoAcao();
     
-    private void caseEditar() {
-        labelTitulo.setText("Editar aeroporto");
-        desabilitaItems();
-    }
+    public abstract void btnConfirmarAcao();
     
-    private void caseRemover() {
-        labelTitulo.setText("Remover aeroporto");
-        desabilitaItems();
-    }
-     
-    private void habilitaItems() {
-        campoCidade.setEnabled(true);
-        campoCodigo.setEnabled(true);
-        campoNome.setEnabled(true);
-           
-    }
-    
-    private void desabilitaItems() {
-        campoCidade.setEnabled(false);
-        campoCodigo.setEnabled(false);
-        campoNome.setEnabled(false);
-    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -180,49 +149,15 @@ public class TelaAeroportos extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+    
 
+    
     private void cbAeroportoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAeroportoActionPerformed
-        int option = cbAeroporto.getSelectedIndex();
-        if (option != -1) {
-           aeroporto = Aerobus.arrayAeroporto.get(option-1);
-           campoCidade.setText(aeroporto.getCidade());
-           campoCodigo.setText(aeroporto.getCodigo());
-           campoNome.setText(aeroporto.getNome());
-           habilitaItems();
-        }
-        if (option == -1 || opt == REMOVER) desabilitaItems();
+        cbAeroportoAcao();
     }//GEN-LAST:event_cbAeroportoActionPerformed
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-        String nome = campoNome.getText();
-        String cidade = campoCidade.getText();
-        String codigo = campoCodigo.getText();
-        
-        if ((opt == NOVO || opt == EDITAR) && 
-           (nome.equals("") || cidade.equals("") || codigo.equals(""))) {
-            JOptionPane.showMessageDialog(null, "Todos os campos são obrigatórios.\n");
-            dispose();
-        }
-        
-        switch(opt) {
-            case NOVO:
-                aeroporto = new Aeroporto(codigo, nome, cidade);
-                Aerobus.arrayAeroporto.add(aeroporto);
-                break;
-            case EDITAR:
-                aeroporto = Aerobus.arrayAeroporto.get(cbAeroporto.getSelectedIndex()-1);
-                aeroporto.setCidade(cidade);
-                aeroporto.setNome(nome);
-                aeroporto.setCodigo(codigo);
-                break;
-            case REMOVER:
-                Aerobus.arrayAeroporto.remove(cbAeroporto.getSelectedIndex()-1);
-        }
-        
-        
-        
-        
-        dispose();
+        btnConfirmarAcao();
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -235,6 +170,52 @@ public class TelaAeroportos extends javax.swing.JFrame {
         Manter tela = new Manter(AEROPORTOS);
         tela.setVisible(true);
     }
+
+    public static byte getOpt() {
+        return opt;
+    }
+
+    public JButton getBtnCancelar() {
+        return btnCancelar;
+    }
+
+    public JButton getBtnConfirmar() {
+        return btnConfirmar;
+    }
+
+    public JTextField getCampoCidade() {
+        return campoCidade;
+    }
+
+    public JTextField getCampoCodigo() {
+        return campoCodigo;
+    }
+
+    public JTextField getCampoNome() {
+        return campoNome;
+    }
+
+    public JComboBox<String> getCbAeroporto() {
+        return cbAeroporto;
+    }
+
+    public JLabel getLabelCidade() {
+        return labelCidade;
+    }
+
+    public JLabel getLabelCodigo() {
+        return labelCodigo;
+    }
+
+    public JLabel getLabelNome() {
+        return labelNome;
+    }
+
+    public JLabel getLabelTitulo() {
+        return labelTitulo;
+    }
+    
+    
     
     /**
      * @param args the command line arguments
@@ -265,10 +246,8 @@ public class TelaAeroportos extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new TelaAeroportos(opt).setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new NegocioAeroportos(opt).setVisible(true);
         });
     }
 

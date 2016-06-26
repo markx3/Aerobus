@@ -5,6 +5,7 @@
  */
 package Telas;
 
+import Negocio.NegocioAeroportos;
 import java.awt.Component;
 import javax.swing.SwingConstants;
 
@@ -134,7 +135,7 @@ public class Manter extends javax.swing.JFrame {
 
     private void selecionaAcao(byte entidade, byte opcao) {
         if (entidade == AEROPORTOS) {
-            TelaAeroportos tela = new TelaAeroportos(opcao);
+            TelaAeroportos tela = new NegocioAeroportos(opcao);
             tela.setVisible(true);
         }
         if (entidade == AVIOES) {
