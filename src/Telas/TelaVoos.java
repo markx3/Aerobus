@@ -5,18 +5,11 @@
  */
 package Telas;
 
-import Entidades.Aerobus;
-import Entidades.Aeroporto;
-import Entidades.DescricaoAviao;
-import Entidades.DescricaoVoo;
-import Entidades.Voo;
 import Negocio.NegocioVoo;
-import java.util.Hashtable;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**

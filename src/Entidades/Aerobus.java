@@ -1,7 +1,6 @@
 package Entidades;
 
 
-import Telas.TelaAeroportos;
 import Telas.Menu;
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -17,17 +16,9 @@ import java.util.Hashtable;
  * @author marcos
  */
 public class Aerobus {
-
-    /**
-     *
-     */
-    public static Hashtable<String,PessoaFisica> pessoaFisicaHTable = new Hashtable<>();
-
-    /**
-     *
-     */
-    public static Hashtable<String,PessoaJuridica> pessoaJuridicaHTable = new Hashtable<>();
     
+    public static Hashtable<String,PessoaFisica> pessoaFisicaHTable = new Hashtable<>();
+    public static Hashtable<String,PessoaJuridica> pessoaJuridicaHTable = new Hashtable<>();
     public static ArrayList<DescricaoVoo> arrayDescricaoVoos = new ArrayList<>();
     public static ArrayList<Voo> arrayVoos = new ArrayList<>();
     public static ArrayList<DescricaoAviao> arrayDescricaoAviao = new ArrayList<>();

@@ -5,8 +5,6 @@
  */
 package Entidades;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author marcos

@@ -5,7 +5,6 @@
  */
 package Telas;
 
-import Entidades.DescricaoAviao;
 import Negocio.NegocioAvioes;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
