@@ -5,78 +5,37 @@
  */
 package Telas;
 
-import Entidades.Aerobus;
 import Entidades.DescricaoAviao;
-import java.util.Set;
-import javax.swing.JOptionPane;
+import Negocio.NegocioAvioes;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 /**
  *
  * @author mrk
  */
-public class TelaAvioes extends javax.swing.JFrame {
+public abstract class TelaAvioes extends javax.swing.JFrame {
          
-    private final static byte AVIOES       = 1;
-    private final static byte NOVO         = 5;
-    private final static byte EDITAR       = 6;
-    private final static byte REMOVER      = 7;
+    protected final static byte AVIOES       = 1;
+    protected final static byte NOVO         = 5;
+    protected final static byte EDITAR       = 6;
+    protected final static byte REMOVER      = 7;
+   
+    protected static byte opt;
     
-    private static byte opt;
     
-    DescricaoAviao descricaoAviao;
     /**
      * Creates new form Avioes
      * @param opt
      */
     public TelaAvioes(byte opt) {
-        int i = 0;
         TelaAvioes.opt = opt;
-        initComponents();
-        verificaOperacao();
-        for (i = 0; i < Aerobus.arrayDescricaoAviao.size(); i++) {
-            DescricaoAviao tmp = Aerobus.arrayDescricaoAviao.get(i);
-            cbAvioes.addItem(tmp.toString());
-        }
-        
+        initComponents();   
     }
        
-    private void verificaOperacao() {
-         switch(opt) {
-            case NOVO: caseNovo(); break;
-            case EDITAR: caseEditar(); break;
-            case REMOVER: caseRemover(); break;
-        }
-    }
-    
-    private void caseNovo() {
-        labelTitulo.setText("Novo avião");
-        cbAvioes.setEnabled(false);
-    }
-    
-    private void caseEditar() {
-        labelTitulo.setText("Editar avião");
-        desabilitaItems();
-    }
-    
-    private void caseRemover() {
-        labelTitulo.setText("Remover avião");
-        desabilitaItems();
-    }
-     
-    private void habilitaItems() {
-        campoFabricante.setEnabled(true);
-        campoModelo.setEnabled(true);
-        campoNumAssentos.setEnabled(true);
-           
-    }
-    
-    private void desabilitaItems() {
-        campoFabricante.setEnabled(false);
-        campoModelo.setEnabled(false);
-        campoNumAssentos.setEnabled(false);
-
-    }
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -184,34 +143,12 @@ public class TelaAvioes extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    protected abstract void btnConfirmarAcao();
+    
+    protected abstract void cbAvioesAcao();
+    
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-        String fabricante = campoFabricante.getText();
-        String modelo = campoModelo.getText();
-        String numAssentos = campoNumAssentos.getText();
-        
-        if ((opt == NOVO || opt == EDITAR) && (fabricante.equals("") || modelo.equals("") || numAssentos.equals(""))) {
-            JOptionPane.showMessageDialog(null, "Todos os campos são obrigatórios.\n");
-            dispose();
-        }
-        
-        switch(opt) {
-            case NOVO: 
-                descricaoAviao = new DescricaoAviao(fabricante, Long.parseLong(modelo), Integer.parseInt(numAssentos));
-                Aerobus.arrayDescricaoAviao.add(descricaoAviao);
-                break;
-            case EDITAR:
-                descricaoAviao = Aerobus.arrayDescricaoAviao.get(cbAvioes.getSelectedIndex()-1);
-                descricaoAviao.setNomeFabricante(fabricante);
-                descricaoAviao.setNumAssentos(Integer.parseInt(numAssentos));
-                descricaoAviao.setIdModelo(Long.parseLong(modelo));
-                break;
-            case REMOVER: caseRemover();
-                Aerobus.arrayDescricaoAviao.remove(cbAvioes.getSelectedIndex()-1);
-                break;
-        }
-        
-        
-        dispose();
+        btnConfirmarAcao();
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -219,15 +156,7 @@ public class TelaAvioes extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void cbAvioesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAvioesActionPerformed
-        int option = cbAvioes.getSelectedIndex();
-        if (option != -1) {
-            descricaoAviao = Aerobus.arrayDescricaoAviao.get(option-1);
-            campoFabricante.setText(descricaoAviao.getNomeFabricante());
-            campoModelo.setText(Long.toString(descricaoAviao.getIdModelo()));
-            campoNumAssentos.setText(Long.toString(descricaoAviao.getNumAssentos()));
-            habilitaItems();
-        }
-        if (option == -1 || opt == REMOVER) desabilitaItems();
+        cbAvioesAcao();
     }//GEN-LAST:event_cbAvioesActionPerformed
 
     @Override
@@ -236,6 +165,53 @@ public class TelaAvioes extends javax.swing.JFrame {
         Manter tela = new Manter(AVIOES);
         tela.setVisible(true);
     }
+
+    public static byte getOpt() {
+        return opt;
+    }
+
+
+    public JButton getBtnCancelar() {
+        return btnCancelar;
+    }
+
+    public JButton getBtnConfirmar() {
+        return btnConfirmar;
+    }
+
+    public JTextField getCampoFabricante() {
+        return campoFabricante;
+    }
+
+    public JTextField getCampoModelo() {
+        return campoModelo;
+    }
+
+    public JFormattedTextField getCampoNumAssentos() {
+        return campoNumAssentos;
+    }
+
+    public JComboBox<String> getCbAvioes() {
+        return cbAvioes;
+    }
+
+    public JLabel getLabelFabricante() {
+        return labelFabricante;
+    }
+
+    public JLabel getLabelModelo() {
+        return labelModelo;
+    }
+
+    public JLabel getLabelNumAssentos() {
+        return labelNumAssentos;
+    }
+
+    public JLabel getLabelTitulo() {
+        return labelTitulo;
+    }
+    
+    
     
     /**
      * @param args the command line arguments
@@ -267,10 +243,8 @@ public class TelaAvioes extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new TelaAvioes(opt).setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new NegocioAvioes(opt).setVisible(true);
         });
     }
 
