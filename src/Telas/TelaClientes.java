@@ -19,18 +19,17 @@ import javax.swing.JTextField;
  *
  * @author mrk
  */
-public class TelaClientes extends javax.swing.JFrame {
+public abstract class TelaClientes extends javax.swing.JFrame {
     
-    private final static byte CPF          = 0;
-    private final static byte CNPJ         = 1;
-    private final static byte CLIENTES     = 4;
-    private final static byte NOVO         = 5;
-    private final static byte EDITAR       = 6;
-    private final static byte REMOVER      = 7;
+    protected final static byte CPF          = 0;
+    protected final static byte CNPJ         = 1;
+    protected final static byte CLIENTES     = 4;
+    protected final static byte NOVO         = 5;
+    protected final static byte EDITAR       = 6;
+    protected final static byte REMOVER      = 7;
     
-    private static byte opt;
-    private byte docOpt;
-    private final NegocioCliente negocio;
+    protected static byte opt;
+    protected byte docOpt;
     
     
     /**
@@ -39,9 +38,7 @@ public class TelaClientes extends javax.swing.JFrame {
      */
     public TelaClientes(byte opt) {
         TelaClientes.opt = opt;
-        negocio = new NegocioCliente(this, opt);
         initComponents();
-        verificaOperacao();
     }
 
     /**
@@ -217,113 +214,20 @@ public class TelaClientes extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
     
-    private void verificaOperacao() {
-        switch(opt) {
-            case NOVO: caseNovo(); break;
-            case EDITAR: caseEditar(); break;
-            case REMOVER: caseRemover(); break;
-        }
-    }
+   
     
-    private void caseNovo() {
-        labelTitulo.setText("Novo cliente");
-        btnConsulta.setEnabled(false);
-        habilitaItems();
-    }
+    protected abstract void btnConsultaAcao();
     
-    private void caseEditar() {
-        labelTitulo.setText("Editar cliente");
-        desabilitaItems();
-
-    }
+    protected abstract void btnConfirmarAcao();
     
-    private void caseRemover() {
-        labelTitulo.setText("Remover cliente");
-        desabilitaItems();
-    }
-    
-    private void habilitaItems() {
-        campoNome.setEnabled(true);
-        campoEndereco1.setEnabled(true);
-        campoTel1.setEnabled(true);
-        campoTel2.setEnabled(true);
-        if (cbDocumento.getSelectedIndex() == CNPJ) {
-            cbSexo.setEnabled(false);
-            campoNascimento.setEnabled(false);
-            labelNome.setText("Razão social:");
-            docOpt = CNPJ;
-        }
-        else {
-            cbSexo.setEnabled(true);
-            campoNascimento.setEnabled(true);
-            labelNome.setText("Nome:");
-            docOpt = CPF;
-
-        }
-    }
-    
-    private void desabilitaItems() {
-        campoNome.setEnabled(false);
-        campoEndereco1.setEnabled(false);
-        campoTel1.setEnabled(false);
-        campoTel2.setEnabled(false);
-        if (cbDocumento.getSelectedIndex() == CNPJ) {
-            cbSexo.setEnabled(false);
-            campoNascimento.setEnabled(false);
-            labelNome.setText("Razão social:");
-        }
-        else {
-            cbSexo.setEnabled(false);
-            campoNascimento.setEnabled(false);
-            labelNome.setText("Nome:");
-
-        }
-    }
+    protected abstract void cbDocumentoAcao();
     
     private void btnConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultaActionPerformed
-        if ("".equals(campoDocumento.getText())) return;
-        if (campoDocumento.getText().length() != 11 && docOpt == CPF) {
-            JOptionPane.showMessageDialog(null, "Favor inserir CPF válido.");
-            return;
-        }
-        if ("".equals(campoDocumento.getText())) return;
-        if (campoDocumento.getText().length() != 14 && docOpt == CNPJ) {
-            JOptionPane.showMessageDialog(null, "Favor inserir CNPJ válido.");
-        }
-  
-        
-        if (docOpt == CPF) negocio.consultaPessoaFisica();
-        if (docOpt == CNPJ) negocio.consultaPessoaJuridica();
-        
-        if (opt != REMOVER) {
-            habilitaItems();
-        }
-        cbDocumento.setEnabled(false);
-        campoDocumento.setEnabled(false);
-        btnConsulta.setEnabled(false);
-        
-        
+        btnConsultaAcao();
     }//GEN-LAST:event_btnConsultaActionPerformed
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-        if ("".equals(campoDocumento.getText()) || "".equals(campoNome.getText()) || "".equals(campoEndereco1.getText())) {
-            JOptionPane.showMessageDialog(null, "Campos obrigatórios: documento, nome/razão social e endereço.\n");
-            dispose();
-        }
-        
-        if (campoDocumento.getText().length() != 11 && docOpt == CPF) {
-            JOptionPane.showMessageDialog(null, "Favor inserir CPF válido.");
-            return;
-        }
-
-        if (campoDocumento.getText().length() != 14 && docOpt == CNPJ) {
-            JOptionPane.showMessageDialog(null, "Favor inserir CNPJ válido.");
-        }
-  
-        
-        
-        negocio.verificaAoConfirmar(docOpt, opt);
-        dispose();
+        btnConfirmarAcao();
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -331,17 +235,7 @@ public class TelaClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void cbDocumentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDocumentoActionPerformed
-       if (cbDocumento.getSelectedIndex() == CPF) {
-           labelNome.setText("Nome:");
-           docOpt = CPF;
-       }
-       else {
-           labelNome.setText("Razão social:");
-           docOpt = CNPJ;
-       }
-       if (opt == NOVO) {
-           habilitaItems();
-       }
+       cbDocumentoAcao();
     }//GEN-LAST:event_cbDocumentoActionPerformed
 
     public static byte getOpt() {
@@ -461,10 +355,8 @@ public class TelaClientes extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new TelaClientes(opt).setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new NegocioCliente(opt).setVisible(true);
         });
     }
 

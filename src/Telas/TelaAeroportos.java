@@ -37,9 +37,9 @@ public abstract class TelaAeroportos extends javax.swing.JFrame {
 
     }
     
-    public abstract void cbAeroportoAcao();
+    protected abstract void cbAeroportoAcao();
     
-    public abstract void btnConfirmarAcao();
+    protected abstract void btnConfirmarAcao();
     
     
     /**

@@ -6,8 +6,7 @@
 package Telas;
 
 import Negocio.NegocioAeroportos;
-import java.awt.Component;
-import javax.swing.SwingConstants;
+import Negocio.NegocioCliente;
 
 /**
  *
@@ -151,7 +150,7 @@ public class Manter extends javax.swing.JFrame {
             tela.setVisible(true);
         }
         if (entidade == CLIENTES) {
-            TelaClientes tela = new TelaClientes(opcao);
+            TelaClientes tela = new NegocioCliente(opcao);
             tela.setVisible(true);
         }
         dispose();
