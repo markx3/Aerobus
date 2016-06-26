@@ -7,7 +7,7 @@ package Telas;
 
 
 import Entidades.Aeroporto;
-import Negocio.NegocioAeroportos;
+import Negocio.NegocioAeroporto;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -247,7 +247,7 @@ public abstract class TelaAeroportos extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new NegocioAeroportos(opt).setVisible(true);
+            new NegocioAeroporto(opt).setVisible(true);
         });
     }
 

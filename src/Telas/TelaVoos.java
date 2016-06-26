@@ -11,32 +11,26 @@ import Entidades.DescricaoAviao;
 import Entidades.DescricaoVoo;
 import Entidades.Voo;
 import Negocio.NegocioVoo;
-import java.util.ArrayList;
 import java.util.Hashtable;
-import java.util.Set;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
  * @author mrk
  */
-public class TelaVoos extends javax.swing.JFrame {
+public abstract class TelaVoos extends javax.swing.JFrame {
 
-    private final static byte VOOS         = 3;
-    private final static byte NOVO         = 5;
-    private final static byte EDITAR       = 6;
-    private final static byte REMOVER      = 7;
+    protected final static byte VOOS         = 3;
+    protected final static byte NOVO         = 5;
+    protected final static byte EDITAR       = 6;
+    protected final static byte REMOVER      = 7;
     
-    private static byte opt;
-    
-    private final NegocioVoo negocio = new NegocioVoo(this);
-    private final Hashtable<String, DescricaoAviao> hashDescricaoAviao = new Hashtable<>();
-    private final Hashtable<String, Aeroporto> hashAeroporto = new Hashtable<>();
-    private Voo voo;
-    private DescricaoVoo descricaoVoo;
-    private Aeroporto aeroporto;
+    protected static byte opt;
     
     /**
      * Creates new form Voo
@@ -44,88 +38,9 @@ public class TelaVoos extends javax.swing.JFrame {
      */
     public TelaVoos(byte opt) {
         TelaVoos.opt = opt;
-        initComponents();
-        verificaOperacao();
-        int i = 0;
-        for(i = 0; i < Aerobus.arrayDescricaoAviao.size(); i++) {
-            DescricaoAviao tmp = Aerobus.arrayDescricaoAviao.get(i);
-            hashDescricaoAviao.put(tmp.toString(), tmp);
-            cbAviao.addItem(tmp.toString());
-        }
-        
-        for (i = 0; i < Aerobus.arrayAeroporto.size(); i++) {
-            boolean isInIndexDestino = false;
-            boolean isInIndexOrigem = false;
-            
-            Aeroporto tmp = Aerobus.arrayAeroporto.get(i);
-            String cidade = tmp.getCidade();
-            String codigo = tmp.getCodigo();
-            hashAeroporto.put(tmp.getCodigo(), tmp);
-            
-            for (int j = 0; j < cbCidadeDestino.getItemCount(); j++) { 
-                if (cbCidadeDestino.getItemAt(j).equals(cidade)) isInIndexDestino = true;
-            }
-            for (int j = 0; j < cbCidadeOrigem.getItemCount(); j++) {
-                if (cbCidadeOrigem.getItemAt(j).equals(cidade)) isInIndexOrigem = true;
-            }
-            if (!isInIndexDestino) cbCidadeDestino.addItem(cidade);
-            if (!isInIndexOrigem) cbCidadeOrigem.addItem(cidade);
-           
-        }
-        if (opt == EDITAR || opt == REMOVER) {
-            for (i = 0; i < Aerobus.arrayVoos.size(); i++) {
-                Voo tmp = Aerobus.arrayVoos.get(i);
-                cbVoo.addItem(tmp.toString());
-            }
-        } 
-        
+        initComponents();      
     }
 
-    private void verificaOperacao() {
-         switch(opt) {
-            case NOVO: caseNovo(); break;
-            case EDITAR: caseEditar(); break;
-            case REMOVER: caseRemover(); break;
-        }
-    }
-    
-    private void caseNovo() {
-        labelTitulo.setText("Novo vôo");
-        cbVoo.setEnabled(false);
-    }
-    
-    private void caseEditar() {
-        labelTitulo.setText("Editar vôo");
-        desabilitaItems();
-    }
-    
-    private void caseRemover() {
-        labelTitulo.setText("Remover vôo");
-        desabilitaItems();
-    }
-    
-    private void habilitaItems() {
-        campoDataPartida.setEnabled(true);
-        campoVagas.setEnabled(true);
-        cbAeroportoDestino.setEnabled(true);
-        cbAeroportoOrigem.setEnabled(true);
-        cbCidadeDestino.setEnabled(true);
-        cbCidadeOrigem.setEnabled(true);
-        cbAviao.setEnabled(true);
-
-                
-    }
-    
-    private void desabilitaItems() {
-        campoDataPartida.setEnabled(false);
-        campoVagas.setEnabled(false);
-        cbAeroportoDestino.setEnabled(false);
-        cbAeroportoOrigem.setEnabled(false);
-        cbCidadeDestino.setEnabled(false);
-        cbCidadeOrigem.setEnabled(false);
-        cbAviao.setEnabled(false);
-    }
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -334,46 +249,18 @@ public class TelaVoos extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    protected abstract void confirmarAcao();
+    
+    protected abstract void vooAcao();
+    
+    protected abstract void cidadeOrigemAcao();
+    
+    protected abstract void cidadeDestinoAcao();
+    
+    protected abstract void aviaoAcao();
+    
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-       String data = campoDataPartida.getText();
-       int numPoltronas = Integer.parseInt(campoVagas.getText());
-       String horarioPartida = campoHorarioPartida.getText();
-       String horarioChegada = campoHorarioChegada.getText();
-       DescricaoAviao descricaoAviao = hashDescricaoAviao.get(cbAviao.getItemAt(cbAviao.getSelectedIndex()));
-       Aeroporto aeroportoOrigem = hashAeroporto.get(cbAeroportoOrigem.getItemAt(cbAeroportoOrigem.getSelectedIndex()));
-       Aeroporto aeroportoDestino = hashAeroporto.get(cbAeroportoDestino.getItemAt(cbAeroportoDestino.getSelectedIndex()));
-       
-       if ((opt == NOVO || opt == EDITAR) && (data.equals("") || numPoltronas == 0 || horarioPartida.equals("")
-                                              || horarioChegada.equals("") || descricaoAviao == null 
-                                              || aeroportoOrigem == null || aeroportoDestino == null )) {
-           JOptionPane.showMessageDialog(null, "Erro! Todos os campos são obrigatórios.\n");
-           dispose();
-       }
-       
-       switch(opt) {
-           case NOVO:
-               descricaoVoo = new DescricaoVoo(horarioPartida, horarioChegada, aeroportoOrigem, aeroportoDestino, descricaoAviao);
-               voo = new Voo(data, numPoltronas, descricaoVoo);
-               Aerobus.arrayVoos.add(voo);
-               break;
-           case EDITAR:
-               voo = Aerobus.arrayVoos.get(cbVoo.getSelectedIndex()-1);
-               descricaoVoo = voo.getDescricaoVoo();
-               descricaoVoo.setAeroportoChegada(aeroportoDestino);
-               descricaoVoo.setAeroportoOrigem(aeroportoOrigem);
-               descricaoVoo.setDescricaoAviao(descricaoAviao);
-               descricaoVoo.setHorarioChegada(horarioChegada);
-               descricaoVoo.setHorarioPartida(horarioPartida);
-               voo.setData(data);
-               voo.setDescricaoVoo(descricaoVoo);
-               voo.setNumPoltronas(numPoltronas);
-               break;
-           case REMOVER:
-               voo = Aerobus.arrayVoos.remove(cbVoo.getSelectedIndex()-1);
-               break;
-       }
-       
-       dispose();
+       confirmarAcao();
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -381,61 +268,19 @@ public class TelaVoos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void cbVooActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbVooActionPerformed
-        int option = cbVoo.getSelectedIndex();
-        if (option != -1) {
-            voo = Aerobus.arrayVoos.get(option-1);
-            descricaoVoo = voo.getDescricaoVoo();
-            Aeroporto aeroportoOrigem = descricaoVoo.getAeroportoOrigem();
-            Aeroporto aeroportoDestino = descricaoVoo.getAeroportoChegada();
-            cbCidadeDestino.setSelectedItem(aeroportoDestino.getCidade());
-            cbCidadeOrigem.setSelectedItem(aeroportoOrigem.getCidade());
-            cbAeroportoOrigem.setSelectedItem(aeroportoOrigem.getCodigo());
-            cbAeroportoDestino.setSelectedItem(aeroportoDestino.getCodigo());
-            campoDataPartida.setText(voo.getData());
-            cbAviao.setSelectedItem(descricaoVoo.getDescricaoAviao().toString());
-            campoVagas.setText(String.valueOf(voo.getNumPoltronas()));
-            campoHorarioChegada.setText(descricaoVoo.getHorarioChegada());
-            campoHorarioPartida.setText(descricaoVoo.getHorarioPartida());
-            habilitaItems();
-        }
-        if (option == -1 || opt == REMOVER) desabilitaItems();
+        vooAcao();
     }//GEN-LAST:event_cbVooActionPerformed
 
     private void cbCidadeOrigemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCidadeOrigemActionPerformed
-
-        int option = cbCidadeOrigem.getSelectedIndex();
-        if (option != -1) {
-            String cidade = cbCidadeOrigem.getItemAt(option);
-            cbAeroportoOrigem.removeAllItems();
-            for (int i = 0; i < Aerobus.arrayAeroporto.size(); i++) {
-                Aeroporto tmp = Aerobus.arrayAeroporto.get(i);
-                if (cidade.equals(tmp.getCidade())) {
-                    cbAeroportoOrigem.addItem(tmp.getCodigo());
-                }
-            }
-        }
+        cidadeOrigemAcao();
     }//GEN-LAST:event_cbCidadeOrigemActionPerformed
 
     private void cbCidadeDestinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCidadeDestinoActionPerformed
-        int option = cbCidadeDestino.getSelectedIndex();
-        if (option != -1) {
-            String cidade = cbCidadeDestino.getItemAt(option);
-            cbAeroportoDestino.removeAllItems();
-            for (int i = 0; i < Aerobus.arrayAeroporto.size(); i++) {
-                Aeroporto tmp = Aerobus.arrayAeroporto.get(i);
-                if(cidade.equals(tmp.getCidade())) {
-                    cbAeroportoDestino.addItem(tmp.getCodigo());
-                }
-            }
-        }
+        cidadeDestinoAcao();
     }//GEN-LAST:event_cbCidadeDestinoActionPerformed
 
     private void cbAviaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAviaoActionPerformed
-        int option = cbAviao.getSelectedIndex();
-        if (option != -1) {
-            DescricaoAviao tmp = Aerobus.arrayDescricaoAviao.get(option-1);
-            campoVagas.setText(String.valueOf(tmp.getNumAssentos()));
-        }
+        aviaoAcao();
     }//GEN-LAST:event_cbAviaoActionPerformed
 
     @Override
@@ -449,12 +294,28 @@ public class TelaVoos extends javax.swing.JFrame {
         return opt;
     }
 
+    public JButton getBtnCancelar() {
+        return btnCancelar;
+    }
+
+    public JButton getBtnConfirmar() {
+        return btnConfirmar;
+    }
+
     public JFormattedTextField getCampoDataPartida() {
         return campoDataPartida;
     }
 
-    public JFormattedTextField getCampoVagas() {
-        return (JFormattedTextField) campoVagas;
+    public JFormattedTextField getCampoHorarioChegada() {
+        return campoHorarioChegada;
+    }
+
+    public JFormattedTextField getCampoHorarioPartida() {
+        return campoHorarioPartida;
+    }
+
+    public JTextField getCampoVagas() {
+        return campoVagas;
     }
 
     public JComboBox<String> getCbAeroportoDestino() {
@@ -480,7 +341,47 @@ public class TelaVoos extends javax.swing.JFrame {
     public JComboBox<String> getCbVoo() {
         return cbVoo;
     }
-    
+
+    public JLabel getLabelAeroportoDestino() {
+        return labelAeroportoDestino;
+    }
+
+    public JLabel getLabelAeroportoOrigem() {
+        return labelAeroportoOrigem;
+    }
+
+    public JLabel getLabelAviao() {
+        return labelAviao;
+    }
+
+    public JLabel getLabelCidadeDestino() {
+        return labelCidadeDestino;
+    }
+
+    public JLabel getLabelCidadeOrigem() {
+        return labelCidadeOrigem;
+    }
+
+    public JLabel getLabelDataPartida() {
+        return labelDataPartida;
+    }
+
+    public JLabel getLabelHorarioChegada() {
+        return labelHorarioChegada;
+    }
+
+    public JLabel getLabelHorarioPartida() {
+        return labelHorarioPartida;
+    }
+
+    public JLabel getLabelTitulo() {
+        return labelTitulo;
+    }
+
+    public JLabel getLabelVagas() {
+        return labelVagas;
+    }
+
     
     
     /**
@@ -516,7 +417,7 @@ public class TelaVoos extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaVoos(opt).setVisible(true);
+                new NegocioVoo(opt).setVisible(true);
             }
         });
     }

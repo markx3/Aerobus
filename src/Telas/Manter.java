@@ -5,8 +5,11 @@
  */
 package Telas;
 
-import Negocio.NegocioAeroportos;
+import Negocio.NegocioAeroporto;
+import Negocio.NegocioAvioes;
 import Negocio.NegocioCliente;
+import Negocio.NegocioReserva;
+import Negocio.NegocioVoo;
 
 /**
  *
@@ -134,19 +137,19 @@ public class Manter extends javax.swing.JFrame {
 
     private void selecionaAcao(byte entidade, byte opcao) {
         if (entidade == AEROPORTOS) {
-            TelaAeroportos tela = new NegocioAeroportos(opcao);
+            TelaAeroportos tela = new NegocioAeroporto(opcao);
             tela.setVisible(true);
         }
         if (entidade == AVIOES) {
-            TelaAvioes tela = new TelaAvioes(opcao);
+            TelaAvioes tela = new NegocioAvioes(opcao);
             tela.setVisible(true);
         }
         if (entidade == RESERVAS) {
-            TelaReservas tela = new TelaReservas(opcao);
+            TelaReservas tela = new NegocioReserva(opcao);
             tela.setVisible(true);
         }
         if (entidade == VOOS) {
-            TelaVoos tela = new TelaVoos(opcao);
+            TelaVoos tela = new NegocioVoo(opcao);
             tela.setVisible(true);
         }
         if (entidade == CLIENTES) {

@@ -13,9 +13,9 @@ import javax.swing.JOptionPane;
  *
  * @author marcos
  */
-public class NegocioAeroportos extends Telas.TelaAeroportos {
+public class NegocioAeroporto extends Telas.TelaAeroportos {
     
-    public NegocioAeroportos(byte opt) {
+    public NegocioAeroporto(byte opt) {
         super(opt);
         verificaOperacao();
         addAeroportoCb();
@@ -81,6 +81,7 @@ public class NegocioAeroportos extends Telas.TelaAeroportos {
         if (option == -1 || opt == REMOVER) desabilitaItems();
     }
     
+    @Override
     public void btnConfirmarAcao() {
         String nome = getCampoNome().getText();
         String cidade = getCampoCidade().getText();

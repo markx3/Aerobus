@@ -5,43 +5,31 @@
  */
 package Telas;
 
-import Entidades.Aerobus;
-import Entidades.PessoaFisica;
-import Entidades.PessoaJuridica;
-import Entidades.ReservaViagem;
-import Entidades.ReservaVoo;
-import Entidades.Voo;
-import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.Vector;
-import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
-import static jdk.nashorn.internal.objects.NativeError.printStackTrace;
+import Negocio.NegocioReserva;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 
 /**
  *
  * @author mrk
  */
-public class TelaReservas extends javax.swing.JFrame {
+public abstract class TelaReservas extends javax.swing.JFrame {
 
-    private static final byte CPF = 0;
-    private static final byte CNPJ = 1;
-    private final static byte RESERVAS     = 2;
-    private final static byte NOVO         = 5;
-    private final static byte EDITAR       = 6;
-    private final static byte REMOVER      = 7;
+    protected static final byte CPF = 0;
+    protected static final byte CNPJ = 1;
+    protected final static byte RESERVAS     = 2;
+    protected final static byte NOVO         = 5;
+    protected final static byte EDITAR       = 6;
+    protected final static byte REMOVER      = 7;
     
-    private PessoaFisica pessoaFisica;
-    private PessoaJuridica pessoaJuridica;
-    private ArrayList<ReservaViagem> arrayReservas;
-    private Hashtable<Integer,ReservaViagem> hashReservas;
-    private Hashtable hashVoos;
-    private ReservaViagem reservaViagem;
-    private ArrayList<ReservaVoo> arrayVoo;
+
     
-    private static byte opt;
-    private byte docOpt;
+    protected static byte opt;
+    protected byte docOpt;
     
     /**
      * Creates new form Viagem
@@ -50,35 +38,8 @@ public class TelaReservas extends javax.swing.JFrame {
     public TelaReservas(byte opt) {
         TelaReservas.opt = opt;
         initComponents();
-        verificaOperacao();
-        campoNomeCliente.setEditable(false);
-        if (opt == NOVO || opt == EDITAR) carregaVoosDisponiveis();
-    }
-
-    private void verificaOperacao() {
-        switch(opt) {
-            case NOVO: caseNovo(); break;
-            case EDITAR: caseEditar(); break;
-            case REMOVER: caseRemover(); break;
-        }
-    }
-    
-    private void caseNovo() {
-        labelTitulo.setText("Reservar viagem");
-        cbReservas.setEnabled(false);
-    }
-    
-    private void caseEditar() {
-        labelTitulo.setText("Editar reserva");
-        tabelaCodVoo.setEnabled(false);
 
     }
-    
-    private void caseRemover() {
-        labelTitulo.setText("Remover reserva");
-        tabelaCodVoo.setEnabled(false);
-    }
-    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -311,157 +272,36 @@ public class TelaReservas extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    protected abstract void cbDocumentoAcao();
+    
+    protected abstract void btnConsultaClienteAcao();
+    
+    protected abstract void btnAdicionarReservaAcao();
+    
+    protected abstract void btnRemoverReservaAcao();
+    
+    protected abstract void btnConfirmarReservaAcao();
+    
+    protected abstract void cbReservasAcao();
+    
     private void cbDocumentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDocumentoActionPerformed
-        switch(cbDocumento.getSelectedIndex()) {
-            case CPF:
-                labelDocumento.setText("Nome:");
-                break;
-            case CNPJ:
-                labelDocumento.setText("Razão social:");
-                break;
-        }
-        docOpt = (byte) cbDocumento.getSelectedIndex();
-        
-        
-        
+        cbDocumentoAcao();
     }//GEN-LAST:event_cbDocumentoActionPerformed
 
     private void btnConsultaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultaClienteActionPerformed
-        /**
-         * Escreve o nome do cliente no devido campo.
-         */
-        if ("".equals(campoDocumento.getText())) return;
-        if (campoDocumento.getText().length() != 11 && docOpt == CPF) {
-            JOptionPane.showMessageDialog(null, "Favor inserir CPF válido.");
-            return;
-        }
-        if ("".equals(campoDocumento.getText())) return;
-        if (campoDocumento.getText().length() != 14 && docOpt == CNPJ) {
-            JOptionPane.showMessageDialog(null, "Favor inserir CNPJ válido.");
-        }
-  
-        if (opt == EDITAR || opt == REMOVER) {
-            cbReservas.setEnabled(true);
-        }
-        
-        if ((opt == EDITAR || opt == NOVO) && !Aerobus.arrayVoos.isEmpty()) {
-            btnAdicionarReserva.setEnabled(true);
-        }
-        
-        String documento = campoDocumento.getText();
-        switch (docOpt) {
-            case CPF:
-                pessoaFisica = Aerobus.pessoaFisicaHTable.get(documento);
-                campoNomeCliente.setText(pessoaFisica.getNome());
-                arrayReservas = pessoaFisica.getReservas();
-                break;
-            case CNPJ:
-                pessoaJuridica = Aerobus.pessoaJuridicaHTable.get(documento);
-                campoNomeCliente.setText(pessoaJuridica.getRazaoSocial());
-                arrayReservas = pessoaFisica.getReservas();
-                break;
-        }
-        for (int i = 0; i < arrayReservas.size(); i++) {
-            cbReservas.addItem(String.valueOf(i));
-        }
+         btnConsultaClienteAcao();
     }//GEN-LAST:event_btnConsultaClienteActionPerformed
 
     private void btnAdicionarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarReservaActionPerformed
-        /**
-         * Adiciona o código do vôo da tabela anterior à reserva de viagem
-         */
-        DefaultTableModel dtmReservas = (DefaultTableModel) tabelaCodReserva.getModel();
-        DefaultTableModel dtmVoos = (DefaultTableModel) tabelaCodVoo.getModel();
-        
-        Vector<Object> data = (Vector<Object>) dtmVoos.getDataVector().elementAt(tabelaCodVoo.getSelectedRow());
-        dtmVoos.removeRow(tabelaCodVoo.getSelectedRow());
-        dtmReservas.addRow(data);
-        
-        if (tabelaCodReserva.getRowCount() != 0) {
-            btnRemoverReserva.setEnabled(true);
-        }
-        
-        if (tabelaCodVoo.getRowCount() == 0) {
-            btnAdicionarReserva.setEnabled(false);
-        }
-            
-        
+        btnAdicionarReservaAcao();
     }//GEN-LAST:event_btnAdicionarReservaActionPerformed
 
     private void btnRemoverReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverReservaActionPerformed
-        /**
-         * Remove da reserva de viagem uma reserva de vôo
-         */
-        DefaultTableModel dtmReservas = (DefaultTableModel) tabelaCodReserva.getModel();
-        DefaultTableModel dtmVoos = (DefaultTableModel) tabelaCodVoo.getModel();
-        
-        Vector<Object> data = (Vector<Object>) dtmReservas.getDataVector().elementAt(tabelaCodReserva.getSelectedRow());
-        dtmReservas.removeRow(tabelaCodReserva.getSelectedRow());
-        dtmVoos.addRow(data);
-        
-        if (tabelaCodVoo.getRowCount() != 0) {
-            btnAdicionarReserva.setEnabled(true);
-        }
-        
-        if (tabelaCodReserva.getRowCount() == 0) {
-            btnRemoverReserva.setEnabled(false);
-        }
+        btnRemoverReservaAcao();
     }//GEN-LAST:event_btnRemoverReservaActionPerformed
 
     private void btnConfirmarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarReservaActionPerformed
-        /**
-         * Confirma a reserva de viagem
-         */
-        
-        if ((campoNomeCliente.equals("") ||
-            tabelaCodReserva.getRowCount() == 0) && opt == NOVO)  {
-            JOptionPane.showMessageDialog(null, "É necessário selecionar o cliente e no mínimo um vôo!\n");
-            dispose();
-        }
-        
-        DefaultTableModel dtmReservas = (DefaultTableModel) tabelaCodReserva.getModel();
-        ArrayList<ReservaVoo> tmpArrayVoos = new ArrayList<>();
-        ReservaViagem tmpReservaViagem = new ReservaViagem();
-        
-        for (int i = 0; i < tabelaCodReserva.getRowCount(); i++) {
-            int aux = Integer.parseInt(String.valueOf(tabelaCodReserva.getModel().getValueAt(i, 0)));
-            ReservaVoo tmp = new ReservaVoo(Aerobus.arrayVoos.get(aux-1));
-            tmpArrayVoos.add(tmp);
-        }
-        tmpReservaViagem.setReservasVoos(tmpArrayVoos);
-        switch(opt) {
-            case NOVO:
-                switch (docOpt) {
-                    case CPF:
-                        pessoaFisica.getReservas().add(tmpReservaViagem);
-                        break;
-                    case CNPJ:
-                        pessoaJuridica.getReservas().add(tmpReservaViagem);
-                        break;
-                }
-                break;
-            case EDITAR:
-                if (docOpt == CPF) {
-                    pessoaFisica.getReservas().remove(cbReservas.getSelectedIndex()-1);
-                    pessoaFisica.getReservas().add(cbReservas.getSelectedIndex()-1, tmpReservaViagem);
-                }
-                if (docOpt == CNPJ) {
-                    pessoaJuridica.getReservas().remove(cbReservas.getSelectedIndex()-1);
-                    pessoaJuridica.getReservas().add(cbReservas.getSelectedIndex()-1, tmpReservaViagem);
-                }
-                break;
-            case REMOVER:
-                if (docOpt == CPF) {
-                    pessoaFisica.getReservas().remove(cbReservas.getSelectedIndex()-1);
-                }
-                if (docOpt == CNPJ) {
-                    pessoaJuridica.getReservas().remove(cbReservas.getSelectedIndex()-1);
-                }
-                break;
-        }
-        
-        
-        dispose();
+        btnConfirmarReservaAcao();
     }//GEN-LAST:event_btnConfirmarReservaActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -472,47 +312,94 @@ public class TelaReservas extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void cbReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbReservasActionPerformed
-        int option = cbReservas.getSelectedIndex();
-        if (option != -1) {
-            
-            ArrayList<ReservaVoo> tmpArrayVoo =
-            arrayReservas.get(option-1).getReservasVoos();
-            
-            
-            DefaultTableModel dtm = (DefaultTableModel) tabelaCodReserva.getModel();
-            for (int i = 0; i < tmpArrayVoo.size(); i++) {
-                ReservaVoo tmp = tmpArrayVoo.get(i);
-                Object [] data = {
-                    String.valueOf(tmp.getVoo().getId()), 
-                    tmp.getVoo().getDescricaoVoo().getAeroportoOrigem().getCodigo(),
-                    tmp.getVoo().getDescricaoVoo().getAeroportoChegada().getCodigo(),
-                    tmp.getVoo().getData(),
-                    tmp.getVoo().getDescricaoVoo().getHorarioPartida(),
-                    tmp.getVoo().getDescricaoVoo().getHorarioChegada()
-                };
-                dtm.addRow(data);
-            }
-            btnAdicionarReserva.setEnabled(true);
-            btnRemoverReserva.setEnabled(true);
-        }
-        
+        cbReservasAcao();
     }//GEN-LAST:event_cbReservasActionPerformed
 
-    private void carregaVoosDisponiveis() {
-        DefaultTableModel dtm = (DefaultTableModel) tabelaCodVoo.getModel();
-        for (int i = 0; i < Aerobus.arrayVoos.size(); i++) {
-            Voo tmp = Aerobus.arrayVoos.get(i);
-            Object data [] = {
-                String.valueOf(tmp.getId()),
-                tmp.getDescricaoVoo().getAeroportoOrigem().getCodigo(),
-                tmp.getDescricaoVoo().getAeroportoChegada().getCodigo(),
-                tmp.getData(),
-                tmp.getDescricaoVoo().getHorarioPartida(),
-                tmp.getDescricaoVoo().getHorarioChegada()
-            };
-            dtm.addRow(data);
-        }
+    public static byte getOpt() {
+        return opt;
     }
+
+    public byte getDocOpt() {
+        return docOpt;
+    }
+
+    public JButton getBtnAdicionarReserva() {
+        return btnAdicionarReserva;
+    }
+
+    public JButton getBtnCancelar() {
+        return btnCancelar;
+    }
+
+    public JButton getBtnConfirmarReserva() {
+        return btnConfirmarReserva;
+    }
+
+    public JButton getBtnConsultaCliente() {
+        return btnConsultaCliente;
+    }
+
+    public JButton getBtnRemoverReserva() {
+        return btnRemoverReserva;
+    }
+
+    public JTextField getCampoDocumento() {
+        return campoDocumento;
+    }
+
+    public JTextField getCampoNomeCliente() {
+        return campoNomeCliente;
+    }
+
+    public JComboBox<String> getCbDocumento() {
+        return cbDocumento;
+    }
+
+    public JComboBox<String> getCbReservas() {
+        return cbReservas;
+    }
+
+    public JLabel getjLabel1() {
+        return jLabel1;
+    }
+
+    public JLabel getjLabel2() {
+        return jLabel2;
+    }
+
+    public JScrollPane getjScrollPane1() {
+        return jScrollPane1;
+    }
+
+    public JScrollPane getjScrollPane2() {
+        return jScrollPane2;
+    }
+
+    public JScrollPane getjScrollPane3() {
+        return jScrollPane3;
+    }
+
+    public JTable getjTable2() {
+        return jTable2;
+    }
+
+    public JLabel getLabelDocumento() {
+        return labelDocumento;
+    }
+
+    public JLabel getLabelTitulo() {
+        return labelTitulo;
+    }
+
+    public JTable getTabelaCodReserva() {
+        return tabelaCodReserva;
+    }
+
+    public JTable getTabelaCodVoo() {
+        return tabelaCodVoo;
+    }
+
+    
     
     @Override
     public void dispose() {
@@ -558,7 +445,7 @@ public class TelaReservas extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaReservas(opt).setVisible(true);
+                new NegocioReserva(opt).setVisible(true);
             }
         });
     }
