@@ -17,7 +17,7 @@ public class DescricaoVoo {
     private DescricaoAviao descricaoAviao;
     
     /**
-     * Construtor Descri
+     * Construtor DescricaoVoo
      * @param horarioPartida
      * @param horarioChegada
      * @param aeroportoOrigem
@@ -32,42 +32,82 @@ public class DescricaoVoo {
         this.descricaoAviao = descricaoAviao;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public String getHorarioPartida() {
         return horarioPartida;
     }
 
+    /**
+     * 
+     * @param horarioPartida 
+     */
     public void setHorarioPartida(String horarioPartida) {
         this.horarioPartida = horarioPartida;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public String getHorarioChegada() {
         return horarioChegada;
     }
 
+    /**
+     * 
+     * @param horarioChegada 
+     */
     public void setHorarioChegada(String horarioChegada) {
         this.horarioChegada = horarioChegada;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public Aeroporto getAeroportoOrigem() {
         return aeroportoOrigem;
     }
 
+    /**
+     * 
+     * @param aeroportoOrigem 
+     */
     public void setAeroportoOrigem(Aeroporto aeroportoOrigem) {
         this.aeroportoOrigem = aeroportoOrigem;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public Aeroporto getAeroportoChegada() {
         return aeroportoChegada;
     }
 
+    /**
+     * 
+     * @param aeroportoChegada 
+     */
     public void setAeroportoChegada(Aeroporto aeroportoChegada) {
         this.aeroportoChegada = aeroportoChegada;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public DescricaoAviao getDescricaoAviao() {
         return descricaoAviao;
     }
 
+    /**
+     * 
+     * @param descricaoAviao 
+     */
     public void setDescricaoAviao(DescricaoAviao descricaoAviao) {
         this.descricaoAviao = descricaoAviao;
     }

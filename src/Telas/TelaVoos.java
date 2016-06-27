@@ -252,30 +252,57 @@ public abstract class TelaVoos extends javax.swing.JFrame {
     
     protected abstract void aviaoAcao();
     
+    /**
+     * 
+     * @param evt 
+     */
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
        confirmarAcao();
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
+    /**
+     * 
+     * @param evt 
+     */
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    /**
+     * 
+     * @param evt 
+     */
     private void cbVooActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbVooActionPerformed
         vooAcao();
     }//GEN-LAST:event_cbVooActionPerformed
 
+    /**
+     * 
+     * @param evt 
+     */
     private void cbCidadeOrigemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCidadeOrigemActionPerformed
         cidadeOrigemAcao();
     }//GEN-LAST:event_cbCidadeOrigemActionPerformed
 
+    /**
+     * 
+     * @param evt 
+     */
     private void cbCidadeDestinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCidadeDestinoActionPerformed
         cidadeDestinoAcao();
     }//GEN-LAST:event_cbCidadeDestinoActionPerformed
 
+    /**
+     * 
+     * @param evt 
+     */
     private void cbAviaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAviaoActionPerformed
         aviaoAcao();
     }//GEN-LAST:event_cbAviaoActionPerformed
 
+    /**
+     * Override no dispose() para criar nova tela Manter(VOOS).
+     */
     @Override
     public void dispose() {
         super.dispose();
@@ -283,94 +310,186 @@ public abstract class TelaVoos extends javax.swing.JFrame {
         tela.setVisible(true);
     }
 
+    /**
+     * 
+     * @return 
+     */
     public static byte getOpt() {
         return opt;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JButton getBtnCancelar() {
         return btnCancelar;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JButton getBtnConfirmar() {
         return btnConfirmar;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JFormattedTextField getCampoDataPartida() {
         return campoDataPartida;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JFormattedTextField getCampoHorarioChegada() {
         return campoHorarioChegada;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JFormattedTextField getCampoHorarioPartida() {
         return campoHorarioPartida;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JTextField getCampoVagas() {
         return campoVagas;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JComboBox<String> getCbAeroportoDestino() {
         return cbAeroportoDestino;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JComboBox<String> getCbAeroportoOrigem() {
         return cbAeroportoOrigem;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JComboBox<String> getCbAviao() {
         return cbAviao;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JComboBox<String> getCbCidadeDestino() {
         return cbCidadeDestino;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JComboBox<String> getCbCidadeOrigem() {
         return cbCidadeOrigem;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JComboBox<String> getCbVoo() {
         return cbVoo;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JLabel getLabelAeroportoDestino() {
         return labelAeroportoDestino;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JLabel getLabelAeroportoOrigem() {
         return labelAeroportoOrigem;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JLabel getLabelAviao() {
         return labelAviao;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JLabel getLabelCidadeDestino() {
         return labelCidadeDestino;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JLabel getLabelCidadeOrigem() {
         return labelCidadeOrigem;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JLabel getLabelDataPartida() {
         return labelDataPartida;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JLabel getLabelHorarioChegada() {
         return labelHorarioChegada;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JLabel getLabelHorarioPartida() {
         return labelHorarioPartida;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JLabel getLabelTitulo() {
         return labelTitulo;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JLabel getLabelVagas() {
         return labelVagas;
     }

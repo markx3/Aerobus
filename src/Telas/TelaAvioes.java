@@ -146,18 +146,33 @@ public abstract class TelaAvioes extends javax.swing.JFrame {
     
     protected abstract void cbAvioesAcao();
     
+    /**
+     * 
+     * @param evt 
+     */
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         btnConfirmarAcao();
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
+    /**
+     * 
+     * @param evt 
+     */
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    /**
+     * 
+     * @param evt 
+     */
     private void cbAvioesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAvioesActionPerformed
         cbAvioesAcao();
     }//GEN-LAST:event_cbAvioesActionPerformed
 
+    /**
+     * Override no dispose() para criar nova tela Manter(AVIOES) ao sair.
+     */
     @Override
     public void dispose() {
         super.dispose();
@@ -165,47 +180,91 @@ public abstract class TelaAvioes extends javax.swing.JFrame {
         tela.setVisible(true);
     }
 
+    /**
+     * 
+     * @return 
+     */
     public static byte getOpt() {
         return opt;
     }
 
 
+    /**
+     * 
+     * @return 
+     */
     public JButton getBtnCancelar() {
         return btnCancelar;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JButton getBtnConfirmar() {
         return btnConfirmar;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JTextField getCampoFabricante() {
         return campoFabricante;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JTextField getCampoModelo() {
         return campoModelo;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JFormattedTextField getCampoNumAssentos() {
         return campoNumAssentos;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JComboBox<String> getCbAvioes() {
         return cbAvioes;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JLabel getLabelFabricante() {
         return labelFabricante;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JLabel getLabelModelo() {
         return labelModelo;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JLabel getLabelNumAssentos() {
         return labelNumAssentos;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JLabel getLabelTitulo() {
         return labelTitulo;
     }

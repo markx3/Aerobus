@@ -36,7 +36,7 @@ public abstract class TelaAeroportos extends javax.swing.JFrame {
         initComponents();
 
     }
-    
+
     protected abstract void cbAeroportoAcao();
     
     protected abstract void btnConfirmarAcao();
@@ -151,18 +151,33 @@ public abstract class TelaAeroportos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     
 
+    /**
+     * 
+     * @param evt 
+     */
     private void cbAeroportoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAeroportoActionPerformed
         cbAeroportoAcao();
     }//GEN-LAST:event_cbAeroportoActionPerformed
 
+    /**
+     * 
+     * @param evt 
+     */
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         btnConfirmarAcao();
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
+    /**
+     * 
+     * @param evt 
+     */
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    /**
+     * Override no dispose() p/ criar nova tela Manter(AEROPORTOS).
+     */
     @Override
     public void dispose() {
         super.dispose();
@@ -170,46 +185,90 @@ public abstract class TelaAeroportos extends javax.swing.JFrame {
         tela.setVisible(true);
     }
 
+    /**
+     * 
+     * @return 
+     */
     public static byte getOpt() {
         return opt;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JButton getBtnCancelar() {
         return btnCancelar;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JButton getBtnConfirmar() {
         return btnConfirmar;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JTextField getCampoCidade() {
         return campoCidade;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JTextField getCampoCodigo() {
         return campoCodigo;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JTextField getCampoNome() {
         return campoNome;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JComboBox<String> getCbAeroporto() {
         return cbAeroporto;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JLabel getLabelCidade() {
         return labelCidade;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JLabel getLabelCodigo() {
         return labelCodigo;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JLabel getLabelNome() {
         return labelNome;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JLabel getLabelTitulo() {
         return labelTitulo;
     }

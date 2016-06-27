@@ -135,36 +135,60 @@ public class Menu extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * 
+     * @param evt 
+     */
     private void btnReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReservasActionPerformed
         tela = new Manter(RESERVAS);
         tela.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnReservasActionPerformed
 
+    /**
+     * 
+     * @param evt 
+     */
     private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActionPerformed
         tela = new Manter(CLIENTES);
         tela.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnClientesActionPerformed
 
+    /**
+     * 
+     * @param evt 
+     */
     private void btnVoosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoosActionPerformed
         tela = new Manter(VOOS);
         tela.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnVoosActionPerformed
 
+    /**
+     * 
+     * @param evt 
+     */
     private void btnAeroportosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAeroportosActionPerformed
         tela = new Manter(AEROPORTOS);
         tela.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnAeroportosActionPerformed
 
+    /**
+     * 
+     * @param evt 
+     */
     private void btnAvioesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvioesActionPerformed
         tela = new Manter(AVIOES);
         tela.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnAvioesActionPerformed
 
+    /**
+     * 
+     * @param evt 
+     */
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
         dispose();
     }//GEN-LAST:event_btnSairActionPerformed
