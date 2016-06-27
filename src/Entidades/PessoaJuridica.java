@@ -13,6 +13,14 @@ public class PessoaJuridica extends Pessoa {
     private String CNPJ;
     private String razaoSocial;    
     
+    /**
+     * Construtor PessoaJuridica.
+     * @param razaoSocial
+     * @param CNPJ
+     * @param endereco
+     * @param tel1
+     * @param tel2 
+     */
     public PessoaJuridica(String razaoSocial, String CNPJ, String endereco, String tel1, String tel2){
         this.razaoSocial = razaoSocial;
         this.CNPJ = CNPJ;
@@ -21,6 +29,13 @@ public class PessoaJuridica extends Pessoa {
         this.tel2 = tel2;
     }
     
+    /**
+     * Construtor PessoaJuridica.
+     * @param razaoSocial
+     * @param CNPJ
+     * @param endereco
+     * @param tel1 
+     */
     public PessoaJuridica(String razaoSocial, String CNPJ, String endereco, String tel1){
         this.razaoSocial = razaoSocial;
         this.CNPJ = CNPJ;
@@ -28,26 +43,51 @@ public class PessoaJuridica extends Pessoa {
         this.tel1 = tel1;
     }
     
+    /**
+     * Construtor PessoaJuridica.
+     * @param razaoSocial
+     * @param CNPJ
+     * @param endereco 
+     */
     public PessoaJuridica(String razaoSocial, String CNPJ, String endereco){
         this.razaoSocial = razaoSocial;
         this.CNPJ = CNPJ;
         this.endereco = endereco;
     }
     
+    /**
+     * Construtor PessoaJuridica.
+     */
     public PessoaJuridica() {}
 
+    /**
+     * 
+     * @return 
+     */
     public String getCNPJ() {
         return CNPJ;
     }
 
+    /**
+     * 
+     * @param CNPJ 
+     */
     public void setCNPJ(String CNPJ) {
         this.CNPJ = CNPJ;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public String getRazaoSocial() {
         return razaoSocial;
     }
 
+    /**
+     * 
+     * @param razaoSocial 
+     */
     public void setRazaoSocial(String razaoSocial) {
         this.razaoSocial = razaoSocial;
     }

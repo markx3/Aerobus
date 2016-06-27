@@ -221,104 +221,203 @@ public abstract class TelaClientes extends javax.swing.JFrame {
     
     protected abstract void cbDocumentoAcao();
     
+    /**
+     * 
+     * @param evt 
+     */
     private void btnConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultaActionPerformed
         btnConsultaAcao();
     }//GEN-LAST:event_btnConsultaActionPerformed
 
+    /**
+     * 
+     * @param evt 
+     */
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         btnConfirmarAcao();
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
+    /**
+     * 
+     * @param evt 
+     */
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    /**
+     * 
+     * @param evt 
+     */
     private void cbDocumentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDocumentoActionPerformed
        cbDocumentoAcao();
     }//GEN-LAST:event_cbDocumentoActionPerformed
 
+    /**
+     * 
+     * @return 
+     */
     public static byte getOpt() {
         return opt;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public byte getDocOpt() {
         return docOpt;
     }
 
 
+    /**
+     * 
+     * @return 
+     */
     public JButton getBtnCancelar() {
         return btnCancelar;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JButton getBtnConfirmar() {
         return btnConfirmar;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JButton getBtnConsulta() {
         return btnConsulta;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JTextField getCampoDocumento() {
         return campoDocumento;
     }
 
 
+    /**
+     * 
+     * @return 
+     */
     public JTextField getCampoEndereco1() {
         return campoEndereco1;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JFormattedTextField getCampoNascimento() {
         return campoNascimento;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JTextField getCampoNome() {
         return campoNome;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JTextField getCampoTel1() {
         return campoTel1;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JTextField getCampoTel2() {
         return campoTel2;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JComboBox<String> getCbDocumento() {
         return cbDocumento;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JComboBox<String> getCbSexo() {
         return cbSexo;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JLabel getLabelEndereco() {
         return labelEndereco;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JLabel getLabelNascimento() {
         return labelNascimento;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JLabel getLabelNome() {
         return labelNome;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JLabel getLabelSexo() {
         return labelSexo;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JLabel getLabelTel1() {
         return labelTel1;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JLabel getLabelTel2() {
         return labelTel2;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JLabel getLabelTitulo() {
         return labelTitulo;
     }
     
+    /**
+     * Override no dispose() para criar nova tela Manter(CLIENTES).
+     */
     @Override
     public void dispose() {
         super.dispose();

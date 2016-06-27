@@ -22,6 +22,10 @@ public class NegocioCliente extends TelaClientes {
         verificaOperacao();
     }
 
+    /**
+     * Verifica a operação que foi passada para a nova tela
+     * de aviões e faz as devidas alterações.
+     */
     private void verificaOperacao() {
         switch (opt) {
             case NOVO:
@@ -35,24 +39,53 @@ public class NegocioCliente extends TelaClientes {
                 break;
         }
     }
-
+    
+    /**
+     * Se a operação é NOVO, altera o texto, habilita o botão
+     * btnConsulta e chama habilitaItems().
+     */
     private void caseNovo() {
         getLabelTitulo().setText("Novo cliente");
         getBtnConsulta().setEnabled(false);
         habilitaItems();
     }
 
+    /**
+     * Se a operação é EDITAR, altera o texto e chama desabilitaItems().
+     */
     private void caseEditar() {
         getLabelTitulo().setText("Editar cliente");
         desabilitaItems();
 
     }
 
+    /**
+     * Se a operação é REMOVER, altera o texto e chama desabilitaItems().
+     */
     private void caseRemover() {
         getLabelTitulo().setText("Remover cliente");
         desabilitaItems();
     }
 
+    /**
+     * Habilita os campos:
+     * 
+     * - campoNome
+     * - campoEndereco1
+     * - campoTel1
+     * - campoTel2
+     * 
+     * Se o documento selecionado no ComboBox cbDocumento
+     * é CNPJ, altera labelNome e desabilita:
+     * 
+     * - cbSexo
+     * -campoNascimento
+     * 
+     * Se não for CNPJ, altera labelNome e habilita:
+     * 
+     * - cbSexo
+     * - campoNascimento
+     */
     private void habilitaItems() {
         getCampoNome().setEnabled(true);
         getCampoEndereco1().setEnabled(true);
@@ -71,7 +104,26 @@ public class NegocioCliente extends TelaClientes {
 
         }
     }
-
+    /**
+     * Desabilita os campos:
+     * 
+     * - campoNome
+     * - campoEndereco1
+     * - campoTel1
+     * - campoTel2
+     * 
+     * Se o documento selecionado no ComboBox cbDocumento
+     * é CNPJ, altera labelNome e desabilita:
+     * 
+     * - cbSexo
+     * - campoNascimento
+     * 
+     * Se não for CNPJ, altera labelNome e habilita:
+     * 
+     * - cbSexo
+     * - campoNascimento
+     * 
+     */
     private void desabilitaItems() {
         getCampoNome().setEnabled(false);
         getCampoEndereco1().setEnabled(false);
@@ -89,6 +141,10 @@ public class NegocioCliente extends TelaClientes {
         }
     }
 
+    
+    /**
+     * Faz a consulta de pessoa física e preenche os campos da tela.
+     */
     public void consultaPessoaFisica() {
         PessoaFisica cliente = (PessoaFisica) Aerobus.pessoaFisicaHTable.get(getCampoDocumento().getText());
         if (cliente == null) {
@@ -103,6 +159,10 @@ public class NegocioCliente extends TelaClientes {
         getCampoTel2().setText(cliente.getTel2());
     }
 
+    
+    /**
+     * Faz a consulta de pessoa jurídica e preenche os campos da tela.
+     */
     public void consultaPessoaJuridica() {
         PessoaJuridica cliente = (PessoaJuridica) Aerobus.pessoaJuridicaHTable.get(getCampoDocumento().getText());
         if (cliente == null) {
@@ -116,6 +176,13 @@ public class NegocioCliente extends TelaClientes {
         getCampoTel2().setText(cliente.getTel2());
     }
 
+    /**
+     * Verifica a intenção do usuário (NOVO, EDITAR, REMOVER)
+     * e o tipo de documento selecionado para então realizar 
+     * as devidas alterações.
+     * @param docOpt
+     * @param opt 
+     */
     public void verificaAoConfirmar(byte docOpt, byte opt) {
         switch (docOpt) {
             case CPF:
@@ -146,7 +213,11 @@ public class NegocioCliente extends TelaClientes {
                 break;
         }
     }
-
+    
+    
+    /**
+     * Insere nova pessoa física na HashTable da entidade Aerobus.
+     */
     public void inserePessoaFisica() {
         // Verifica se já existe cliente cadastrado com o CPF dado
         if (Aerobus.pessoaFisicaHTable.get(getCampoDocumento().getText()) != null) {
@@ -166,7 +237,10 @@ public class NegocioCliente extends TelaClientes {
         // Insere na hash table
         Aerobus.pessoaFisicaHTable.put(getCampoDocumento().getText(), cliente);
     }
-
+    
+    /**
+     * Altera as informações de uma pessoa física já existente.
+     */
     public void editaPessoaFisica() {
         // Consulta na hash table
         PessoaFisica cliente = (PessoaFisica) Aerobus.pessoaFisicaHTable.get(getCampoDocumento().getText());
@@ -181,12 +255,17 @@ public class NegocioCliente extends TelaClientes {
 
         Aerobus.pessoaFisicaHTable.replace(getCampoDocumento().getText(), cliente);
     }
-
+    /**
+     * Exibe uma tela de aviso que o cliente não foi encontrado.
+     */
     private void clienteNaoEncontrado() {
         JOptionPane.showMessageDialog(null, "Cliente não encontrado.\n");
         dispose();
     }
-
+    
+    /**
+     * Insere nova pessoa jurídica na HashTable da entidade Aerobus.
+     */
     private void inserePessoaJuridica() {
         // Verifica se já existe pessoa jurídica a partir do CNPJ dado.
         if (Aerobus.pessoaJuridicaHTable.get(getCampoDocumento().getText()) != null) {
@@ -206,6 +285,9 @@ public class NegocioCliente extends TelaClientes {
 
     }
 
+    /**
+     * Altera as informações de uma pessoa jurídica já existente.
+     */
     private void editaPessoaJuridica() {
         // Consulta na hash table
         PessoaJuridica cliente = Aerobus.pessoaJuridicaHTable.get(getCampoDocumento().getText());
@@ -218,6 +300,11 @@ public class NegocioCliente extends TelaClientes {
         Aerobus.pessoaJuridicaHTable.replace(cliente.getCNPJ(), cliente);
     }
     
+    /**
+     * Verifica a validade da busca por CPF ou CNPJ e chama o devido método
+     * de consulta.
+     */
+    @Override
     public void btnConsultaAcao() {
         if ("".equals(getCampoDocumento().getText())) return;
         if (getCampoDocumento().getText().length() != 11 && docOpt == CPF) {
@@ -241,6 +328,10 @@ public class NegocioCliente extends TelaClientes {
         getBtnConsulta().setEnabled(false);
     }
     
+    /**
+     * Verifica a validade das informações inseridas nos campos e chama
+     * verificaAoConfirmar(docOpt, opt).
+     */
     @Override
     public void btnConfirmarAcao() {
         if ("".equals(getCampoDocumento().getText()) || "".equals(getCampoNome().getText()) || "".equals(getCampoEndereco1().getText())) {
@@ -259,7 +350,10 @@ public class NegocioCliente extends TelaClientes {
         verificaAoConfirmar(docOpt, opt);
         dispose();
     }
-
+    
+    /**
+     * Altera a labelNome de acordo com o tipo de documento.
+     */
     @Override
     protected void cbDocumentoAcao() {
         if (getCbDocumento().getSelectedIndex() == CPF) {

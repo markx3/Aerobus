@@ -18,6 +18,12 @@ public class Voo {
     private static final AtomicInteger count = new AtomicInteger(0);
     private final int id;
 
+    /**
+     * Construtor Voo.
+     * @param data
+     * @param numPoltronas
+     * @param descricaoVoo 
+     */
     public Voo(String data, int numPoltronas, DescricaoVoo descricaoVoo) {
         id = count.incrementAndGet();
         this.data = data;
@@ -25,34 +31,66 @@ public class Voo {
         this.descricaoVoo = descricaoVoo;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public String getData() {
         return data;
     }
 
+    /**
+     * 
+     * @param data 
+     */
     public void setData(String data) {
         this.data = data;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public int getNumPoltronas() {
         return numPoltronas;
     }
 
+    /**
+     * 
+     * @param numPoltronas 
+     */
     public void setNumPoltronas(int numPoltronas) {
         this.numPoltronas = numPoltronas;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public DescricaoVoo getDescricaoVoo() {
         return descricaoVoo;
     }
 
+    /**
+     * 
+     * @param descricaoVoo 
+     */
     public void setDescricaoVoo(DescricaoVoo descricaoVoo) {
         this.descricaoVoo = descricaoVoo;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public int getId() {
         return id;
     }
     
+    /**
+     * 
+     * @return 
+     */
     @Override
     public String toString() {
         String retorno = descricaoVoo.getAeroportoOrigem().getCodigo() +

@@ -22,7 +22,8 @@ public class NegocioAeroporto extends Telas.TelaAeroportos {
     }
     
     /**
-     *
+     * Verifica a operação que foi passada para a nova tela
+     * de aeroportos e faz as devidas alterações.
      */
     private void verificaOperacao() {
          switch(opt) {
@@ -32,21 +33,39 @@ public class NegocioAeroporto extends Telas.TelaAeroportos {
         }
     }
     
+    /**
+     * Se a operação é NOVO, altera o texto e desabilita o ComboBox.
+     */
     protected void caseNovo() {
         getLabelTitulo().setText("Novo aeroporto");
         getCbAeroporto().setEnabled(false);
     }
     
+    /**
+     * Se a operação é EDITAR, altera o texto e chama
+     * desabilitaItems().
+     * 
+     */
     protected void caseEditar() {
         getLabelTitulo().setText("Editar aeroporto");
         desabilitaItems();
     }
     
+    /**
+     * Se a operação é REMOVER, altera o texto e chama
+     * desabilitaItems().
+     */
     protected void caseRemover() {
         getLabelTitulo().setText("Remover aeroporto");
         desabilitaItems();
     }
     
+    /**
+     * Habilita os campos:
+     * - campoCidade
+     * - campoCodigo
+     * - campoNome.
+     */
     protected void habilitaItems() {
         getCampoCidade().setEnabled(true);
         getCampoCodigo().setEnabled(true);
@@ -54,12 +73,23 @@ public class NegocioAeroporto extends Telas.TelaAeroportos {
            
     }
     
+    /**
+     * Desabilita os campos:
+     * - campoCidade
+     * - campoCodigo
+     * - campoNome.
+     */
     protected void desabilitaItems() {
         getCampoCidade().setEnabled(false);
         getCampoCodigo().setEnabled(false);
         getCampoNome().setEnabled(false);
     }
     
+    
+    /**
+     * Adiciona todos os aeroportos cadastrados ao
+     * ComboBox cbAeroporto.
+     */
     public void addAeroportoCb() {
             for(int i = 0; i < Aerobus.arrayAeroporto.size(); i++) {
             Aeroporto tmp = Aerobus.arrayAeroporto.get(i);
@@ -68,6 +98,11 @@ public class NegocioAeroporto extends Telas.TelaAeroportos {
         }
     }
     
+    /**
+     * Identifica a opção selecionada no ComboBox
+     * cbAeroporto e carrega as informações do
+     * devido aeroporto nos campos.
+     */
     @Override
     public void cbAeroportoAcao() {
         int option = getCbAeroporto().getSelectedIndex();
@@ -81,6 +116,10 @@ public class NegocioAeroporto extends Telas.TelaAeroportos {
         if (option == -1 || opt == REMOVER) desabilitaItems();
     }
     
+    /**
+     * Verifica qual é a intenção do usuário (NOVO, EDITAR, REMOVER)
+     * e faz as devidas alterações.
+     */
     @Override
     public void btnConfirmarAcao() {
         String nome = getCampoNome().getText();

@@ -23,7 +23,9 @@ public class NegocioAvioes extends Telas.TelaAvioes {
         addItemsCbAvioes();
         verificaOperacao();
     }
-    
+    /**
+     * Carrega todos os aviões existentes ao ComboBox cbAvioes.
+     */
     private void addItemsCbAvioes() {
         for (int i = 0; i < Aerobus.arrayDescricaoAviao.size(); i++) {
             DescricaoAviao tmp = Aerobus.arrayDescricaoAviao.get(i);
@@ -31,6 +33,10 @@ public class NegocioAvioes extends Telas.TelaAvioes {
         }
     }
     
+    /**
+     * Verifica a operação que foi passada para a nova tela
+     * de aviões e faz as devidas alterações.
+     */
     private void verificaOperacao() {
          switch(opt) {
             case NOVO: caseNovo(); break;
@@ -39,21 +45,37 @@ public class NegocioAvioes extends Telas.TelaAvioes {
         }
     }
     
+    /**
+     * Se a operação é NOVO, altera o texto e desabilita o ComboBox.
+     */
     private void caseNovo() {
         getLabelTitulo().setText("Novo avião");
         getCbAvioes().setEnabled(false);
     }
+    
+    /**
+     * Se a operação é EDITAR, altera o texto e chama desabilitaItems().
+     */
     
     private void caseEditar() {
         getLabelTitulo().setText("Editar avião");
         desabilitaItems();
     }
     
+    /**
+     * Se a operação é REMOVER, altera o texto e chama desabilitaItems().
+     */
     private void caseRemover() {
         getLabelTitulo().setText("Remover avião");
         desabilitaItems();
     }
-     
+    
+    /**
+     * Habilita os campos:
+     * - campoFabricante
+     * - campoModelo
+     * - campoNumAssentos.
+     */
     private void habilitaItems() {
         getCampoFabricante().setEnabled(true);
         getCampoModelo().setEnabled(true);
@@ -61,6 +83,12 @@ public class NegocioAvioes extends Telas.TelaAvioes {
            
     }
     
+    /**
+     * Desabilita os campos:
+     * - campoFabricante
+     * - campoModelo
+     * - campoNumAssentos
+     */
     private void desabilitaItems() {
         getCampoFabricante().setEnabled(false);
         getCampoModelo().setEnabled(false);
@@ -68,6 +96,11 @@ public class NegocioAvioes extends Telas.TelaAvioes {
 
     }
     
+    /**
+     * Verifica qual é a intenção do usuário (NOVO, EDITAR, REMOVER)
+     * e faz as devidas alterações.
+     */
+    @Override
     protected void btnConfirmarAcao() {
         String fabricante = getCampoFabricante().getText();
         String modelo = getCampoModelo().getText();
@@ -97,6 +130,12 @@ public class NegocioAvioes extends Telas.TelaAvioes {
         dispose();
     }
     
+    /**
+     * Identifica a opção selecionada no ComboBox 
+     * cbAvioes e carrega as informações do devido
+     * avião nos campos.
+     */
+    @Override
     protected void cbAvioesAcao() {
         int option = getCbAvioes().getSelectedIndex();
         if (option != -1) {

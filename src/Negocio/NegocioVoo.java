@@ -31,6 +31,10 @@ public class NegocioVoo extends Telas.TelaVoos {
         initOperations();
     }
     
+    /**
+     * Coloca as descrições de todos os aviões em uma HashTable e
+     * adiciona ao cbAviao.
+     */
     protected void initOperations() {
         for(int i = 0; i < Aerobus.arrayDescricaoAviao.size(); i++) {
             DescricaoAviao tmp = Aerobus.arrayDescricaoAviao.get(i);
@@ -65,6 +69,10 @@ public class NegocioVoo extends Telas.TelaVoos {
         } 
     }
     
+    /**
+     * Verifica a operação que foi passada para a nova tela
+     * de vôos e faz as devidas alterações.
+     */
     private void verificaOperacao() {
          switch(opt) {
             case NOVO: caseNovo(); break;
@@ -73,21 +81,40 @@ public class NegocioVoo extends Telas.TelaVoos {
         }
     }
     
+    /**
+     * Se a operação é NOVO, altera o texto e desabilita o ComboBox.
+     */
     private void caseNovo() {
         getLabelTitulo().setText("Novo vôo");
         getCbVoo().setEnabled(false);
     }
     
+    /**
+     * Se a operação é EDITAR, altera o texto e chama desabilitaItems().
+     */
     private void caseEditar() {
         getLabelTitulo().setText("Editar vôo");
         desabilitaItems();
     }
     
+    /**
+     * Se a operação é REMOVER, altera o texto e chama desabilitaItems().
+     */
     private void caseRemover() {
         getLabelTitulo().setText("Remover vôo");
         desabilitaItems();
     }
     
+    /**
+     * Habilita os campos:
+     * - campoDataPartida
+     * - campoVagas
+     * - cbAeroportoDestino
+     * - cbAeroportoOrigem
+     * - cbCidadeDestino
+     * - cbCidadeOrigem
+     * - cbAviao.
+     */
     private void habilitaItems() {
         getCampoDataPartida().setEnabled(true);
         getCampoVagas().setEnabled(true);
@@ -100,6 +127,16 @@ public class NegocioVoo extends Telas.TelaVoos {
                 
     }
     
+    /**
+     * Desabilita os campos:
+     * - campoDataPartida
+     * - campoVagas
+     * - cbAeroportoDestino
+     * - cbAeroportoOrigem
+     * - cbCidadeDestino
+     * - cbCidadeOrigem
+     * - cbAviao.
+     */
     private void desabilitaItems() {
         getCampoDataPartida().setEnabled(false);
         getCampoVagas().setEnabled(false);
@@ -110,6 +147,10 @@ public class NegocioVoo extends Telas.TelaVoos {
         getCbAviao().setEnabled(false);
     }
 
+    /**
+     * Verifica a intenção do usuário (NOVO, EDITAR, REMOVER)
+     * e faz as devidas alterações.
+     */
     @Override
     protected void confirmarAcao() {
        String data = getCampoDataPartida().getText();
@@ -152,6 +193,9 @@ public class NegocioVoo extends Telas.TelaVoos {
        dispose();
     }
 
+    /**
+     * Carrega as informações de determinado vôo nos campos da tela.
+     */
     @Override
     protected void vooAcao() {
         int option = getCbVoo().getSelectedIndex();
@@ -173,7 +217,10 @@ public class NegocioVoo extends Telas.TelaVoos {
         }
         if (option == -1 || opt == REMOVER) desabilitaItems();
     }
-
+    
+    /**
+     * Carrega todos os aerportos que partem da cidade selecionada.
+     */
     @Override
     protected void cidadeOrigemAcao() {
         int option = getCbCidadeOrigem().getSelectedIndex();
@@ -189,6 +236,9 @@ public class NegocioVoo extends Telas.TelaVoos {
         }
     }
 
+    /**
+     * Carrega todos os aeroportos que partem da cidade selecionada.
+     */
     @Override
     protected void cidadeDestinoAcao() {
         int option = getCbCidadeDestino().getSelectedIndex();
@@ -204,6 +254,9 @@ public class NegocioVoo extends Telas.TelaVoos {
         }
     }
 
+    /**
+     * Carrega a quantidade de vagas em um avião.
+     */
     @Override
     protected void aviaoAcao() {
         int option = getCbAviao().getSelectedIndex();

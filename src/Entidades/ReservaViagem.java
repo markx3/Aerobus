@@ -15,19 +15,33 @@ public class ReservaViagem {
     private long id;
     protected ArrayList<ReservaVoo> reservasVoos = new ArrayList<>();
 
+    /**
+     * Construtor ReservaViagem.
+     */
     public ReservaViagem() {
         id++;
     }
 
-
+    /**
+     * 
+     * @return 
+     */
     public ArrayList<ReservaVoo> getReservasVoos() {
         return reservasVoos;
     }
 
+    /**
+     * 
+     * @param reservasVoos 
+     */
     public void setReservasVoos(ArrayList<ReservaVoo> reservasVoos) {
         this.reservasVoos = reservasVoos;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public long getId() {
         return id;
     }

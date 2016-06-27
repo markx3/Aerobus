@@ -151,7 +151,6 @@ public abstract class TelaAeroportos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     
 
-    
     private void cbAeroportoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAeroportoActionPerformed
         cbAeroportoAcao();
     }//GEN-LAST:event_cbAeroportoActionPerformed

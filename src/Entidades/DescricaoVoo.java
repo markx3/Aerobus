@@ -15,7 +15,15 @@ public class DescricaoVoo {
     private Aeroporto aeroportoOrigem;
     private Aeroporto aeroportoChegada;
     private DescricaoAviao descricaoAviao;
-
+    
+    /**
+     * Construtor Descri
+     * @param horarioPartida
+     * @param horarioChegada
+     * @param aeroportoOrigem
+     * @param aeroportoChegada
+     * @param descricaoAviao 
+     */
     public DescricaoVoo(String horarioPartida, String horarioChegada, Aeroporto aeroportoOrigem, Aeroporto aeroportoChegada, DescricaoAviao descricaoAviao) {
         this.horarioPartida = horarioPartida;
         this.horarioChegada = horarioChegada;

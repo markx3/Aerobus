@@ -12,14 +12,26 @@ package Entidades;
 public class ReservaVoo {
     protected Voo voo;
 
+    /**
+     * Construtor ReservaVoo.
+     * @param voo 
+     */
     public ReservaVoo(Voo voo) {
         this.voo = voo;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public Voo getVoo() {
         return voo;
     }
 
+    /**
+     * 
+     * @param voo 
+     */
     public void setVoo(Voo voo) {
         this.voo = voo;
     }

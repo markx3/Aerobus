@@ -284,123 +284,234 @@ public abstract class TelaReservas extends javax.swing.JFrame {
     
     protected abstract void cbReservasAcao();
     
+    /**
+     * 
+     * @param evt 
+     */
     private void cbDocumentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDocumentoActionPerformed
         cbDocumentoAcao();
     }//GEN-LAST:event_cbDocumentoActionPerformed
 
+    /**
+     * 
+     * @param evt 
+     */
     private void btnConsultaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultaClienteActionPerformed
          btnConsultaClienteAcao();
     }//GEN-LAST:event_btnConsultaClienteActionPerformed
 
+    /**
+     * 
+     * @param evt 
+     */
     private void btnAdicionarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarReservaActionPerformed
         btnAdicionarReservaAcao();
     }//GEN-LAST:event_btnAdicionarReservaActionPerformed
 
+    /**
+     * 
+     * @param evt 
+     */
     private void btnRemoverReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverReservaActionPerformed
         btnRemoverReservaAcao();
     }//GEN-LAST:event_btnRemoverReservaActionPerformed
 
+    /**
+     * 
+     * @param evt 
+     */
     private void btnConfirmarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarReservaActionPerformed
         btnConfirmarReservaAcao();
     }//GEN-LAST:event_btnConfirmarReservaActionPerformed
 
+    /**
+     * 
+     * @param evt 
+     */
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        /**
-         * Cancela a reserva de viagem
-         */
         dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    /**
+     * 
+     * @param evt 
+     */
     private void cbReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbReservasActionPerformed
         cbReservasAcao();
     }//GEN-LAST:event_cbReservasActionPerformed
 
+    /**
+     * 
+     * @return 
+     */
     public static byte getOpt() {
         return opt;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public byte getDocOpt() {
         return docOpt;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JButton getBtnAdicionarReserva() {
         return btnAdicionarReserva;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JButton getBtnCancelar() {
         return btnCancelar;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JButton getBtnConfirmarReserva() {
         return btnConfirmarReserva;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JButton getBtnConsultaCliente() {
         return btnConsultaCliente;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JButton getBtnRemoverReserva() {
         return btnRemoverReserva;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JTextField getCampoDocumento() {
         return campoDocumento;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JTextField getCampoNomeCliente() {
         return campoNomeCliente;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JComboBox<String> getCbDocumento() {
         return cbDocumento;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JComboBox<String> getCbReservas() {
         return cbReservas;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JLabel getjLabel1() {
         return jLabel1;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JLabel getjLabel2() {
         return jLabel2;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JScrollPane getjScrollPane1() {
         return jScrollPane1;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JScrollPane getjScrollPane2() {
         return jScrollPane2;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JScrollPane getjScrollPane3() {
         return jScrollPane3;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JTable getjTable2() {
         return jTable2;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JLabel getLabelDocumento() {
         return labelDocumento;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JLabel getLabelTitulo() {
         return labelTitulo;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JTable getTabelaCodReserva() {
         return tabelaCodReserva;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public JTable getTabelaCodVoo() {
         return tabelaCodVoo;
     }
 
     
-    
+    /**
+     * Override no dispose() para criar nova tela Manter(RESERVAS).
+     */
     @Override
     public void dispose() {
         super.dispose();

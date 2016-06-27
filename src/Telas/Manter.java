@@ -134,7 +134,16 @@ public class Manter extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    /**
+     * Seleciona a intenção do usuário.
+     * 
+     * Recebe a entidade e a opção (Novo, editar, remover)
+     * 
+     * Cria uma a tela selecionada pelo usuário.
+     * @param entidade
+     * @param opcao 
+     */
     private void selecionaAcao(byte entidade, byte opcao) {
         if (entidade == AEROPORTOS) {
             TelaAeroportos tela = new NegocioAeroporto(opcao);
@@ -170,7 +179,11 @@ public class Manter extends javax.swing.JFrame {
     private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
         selecionaAcao(opt, REMOVER);
     }//GEN-LAST:event_btnRemoverActionPerformed
-
+    
+    /**
+     * Elimina a tela atual e cria uma nova tela de menu.
+     * @param evt 
+     */
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         dispose();
         Menu tela = new Menu();

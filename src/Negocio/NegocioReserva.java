@@ -38,6 +38,10 @@ public class NegocioReserva extends Telas.TelaReservas {
         if (opt == NOVO || opt == EDITAR) carregaVoosDisponiveis();
     }
     
+    /**
+     * Verifica a operação que foi passada para a nova tela
+     * de aviões e faz as devidas alterações.
+     */
     private void verificaOperacao() {
         switch(opt) {
             case NOVO: caseNovo(); break;
@@ -46,22 +50,38 @@ public class NegocioReserva extends Telas.TelaReservas {
         }
     }
     
+    /**
+     * Se a operação é NOVO, altera o texto, e desabilita
+     * o ComboBox cbReservas.
+     */
     private void caseNovo() {
         getLabelTitulo().setText("Reservar viagem");
         getCbReservas().setEnabled(false);
     }
     
+    
+    /**
+     * Se a operação é EDITAR, altera o texto, desabilita a tabela
+     * tabelaCodVoo.
+     */
     private void caseEditar() {
         getLabelTitulo().setText("Editar reserva");
         getTabelaCodVoo().setEnabled(false);
 
     }
     
+    /**
+     * Se a operação é REMOVER, altera o texto, desabilita a tabela
+     * tabelaCodVoo.
+     */
     private void caseRemover() {
         getLabelTitulo().setText("Remover reserva");
         getTabelaCodVoo().setEnabled(false);
     }
 
+    /**
+     * Altera labelDocumento de acordo com o documento selecionado.
+     */
     @Override
     protected void cbDocumentoAcao() {
         switch(getCbDocumento().getSelectedIndex()) {
@@ -75,6 +95,9 @@ public class NegocioReserva extends Telas.TelaReservas {
         docOpt = (byte) getCbDocumento().getSelectedIndex();
     }
 
+    /**
+     * Verifica a validade do documento e faz a consulta de cliente.
+     */
     @Override
     protected void btnConsultaClienteAcao() {
         if ("".equals(getCampoDocumento().getText())) return;
@@ -114,6 +137,9 @@ public class NegocioReserva extends Telas.TelaReservas {
     }
     
     
+    /**
+     * Adiciona vôo à tabela de reservas.
+     */
     @Override
     protected void btnAdicionarReservaAcao() {
  
@@ -133,6 +159,9 @@ public class NegocioReserva extends Telas.TelaReservas {
         }    
     }
 
+    /**
+     * Remove vôo da tabela de reserva.
+     */
     @Override
     protected void btnRemoverReservaAcao() {
         /**
@@ -154,12 +183,11 @@ public class NegocioReserva extends Telas.TelaReservas {
         }
     }
 
+    /**
+     * Confirma a intenção do usuário (NOVO, EDITAR, REMOVER).
+     */
     @Override
     protected void btnConfirmarReservaAcao() {
-        /**
-         * Confirma a reserva de viagem
-         */
-        
         if ((getCampoNomeCliente().equals("") ||
             getTabelaCodReserva().getRowCount() == 0) && opt == NOVO)  {
             JOptionPane.showMessageDialog(null, "É necessário selecionar o cliente e no mínimo um vôo!\n");
@@ -208,7 +236,11 @@ public class NegocioReserva extends Telas.TelaReservas {
         }
         dispose();
     }
-
+    
+    /**
+     * Carrega os detalhes da reserva selecionada no ComboBox cbReservas
+     * à tabela de reserva.
+     */
     @Override
     protected void cbReservasAcao() {
         int option = getCbReservas().getSelectedIndex();
@@ -236,6 +268,9 @@ public class NegocioReserva extends Telas.TelaReservas {
         }
     }
 
+    /**
+     * Carrega todos os vôos disponíveis.
+     */
     private void carregaVoosDisponiveis() {
         DefaultTableModel dtm = (DefaultTableModel) getTabelaCodVoo().getModel();
         for (int i = 0; i < Aerobus.arrayVoos.size(); i++) {

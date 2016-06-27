@@ -24,6 +24,10 @@ public class Aerobus {
     public static ArrayList<DescricaoAviao> arrayDescricaoAviao = new ArrayList<>();
     public static ArrayList<Aeroporto> arrayAeroporto = new ArrayList<>();
     
+    /**
+     * 
+     * @param args 
+     */
     public static void main(String args[]) {
         Menu menu = new Menu();
         menu.setVisible(true);
